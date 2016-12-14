@@ -7,6 +7,26 @@ from .models import Product, Brand, Image,  Category, CatItem
 from .serializers import ProductSerializer, BrandSerializer, ImageSerializer
 from .serializers import CategorySerializer, CatItemSerializer
 
+from django.conf import settings
+from django.shortcuts import render_to_response, get_object_or_404, redirect, render
+
+
+def index(request):
+    context = {}
+    return render(request, 'index.html', context)
+
+def catalog(request):
+    context = {}
+    return render(request, 'catalog.html', context)
+
+def contacts(request):
+    context = {}
+    return render(request, 'contacts.html', context)
+
+def faq(request):
+    context = {}
+    return render(request, 'faq.html', context)
+
 
 
 

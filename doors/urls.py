@@ -38,6 +38,11 @@ def api_root(request, format=None):
     })
 
 urlpatterns = [
+    url('^$', index, name="index"),
+    url('^catalog$', catalog, name="catalog"),
+    url('^faq$', faq, name="faq"),
+    url('^contacts$', contacts, name="contacts"),
+    
     url(r'^api/$', api_root),
 
     url(
@@ -61,4 +66,5 @@ urlpatterns = [
     url(r'^api/package-item/$', BrandDetail.as_view(), name='packages'),
     url(r'^api/packages/$', BrandDetail.as_view(), name='package-item'),
     url(r'^admin/', admin.site.urls),
+
 ]
