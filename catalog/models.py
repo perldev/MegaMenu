@@ -15,6 +15,9 @@ class Brand(models.Model):
     title = models.CharField(max_length=255,
                              verbose_name=u"Brand",
                              null=True, blank=True, )
+    class Meta:
+        verbose_name = u"Brand"
+        verbose_name_plural = u"Brand-ы"
 
     def __unicode__(self):
         return self.title
@@ -24,6 +27,10 @@ class Category(models.Model):
                              verbose_name=u"Каталог",
                              null=True, blank=True, )
 
+    class Meta:
+        verbose_name = u"Каталог"
+        verbose_name_plural = u"Каталоги"
+                             
     def __unicode__(self):
         return self.title                         
 
@@ -45,6 +52,11 @@ class CatItem(models.Model):
                                    verbose_name=u"Бренд",
                                    null=True, blank=True, )
 
+    class Meta:
+        verbose_name = u"Категория каталога"
+        verbose_name_plural = u"Категории каталога"
+
+                                   
     def __unicode__(self):
         return "%s -> %s -> %s -> %s" % (self.catalog.title, self.opt1_typ,
                                          self.opt2_spec,
@@ -87,11 +99,19 @@ class Product(models.Model):
                                    verbose_name=u"Desciption",
                                    null=True, blank=True, )
 
+    class Meta:
+        verbose_name = u"Товар"
+        verbose_name_plural = u"Товары"
+
+                                   
 class Image(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
     product = models.ForeignKey(Product, verbose_name=u"Продукт" )
     image = models.ImageField(upload_to='photos', max_length=254)
 
+    class Meta:
+        verbose_name = u"Картинка"
+        verbose_name_plural = u"Картинки"
 
     
 class ImagesInline(StackedInline):
@@ -102,9 +122,13 @@ class ImagesInline(StackedInline):
 class Package(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
     title = models.CharField(max_length=255,
-                             verbose_name=u"Акционный пакет",
+                             verbose_name=u"Название",
                              null=True, blank=True, )
 
+    class Meta:
+        verbose_name = u"Акционный пакет"
+        verbose_name_plural = u"Акционный пакеты"
+                             
     def __unicode__(self):
         return self.title
         
@@ -116,6 +140,11 @@ class PackageItem(models.Model):
     price = models.DecimalField(default="0.0", max_digits=6, decimal_places=2,
                                       verbose_name=u"Цена в пакете")
 
+    class Meta:
+        verbose_name = u"Позиция в акционном пакете"
+        verbose_name_plural = u"Позиции в акционном пакете"
+
+                                      
     def __unicode__(self):
         return str(self.product)
                                       
