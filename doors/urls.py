@@ -21,6 +21,9 @@ from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from rest_framework.reverse import reverse
 from catalog.views import *
+from django.conf.urls.static import static
+import os
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -65,6 +68,15 @@ urlpatterns = [
     url(r'^api/image/$', ImageDetail.as_view(), name='image'),
     url(r'^api/package-item/$', BrandDetail.as_view(), name='packages'),
     url(r'^api/packages/$', BrandDetail.as_view(), name='package-item'),
+   
     url(r'^admin/', admin.site.urls),
 
-]
+] 
+if settings.DEBUG:    
+   urlpatterns += static("js", document_root=os.path.join(settings.BASE_DIR,"js"))
+   urlpatterns += static("img", document_root=os.path.join(settings.BASE_DIR,"img"))
+   urlpatterns += static("css", document_root=os.path.join(settings.BASE_DIR, "css"))
+   urlpatterns += static("fonts", document_root=os.path.join(settings.BASE_DIR,"fonts"))
+   urlpatterns += static("icon", document_root=os.path.join(settings.BASE_DIR,"icon"))
+   
+    

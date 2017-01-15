@@ -38,11 +38,8 @@ class Category(models.Model):
 class CatItem(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
 
-    catalog = models.ForeignKey(Category, verbose_name = u"Каталог")
 
-    opt1_typ = models.CharField(max_length=255,
-                               verbose_name=u"Тип товара",
-                               null=True, blank=True, )
+    opt1_typ = models.ForeignKey(Category, verbose_name = u"Каталог",null=True, blank=True, )
                                
     opt2_spec = models.CharField(max_length=255,
                                verbose_name=u"Вид товара",
@@ -58,9 +55,9 @@ class CatItem(models.Model):
 
                                    
     def __unicode__(self):
-        return "%s -> %s -> %s -> %s" % (self.catalog.title, self.opt1_typ,
-                                         self.opt2_spec,
-                                         self.opt3_brand.title)
+        return "%s -> %s -> %s" % (self.opt1_typ,
+                                   self.opt2_spec,
+                                   self.opt3_brand.title)
 
 
                                    
