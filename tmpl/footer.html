@@ -1,0 +1,78 @@
+
+
+
+
+        <footer>
+            <div class="container newsletterContainer">
+                <div class="row">
+                    <div class="col-lg-3 footerLogoBox">
+                        <img src="img/logo.jpg" class="img-responsive">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat.</p>
+                    </div>
+                    <div class="col-lg-6 col-md-8 footerMenuCol">
+                        <div class="row footerMenuRow">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 firstFooterMenu">
+                                <span>Компания</span>
+                                <ul>
+                                    <li><a href="/page_company">О компании</a></li>
+                                    <li><a href="{% url 'brands' %}">Бренды</a></li>
+                                    <li><a href="{% url 'faq'%}">Поддержка</a></li>
+                                    <li><a href="{% url 'blog' %}">Новости и статьи</a></li>
+                                    <li><a href="{% url 'contacts' %}">Контакты</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6">
+                                <span>{{cats.cat_window_title}}</span>
+                                 <ul>
+                                    {% for item in cats.cat_window %}
+                                        <li><a href="/blog_{{item.id}}">{{item.opt2_spec}}</a></li>
+                                    {% endfor %}
+                                 </ul>
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                                <span>{{cats.cat_doors_title}}</span>
+                                <ul>
+                                    {% for item in cats.cat_doors %}
+                                        <li><a href="/blog_{{item.id}}">{{item.opt2_spec}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
+                        <span>Контактная информация</span>
+                        
+                        <p>г. Николаев, ул. Электронная 81/24</p>
+                        <p class="footerPhone">+38 (0512) 58-23-77</p>
+
+                        <p>г. Николаев, ул. Электронная 81/24</p>
+                        <p class="footerPhone">+38 (0512) 58-23-77</p>
+
+                        <p>Понедельник-пятница с 9:00 до 18:00</p>
+                        <hr>
+                        
+                        <p>E-mail: info@bazistk.com.ua</p>
+                        <div class="socIcons">
+                            <a href="#"><i class="flaticon-facebook"></i></a>
+                            <a href="#"><i class="flaticon-instagram"></i></a>
+                            <a href="#"><i class="flaticon-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+
+
+        <section>
+            <div class="container copyRight">
+                <div class="row">
+                    <div class="col-lg-12">© 2016 Компания «Базис ТК». Все права защищены.</div>
+                </div>
+            </div>
+        </section>                  

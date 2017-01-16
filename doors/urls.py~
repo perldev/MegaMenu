@@ -21,6 +21,10 @@ from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 from rest_framework.reverse import reverse
 from catalog.views import *
+from catalog  import views
+from django.conf.urls.static import static
+import os
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -41,7 +45,7 @@ urlpatterns = [
     url('^$', index, name="index"),
     url('^catalog$', catalog, name="catalog"),
     url('^faq$', faq, name="faq"),
-    url('^contacts$', contacts, name="catalog"),
+    url('^contacts$', contacts, name="contacts"),
     
     url(r'^api/$', api_root),
 
@@ -58,6 +62,8 @@ urlpatterns = [
         name='logout'
     ),
 
+
+     
     url(r'^api/brands/$', BrandDetail.as_view(), name='brands'),
     url(r'^api/cats/$', CategoryDetail.as_view(), name='cats'),
     url(r'^api/cats_item/$', CatItemDetail.as_view(), name='cats_item'),
@@ -65,6 +71,29 @@ urlpatterns = [
     url(r'^api/image/$', ImageDetail.as_view(), name='image'),
     url(r'^api/package-item/$', BrandDetail.as_view(), name='packages'),
     url(r'^api/packages/$', BrandDetail.as_view(), name='package-item'),
+
+
+
+
+    url(r'^brands$', views.brands, name="brands"),
+    url(r'^send_marina$', views.send_marina, name="send_marina"),
+    url(r'^page_([\w]+)$', views.custom_page, name="custom_page"),
+
+    url(r'^blog', views.blog, name="blog"),
+    url(r'^blog_item_([\d]+)', views.blog_item, name="blog-item"),
+    url(r'^blog_([\d]+)$', views.blog_cat, name="blog-cat"),
+    
+    url(r'^chanel/delete/([\.\d]+)', views.delete_chanel, name="chanel-delete"),
+    url(r'^chanel/edit', views.edit_chanel, name="chanel-edit"),
+    url(r'^chanel/add', views.add_chanel, name="chanel-add"),   
     url(r'^admin/', admin.site.urls),
 
-]
+] 
+if settings.DEBUG:    
+   urlpatterns += static("js", document_root=os.path.join(settings.BASE_DIR,"js"))
+   urlpatterns += static("img", document_root=os.path.join(settings.BASE_DIR,"img"))
+   urlpatterns += static("css", document_root=os.path.join(settings.BASE_DIR, "css"))
+   urlpatterns += static("fonts", document_root=os.path.join(settings.BASE_DIR,"fonts"))
+   urlpatterns += static("icon", document_root=os.path.join(settings.BASE_DIR,"icon"))
+   
+    

@@ -1705,7 +1705,7 @@ vertical-align: top;
     margin-top: 20px;
 }
 /*---------------------CONTACT FORM---------------*/
-.form-group {
+.contacform-group {
   max-width: 350px;
 }
 .formContact input, .formContact textarea {
@@ -1716,11 +1716,14 @@ vertical-align: top;
 }
 .contactFormContainer {
   text-align: center;
+  max-width: 350px;
+
   padding-top: 25px;
   padding-bottom: 25px;
 }
 .contactFormContainer h3 {
-      font-size: 26px;
+    font-size: 26px;
+
     text-transform: uppercase;
     color: #303460;
     padding-top: 0px;

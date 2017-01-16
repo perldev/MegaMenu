@@ -1,0 +1,85 @@
+<script src="js/main.js"></script>
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector:'textarea.chanel_edit_add',
+                       plugins: "pagebreak",
+                       toolbar: "pagebreak",
+                       pagebreak_separator: "<!-- my page break -->"
+  });</script>
+
+<div class="modal fade" id="myChanelModal"
+     tabindex="20" role="dialog"
+     aria-labelledby="myModalLabelChanel">
+
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content modal-lg">
+            <div class="col-lg-12">
+                <div class="calcBox">
+                    <form id="form_chanel">
+                         <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabelChanel">Добавить</h4>
+                         </div>
+                         <input type="hidden" class="form-control" name="id_chanel"
+                                       id="id_chanel" placeholder="Title">
+                                       
+                         <div class="modal-body">
+
+                              <div class="form-group has-error " id="chanel_errors">
+                                  <label class="control-label" >Попробуйте еще раз, или напишите мне perldev@mail.ru</label>
+                              </div>
+                              <div class="form-group">
+                                <input type="text" class="form-control" 
+                                       name="ordering_chanel"
+                                       id="ordering_chanel_item"
+                                       placeholder="Ordering of item">
+                              </div>
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="title_chanel"
+                                       id="title_chanel_item" placeholder="Title">
+                              </div>
+                              <div class="form-group">
+                              <textarea class="chanel_edit_add" cols="50" id="content_chanel" name="content_chanel" rows="10"></textarea>
+                              </div>
+                         </div>
+                         <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                            <button type="button" id="chanel_btn" class="btn btn-primary">Сохранить</button>
+                         </div>
+                    </form>
+                </div>
+
+
+                </div>
+            </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div id="myChanelDeleteModal" class="modal fade"
+     aria-labelledby="myChanelDeleteModalContent"
+     tabindex="20" role="dialog" >
+      <div class="modal-dialog" role="document" >
+
+            <div class="modal-content modal-lg">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                </div>
+                                <div class="modal-body">
+
+                                        <div class="col-lg-12" id="myChanelDeleteModalContent">
+                                            Are you sure?
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="button" data-dismiss="modal" class="btn btn-primary" id="chanel_item_delete">Delete</button>
+                                        <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+                                </div>
+            </div>
+     
+      </div>
+</div>
+

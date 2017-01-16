@@ -42,35 +42,8 @@
 			</div>
 		</section>
 
-		<section class="headerMenuSection">
-		
-		<div class="container">
-		<div class="row">
+       {% include "menu.html"  with index=True  %}
 
-			<div class="toggleBox">
-			<a href="#mobile-menu" class="toggle-mnu"><span></span></a>
-			</div>
-
-
-			<div class="header-wrap clearfix">				
-                {% include "menu.html" %}        
-
-				<div class="col-lg-2 iconBlock">
-
-						<i class="flaticon-search" data-toggle="modal" data-target="#modalSearch"></i>
-						<i class="flaticon-technology-1" data-toggle="modal" data-target="#myModal"></i>
-						<a href="#">
-							<i class="flaticon-commerce"></i>
-							<span class="cartCount">0</span>
-						</a>
-				</div>
-
-
-			</div>
-
-		</div>
-		</div>
-		</section>
 
 
 
@@ -421,106 +394,9 @@
 				</div>
 		</section>	
 
-		<section class="newsLetterSection">
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-12 newsletterBox">
-						<div class="newsLetterTitle"><span>Будьте в курсе обновлений нашего ассортимента и проводимых акциях</span></div>
-						<div class="newsletterFormBox col-md-6 col-md-offset-3">
-								<form class="form-inline">
-									<div class="row">
-										  <div class="form-group col-lg-7 col-md-7 newletterInputBox">
-										    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Ваш электронный адрес">
-										  </div>
-										  <div class="col-lg-5 col-md-5 btnNewsLetterBox">
-										  	<button type="submit" class="btnNewsLetter">ПОДПИСАТЬСЯ</button>
-										  </div>
-								  	</div>
-								</form>
-						</div>
-					</div>							
-				</div>
-			</div>
-		</section>			
-
-		<footer>
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-3 footerLogoBox">
-						<img src="img/logo.jpg" class="img-responsive">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
-					</div>
-					<div class="col-lg-6 col-md-8 footerMenuCol">
-						<div class="row footerMenuRow">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 firstFooterMenu">
-								<span>Компания</span>
-								<ul>
-									<li><a href="#">О компании</a></li>
-									<li><a href="#">Бренды</a></li>
-									<li><a href="#">Поддержка</a></li>
-									<li><a href="#">Новости и статьи</a></li>
-									<li><a href="#">Контакты</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6">
-								<span>Оконная фурнитура</span>
-								<ul>
-									<li><a href="#">Фурнитура Accado поворотно-откидная</a></li>
-									<li><a href="#">Фурнитура Accado поворотная</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-								<span>Дверная фурнитура</span>
-								<ul>
-									<li><a href="#">Замки-рейки</a></li>
-									<li><a href="#">Короткие замки</a></li>
-									<li><a href="#">Дверные петли</a></li>
-									<li><a href="#">Нажимные гарнитуры</a></li>
-									<li><a href="#">ЦИлиндры</a></li>
-									<li><a href="#">Ответные планки</a></li>
-									<li><a href="#">Дверные доводчики</a></li>
-									<li><a href="#">Офисные ручки</a></li>
-								</ul>
-							</div>														
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
-						<span>Контактная информация</span>
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>
-
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>	
-
-						<p>Понедельник-пятница с 9:00 до 18:00</p>	
-						<hr>
-						<p>E-mail: info@bazistk.com.ua</p>		
-						<div class="socIcons">
-							<a href="#"><i class="flaticon-facebook"></i></a>
-							<a href="#"><i class="flaticon-instagram"></i></a>
-							<a href="#"><i class="flaticon-youtube"></i></a>
-						</div>			
-					</div>										
-				</div>
-			</div>
-		</footer>	
-
-
-
-
-
-
-
-		<section>
-			<div class="container copyRight">
-				<div class="row">
-					<div class="col-lg-12">© 2016 Компания «Базис ТК». Все права защищены.</div>
-				</div>
-			</div>
-		</section>			
+        {% include "subscription.html" %}
+		
+        {% include "footer.html" %}
 
 	</div>
 
@@ -579,6 +455,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
 
 	<script src="js/unslider.js"></script>
+    <script src="js/main.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/common.js"></script>
@@ -602,7 +479,12 @@
             var elemHeight = parseInt($('.productBoxHeightExample').height()+20);
             $('.salesBannerBox').height(elemHeight);    
         });     
-    </script>	
+    </script>
+    {% if is_admin %}
+        {% include "chanels.html"%}
+    {% endif %}
+
+
 
 
 </body>

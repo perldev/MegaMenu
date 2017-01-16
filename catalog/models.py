@@ -7,8 +7,61 @@ from django.contrib import admin
 from django.contrib.admin  import TabularInline, StackedInline
 
 from django.db import models
+from django.utils.timezone import now
+
 
 # Create your models here.
+
+def translit(t):
+    symbols = (u"абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯій",
+                u"abvgdeejzijklmnoprstufhzcssjyjeuaABVGDEEJZIJKLMNOPRSTUFHZCSSJYJEUAii")
+    tr = {ord(a):ord(b) for a, b in zip(*symbols)}
+    t = t.translate(tr)
+    t = t.replace(" ", "_").lower()
+    return t
+
+
+
+class Meta(models.Model):
+    url = models.CharField(max_length=255,
+                             verbose_name=u"Title", null=True, blank=True)
+    keywords = models.CharField(max_length=255,
+                           verbose_name=u"key words", null=True, blank=True)
+    desc = models.CharField(max_length=255,
+                           verbose_name=u"description", null=True, blank=True)
+
+    def __unicode__(self):
+        return self.url
+
+class Chanel(models.Model):
+    title = models.CharField(max_length=255,
+                             verbose_name=u"Title", null=True, blank=True)
+    ext_id = models.IntegerField(verbose_name=u"out_id", null=True, blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+class Content(models.Model):
+
+    image = models.ImageField(upload_to='img', max_length=254, null=True, blank=True)
+
+    title = models.CharField(max_length=255,
+                             verbose_name=u"Title", null=True, blank=True)
+    content = models.TextField(verbose_name=u"Title", null=True, blank=True)
+
+    chanel = models.ForeignKey(Chanel, verbose_name=u"Chanel",
+                                       related_name="chanel",
+                                       blank=True, null=True)
+    pub_date = models.DateTimeField(default=now,
+                                    verbose_name=u"Date of adding")
+
+    ordering = models.IntegerField(verbose_name=u"ordering", default=0)
+
+    def __unicode__(self):
+        return "%s -> %s -> %s " % (self.chanel.title, self.title, str(self.pub_date) )
+
+
+
 
 class Brand(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
@@ -34,7 +87,7 @@ class Category(models.Model):
     def __unicode__(self):
         return self.title                         
 
-                             
+
 class CatItem(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
 
@@ -55,10 +108,13 @@ class CatItem(models.Model):
 
                                    
     def __unicode__(self):
-        return "%s -> %s -> %s" % (self.opt1_typ,
-                                   self.opt2_spec,
-                                   self.opt3_brand.title)
-
+        if self.opt3_brand:
+            return "%s -> %s -> %s" % (self.opt1_typ,
+                                       self.opt2_spec,
+                                       self.opt3_brand.title)
+        else:
+            return "%s -> %s" % (self.opt1_typ,
+                                 self.opt2_spec)
 
                                    
 class Product(models.Model):
@@ -146,6 +202,26 @@ class PackageItem(models.Model):
         return str(self.product)
                                       
 
+class CatItemAdmin(admin.ModelAdmin):
+
+    def save_model(self, request, obj, form, change):
+        # custom stuff here
+
+        
+        obj.save()
+        if obj.pk is None:
+            new_chanel = Chanel(title=translit(obj.opt2_spec), ext_id=obj.pk)
+            new_chanel.save()
+        else:
+            try:
+                chanel = Chanel.objects.get(ext_id=obj.pk)
+                chanel.title=translit(obj.opt2_spec)
+                chanel.save()
+            except Chanel.DoesNotExist:
+                new_chanel = Chanel(title=translit(obj.opt2_spec), ext_id=obj.pk)
+                new_chanel.save()
+
+                                      
 
 class PackageItemInline(StackedInline):
     model = PackageItem
@@ -159,3 +235,12 @@ class PackageAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ ImagesInline ]
     list_display = ['title', 'rate', 'price', 'catalog_item']
+
+
+class CatItemInline(StackedInline):
+    model = CatItem
+    extra = 10
+
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [ CatItemInline ]
+    list_display = ['title']

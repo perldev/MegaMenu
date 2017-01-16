@@ -27,173 +27,14 @@
 </head>
 <body>
 	
-	<div class="wrapper">
-		<section class="headerMenuSection">
-		
-		<div class="container">
-		<div class="row">
-
-			<div class="toggleBox">
-			<a href="#mobile-menu" class="toggle-mnu"><span></span></a>
-			</div>
-
-
-			<div class="header-wrap clearfix">				
-				
-				<div class="col-lg-2 logoBox ">		
-						<a href="#"><img src="img/logo.jpg" class="img-responsive"></a>	
-				</div>
-
-				<div class="col-lg-8 menuColBox">
-				<div class="top-mnu">
-					
-					<ul class="sf-menu">
-						<li><a href="#">ГЛАВНАЯ</a></li>
-						<li><a href="#">О КОМПАНИИ</a></li>
-						<li><a href="#">БРЕНДЫ</a></li>
-						<li>
-							<a href="#">ПРОДУКЦИЯ</a>
-							<ul>
-								<li>
-									<a href="#">Подменю 1</a>
-								</li>
-								<li><a href="#">Подменю 2</a>
-							<ul>
-								<li><a href="#">Подменю 1 текст </a></li>
-								<li><a href="#">Подменю 2</a></li>
-								<li><a href="#">Подменю 3</a></li>
-							</ul>
-
-								</li>
-								<li><a href="#">Подменю 3</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="#">ПОДДЕРЖКА</a>
-							<div class="sf-mega">
-								
-								<div class="container-fluid containerMmenuBox">
-									
-									<div class="row">
-										<div class="col-lg-12">
-											
-											<div class="row">
-												<div class="col-md-4">
-													
-													<div class="menu-new-item">
-														<h3>Оконная фурнитура</h3>
-															<ul class="megaSubMenu">
-																<li><a href="#">Подменю 1 текст </a></li>
-																<li><a href="#">Подменю 2</a></li>
-																<li><a href="#">Подменю 3</a></li>
-															</ul>
-													</div>
-
-												</div>
-												<div class="col-md-4">
-													
-													<div class="menu-new-item">
-														<h3>Дверная фурнитура</h3>
-															<ul class="megaSubMenu">
-																<li><a href="#">Подменю 1 текст </a></li>
-																<li><a href="#">Подменю 2</a></li>
-																<li><a href="#">Подменю 3</a></li>
-																<li><a href="#">Подменю 1 текст </a></li>
-																<li><a href="#">Подменю 2</a></li>
-																<li><a href="#">Подменю 3</a></li>
-																<li><a href="#">Подменю 1 текст </a></li>
-																<li><a href="#">Подменю 2</a></li>																							
-															</ul>
-													</div>
-
-												</div>
-												<div class="col-md-4">
-													
-													<div class="menu-new-item specMegaItem">
-														<h3>Акции и другие спецпредложения</h3>
-														<img class="responsive-img" src="img/coffee.jpg" alt="Alt">														
-														<a href="#" class="btn megaMenuButton">Все акции</a>
-													</div>
-
-												</div>
-											</div>
-
-										</div>
-									</div>
-
-								</div>
-
-							</div>
-						</li>
-						<li>
-							<a href="#">КОНТАКТЫ</a>
-							<ul>
-								<li>
-									<a href="#">Подменю 1</a>
-								</li>
-								<li><a href="#">Подменю 2</a></li>
-								<li><a href="#">Подменю 3</a></li>
-							</ul>
-						</li>
-					</ul>
-
-				</div>
-				</div>
-				
-				<div class="col-lg-2 iconBlock">
-
-						<i class="flaticon-search" data-toggle="modal" data-target="#modalSearch"></i>
-						<i class="flaticon-technology-1" data-toggle="modal" data-target="#myModal"></i>
-						<a href="#">
-							<i class="flaticon-shopping-cart"></i>
-							<span class="cartCount">0</span>
-						</a>
-				</div>
-
-
-			</div>
-
-		</div>
-		</div>
-		</section>
-
-
-
-
-		<div class="pageTitleImageBack" style="background-image:url(img/sl1.jpg);">
-								<div class="container">
-									<div class="row">			
-										<div class="col-lg-12 pageTitleTextCOl">
-												<div class="pageTitleText">
-													<p>Каталог товаров</p>
-													<h3>ДВЕРНАЯ ФУРНИТУРА</h3>
-												</div>
-										</div>	
-									</div>
-								</div>				
-		</div>
-
-	</div>
+   {% include "menu.html" %}
 
 
 	<div class="wrapper">
 
-		<section>
-			<div class="container">
-				<div class="row">	
-					<div class="col-lg-12 breadCrumbsCol">
-						<div class="breadCrumbsBox">
-							<ul>
-								<li><a href="#">Главная</a></li>
-								<li><a href="#">Продукция</a></li>
-								<li><a href="#" class="disabled">Дверная фурнитура</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>	
-
+        {% include "crumbs.html" %}
+	
+        {% load preview %}
 
 		<section>
 			<div class="container">
@@ -225,6 +66,87 @@
 
 
 						<div class="col-lg-9 col-md-12 col-lg-push-3">
+                                {% if is_admin %}
+                                    <div class="col-lg-12 text-center">
+                                            {% include "chanel_add.html" with item=current_chanel.title %}
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                {% endif %}
+						
+						
+                                      {% for article, article2 in current_list %}
+						
+										<div class="row">
+												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
+                                                   {% if is_admin %}
+                                                        {% include "chanel_edit.html" with item=article %}
+                                                        <br/>
+                                                   {% endif %}
+
+                                                   {% autoescape off %}
+
+
+                                                        <div class="articleHomeBox">
+                                                            <span class="artDate">{{article.pub_date}}</span>
+                                                            <a href="/blog_item_{{article.id}}">
+                                                            <img src="img/artImg.jpg" class="img-responsive"></a>
+                                                            <div class="homeArtTitle">
+                                                            <a href="/blog_item_{{article.id}}">{{article.title}}</a>
+                                                            </div>
+                                                            <p>
+                                                            {{article.content|preview}}
+                                                            </p>
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-xs-6 artCat">
+                                                                    <a href="#">{{cat_title}}</a>
+                                                                </div>
+                                                                <div class="col-lg-6 col-xs-6 artOpen">
+                                                                    <img src="img/artSq.jpg" class="img-responsive">
+                                                                    <a href="/blog_item_{{article.id}}">Подробнее</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                  {% endautoescape %}
+
+													
+												</div>
+                                              {% if article2 %}
+                                                    <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
+                                                      {% if is_admin %}
+                                                            {% include "chanel_edit.html" with item=article2 %}
+                                                        <br/>
+                                                      {% endif %}
+
+                                                      {% autoescape off %}
+                                                            <div class="articleHomeBox">
+                                                                <span class="artDate">{{article2.pub_date}}</span>
+                                                                <a href="/blog_item_{{article2.id}}"><img src="img/artImg.jpg" class="img-responsive"></a>
+                                                                <div class="homeArtTitle">
+                                                                <a href="/blog_item_{{article2.id}}">{{article2.title}}</a>
+                                                                </div>
+                                                                <p> {{article2.content|preview}} </p>
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-xs-6 artCat">
+                                                                        <a href="#">{{cat_title}}</a>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-xs-6 artOpen">
+                                                                        <img src="img/artSq.jpg" class="img-responsive">
+                                                                        <a href="/blog_item_{{article2.id}}">Подробнее</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                      {% endautoescape %}
+                                                    </div>
+                                               {% endif %}
+                                       </div>
+                                       {% endfor  %}
+            
+
+										
+
 										<div class="row">
 												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
 													<div class="articleHomeBox">
@@ -271,53 +193,7 @@
 												</div>
 										</div>	
 
-										<div class="row">
-												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-													<div class="articleHomeBox">
-														<span class="artDate">10.10.2037</span>
-														<a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-														<div class="homeArtTitle">
-														<a href="#">Оконная фурнитура и ее возможности</a>
-														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-														tempor incididunt ut labore et dolore magna aliqua.  ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod	tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam,
-														quis nostrud exercitation ullamco laboris nisi ut aliquip </p>							
-														<div class="row">
-															<div class="col-lg-6 col-xs-6 artCat">
-																<a href="#">Оконная фурнитура</a>
-															</div>
-															<div class="col-lg-6 col-xs-6 artOpen">
-																<img src="img/artSq.jpg" class="img-responsive">
-																<a href="#">Подробнее</a>
-															</div>								
-														</div>
-													</div>
-												</div>
-
-												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-													<div class="articleHomeBox">
-														<span class="artDate">10.10.2037</span>
-														<a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-														<div class="homeArtTitle">
-														<a href="#">Оконная фурнитура и ее возможности</a>
-														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-														tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-														quis nostrud exercitation ullamco laboris nisi ut aliquip </p>							
-														<div class="row">
-															<div class="col-lg-6 col-xs-6 artCat">
-																<a href="#">Оконная фурнитура</a>
-															</div>
-															<div class="col-lg-6 col-xs-6 artOpen">
-																<img src="img/artSq.jpg" class="img-responsive">
-																<a href="#">Подробнее</a>
-															</div>								
-														</div>
-													</div>
-												</div>
-										</div>	
-
-										<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
+								<!--		<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
 											<div class="flexPagination">
 												<ul>
 													<li><a href="#">1</a></li>
@@ -326,7 +202,7 @@
 													<li><a href="#">4</a></li>
 												</ul>
 											</div>
-										</div>																			
+										</div>					-->														
 						</div>						
 
 
@@ -348,25 +224,27 @@
 										<div class="sf-mega sfMegaLeft">
 											<li>
 												<div>
+                                                  {% for blog in menu %}
+												
 													<div class="menu-new-item leftSubMenuBox">
-														<h3>Оконная фурнитура</h3>
+														<h3>{{blog.title}}</h3>
 															<ul class="megaSubMenu">
-																<li><a href="#">Подменю 1 текст<span>(8)</span></a></li>
-																<li><a href="#">Подменю 2 <span>(8)</span></a></li>
-																<li><a href="#">Подменю 3 <span>(8)</span></a></li>
+                                                               {% for sub_cat in blog.sub %}
+                                                                    <li><a href="/blog_{{sub_cat.item.id}}">
+                                                                        {% if sub_cat.item.id == current %}
+                                                                        <strong>{{sub_cat.title|truncatechars:28}}</strong>
+                                                                        {% else %}
+                                                                                {{sub_cat.title|truncatechars:28}}
+                                                                        {% endif %}
+                                                                        <span>({{sub_cat.count}})</span></a></li>
+    
+                                                              {% endfor %}
 															</ul>
-													</div>	
-													<div class="menu-new-item leftSubMenuBox">
-														<h3>Дверная фурнитура</h3>
-															<ul class="megaSubMenu">
-																<li><a href="#">Подменю 1 текст<span>(8)</span></a></li>
-																<li><a href="#">Подменю 2<span>(8)</span></a></li>
-																<li><a href="#">Подменю 3<span>(8)</span></a></li>
-															</ul>
-													</div>	
+													</div>
+													{% endfor %}
 													<div class="menu-new-item leftSubMenuBoxSales">
 															<ul class="megaSubMenu">
-																<li><a href="#">АКЦИИ<span>(8)</span></a></li>
+																<li><a href="{% url 'catalog' %}?discont=1">АКЦИИ<span>({{ discont_count }})</span></a></li>
 															</ul>
 													</div>																				
 												</div>
@@ -425,7 +303,8 @@
 								<div class="currentSalesLeft">
 									<img src="img/currentSales.jpg" class="img-responsive">
 									<div class="leftSectionButton">
-										<a href="#" class="btnStandBlueFd">Перейти в раздел</a>
+										<a href="{% url 'catalog' %}?discont=1"
+										class="btnStandBlueFd">Перейти в раздел</a>
 									</div>
 								</div>
 							</div>	
@@ -439,105 +318,10 @@
 		</section>
 
 
-		<section class="newsLetterSection">
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-12 newsletterBox">
-						<div class="newsLetterTitle"><span>Будьте в курсе обновлений нашего ассортимента и проводимых акциях</span></div>
-						<div class="newsletterFormBox col-md-6 col-md-offset-3">
-								<form class="form-inline">
-									<div class="row">
-										  <div class="form-group col-lg-7 col-md-7 newletterInputBox">
-										    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Ваш электронный адрес">
-										  </div>
-										  <div class="col-lg-5 col-md-5 btnNewsLetterBox">
-										  	<button type="submit" class="btnNewsLetter">ПОДПИСАТЬСЯ</button>
-										  </div>
-								  	</div>
-								</form>
-						</div>
-					</div>							
-				</div>
-			</div>
-		</section>			
+        {% include "subscription.html" %}
 
 		
-
-		<footer>
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-3 footerLogoBox">
-						<img src="img/logo.jpg" class="img-responsive">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
-					</div>
-					<div class="col-lg-6 col-md-8 footerMenuCol">
-						<div class="row footerMenuRow">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 firstFooterMenu">
-								<span>Компания</span>
-								<ul>
-									<li><a href="#">О компании</a></li>
-									<li><a href="#">Бренды</a></li>
-									<li><a href="#">Поддержка</a></li>
-									<li><a href="#">Новости и статьи</a></li>
-									<li><a href="#">Контакты</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6">
-								<span>Оконная фурнитура</span>
-								<ul>
-									<li><a href="#">Фурнитура Accado поворотно-откидная</a></li>
-									<li><a href="#">Фурнитура Accado поворотная</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-								<span>Дверная фурнитура</span>
-								<ul>
-									<li><a href="#">Замки-рейки</a></li>
-									<li><a href="#">Короткие замки</a></li>
-									<li><a href="#">Дверные петли</a></li>
-									<li><a href="#">Нажимные гарнитуры</a></li>
-									<li><a href="#">ЦИлиндры</a></li>
-									<li><a href="#">Ответные планки</a></li>
-									<li><a href="#">Дверные доводчики</a></li>
-									<li><a href="#">Офисные ручки</a></li>
-								</ul>
-							</div>														
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
-						<span>Контактная информация</span>
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>
-
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>	
-
-						<p>Понедельник-пятница с 9:00 до 18:00</p>	
-						<hr>
-						<p>E-mail: info@bazistk.com.ua</p>		
-						<div class="socIcons">
-							<a href="#"><i class="flaticon-facebook"></i></a>
-							<a href="#"><i class="flaticon-instagram"></i></a>
-							<a href="#"><i class="flaticon-youtube"></i></a>
-						</div>			
-					</div>										
-				</div>
-			</div>
-		</footer>	
-
-
-
-		<section>
-			<div class="container copyRight">
-				<div class="row">
-					<div class="col-lg-12">© 2016 Компания «Базис ТК». Все права защищены.</div>
-				</div>
-			</div>
-		</section>					
-					
+        {% include "footer.html" %}
 
 
 
@@ -552,6 +336,7 @@
 	<script src="js/unslider.js"></script>
 	<script src="js/quantityCount.js"></script>
 	
+    <script src="js/main.js"></script>
 
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/commonsecmenu.js"></script>
@@ -569,6 +354,10 @@
 			$('.my-slider').unslider();
 		});
 	</script>
+
+	{% if is_admin %}
+        {% include "chanels.html"%}
+    {% endif %}
 
 
 </body>

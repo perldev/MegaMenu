@@ -1,0 +1,12 @@
+  <button type='button'
+        onclick="Chanels.edit_item(this, '{{item.chanel.title}}','{{item.id}}')"
+        data-title="{{item.title}}"
+        data-content="{{item.content}}"
+        data-ordering="{{item.ordering}}"
+        class='btn btn-primary'>
+        <i class="fa fa-edit" aria-hidden="true"></i></button>
+    <button type='button'
+            onclick="Chanels.delete_item(this, '{{item.chanel.title}}','{{item.id}}')"
+            class='btn btn-danger' data-title="{{item.title}}" >
+        <i  class="fa fa-trash" aria-hidden="true"
+             ></i></button>
