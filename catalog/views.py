@@ -64,13 +64,17 @@ def blog(request, cat_id=None):
        cats.append({"sub":art_cats, "title": ch.title})
 
     context["menu"]=cats
-    context["current"] = int(cat_id)
     
     cat_title = None
-    if context["current"]:
+    if cat_id:
+        context["current"] = int(cat_id)
         context["cat_title"] = cats_title[context["current"]]
         context["current_chanel"] = Chanel.objects.get(ext_id=context["current"])
-        context["current_list"] = pairwise(Content.objects.filter(chanel__ext_id=context["current"]))
+        our_list = list(Content.objects.filter(chanel__ext_id=context["current"]))
+        res_list = zip(*[iter(our_list)]*2)
+        if len(our_list) % 2>0:
+            res_list.append( (our_list[-1:][0], None))
+        context["current_list"] = res_list
     
     return render(request, 'blog.html', context)
 
