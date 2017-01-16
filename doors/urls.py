@@ -43,7 +43,6 @@ def api_root(request, format=None):
 
 urlpatterns = [
     url('^$', index, name="index"),
-    url('^catalog$', catalog, name="catalog"),
     url('^faq$', faq, name="faq"),
     url('^contacts$', contacts, name="contacts"),
     
@@ -71,10 +70,11 @@ urlpatterns = [
     url(r'^api/image/$', ImageDetail.as_view(), name='image'),
     url(r'^api/package-item/$', BrandDetail.as_view(), name='packages'),
     url(r'^api/packages/$', BrandDetail.as_view(), name='package-item'),
-
-
-
-
+    
+    url('^catalog$', catalog, name="catalog"),
+    url(r'^cat_type_([\d]+)$', catalog_sub_cat, name='cat-item'),   
+    url(r'^cat_([\w]+)$', catalog, name='catalog'),
+    
     url(r'^brands$', views.brands, name="brands"),
     url(r'^send_marina$', views.send_marina, name="send_marina"),
     url(r'^page_([\w]+)$', views.custom_page, name="custom_page"),
