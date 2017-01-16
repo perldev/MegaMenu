@@ -13,23 +13,81 @@ from .models import Content, Chanel
 from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404, redirect, render
 from helpers import http403json, http200json
-from itertools import tee, izip
 
-
-def pairwise(iterable):
-    "s -> (s0,s1), (s1,s2), (s2, s3), ..."
-    a, b = tee(iterable)
-    next(b, None)
-    return izip(a, b)
 
 
 def index(request):
     context = {}
     return render(request, 'index.html', context)
 
-def catalog(request):
+def catalog(request, catalog_id=None):
+  
+    if catalog_id == "window":
+      catalog_id = 1
+    
+    if catalog_id == "doors": 
+      catalog_id = 2
+      
     context = {}
+    i = 1
+    cats = []
+    cats_title = {}
+    for ch in Category.objects.all().order_by("id"):
+       art_cats = []
+       count = 0
+       for item in CatItem.objects.filter(opt1_typ = ch).order_by("order"):
+            count_tmp = Product.objects.filter(catalog_item=item.id).count()
+            art_cats.append({"item": item,
+                             "title": item.opt2_spec,
+                             "count": count_tmp})
+            count += count_tmp
+            cats_title[item.id] = item.opt2_spec
+            
+       cats.append({"sub":art_cats, "title": ch.title, "count": count})
+
+    context["menu"]=cats
+    
+    cat_title = None
+    if catalog_id:
+        context["current"] = catalog_id
+        context["cat_title"] = cats_title[context["current"]]
+        context["current_chanel"] = CatItem.objects.get(id=context["current"])
+        context["current_list"] = Product.objects.filter(catalog_item__opt1_typ_id=catalog_id)
+    else:
+        our_list = get_last_products(6)       
+        context["current_list"] = Product.objects.all().order_by("-pub_date")
+        
     return render(request, 'catalog.html', context)
+
+def catalog_sub_cat(request, cat_id):
+    
+    context = {}
+    i = 1
+    cats = []
+    cats_title = {}
+    for ch in Category.objects.all().order_by("id"):
+       art_cats = []
+       count = 0
+       for item in CatItem.objects.filter(opt1_typ = ch).order_by("order"):
+            count_tmp = Product.objects.filter(catalog_item=item.id).count()
+            art_cats.append({"item": item,
+                             "title": item.opt2_spec,
+                             "count": count_tmp})
+            count += count_tmp
+            cats_title[item.id] = item.opt2_spec
+            
+       cats.append({"sub":art_cats, "title": ch.title, "count": count})
+
+    context["menu"] = cats
+    
+    cat_title = None
+    context["current"] = int(cat_id)
+    context["cat_title"] = cats_title[context["current"]]
+    context["current_chanel"] = CatItem.objects.get(id=context["current"])
+    context["current_list"] = Product.objects.filter(catalog_item_id=context["current"])
+    return render(request, 'catalog.html', context)
+
+
 
 def brands(request):
     context = {}
@@ -64,22 +122,58 @@ def blog(request, cat_id=None):
        cats.append({"sub":art_cats, "title": ch.title})
 
     context["menu"]=cats
-    context["current"] = int(cat_id)
     
     cat_title = None
-    if context["current"]:
+    if cat_id:
+        context["current"] = int(cat_id)
         context["cat_title"] = cats_title[context["current"]]
         context["current_chanel"] = Chanel.objects.get(ext_id=context["current"])
-        context["current_list"] = pairwise(Content.objects.filter(chanel__ext_id=context["current"]))
-    
+        our_list = list(Content.objects.filter(chanel__ext_id=context["current"]))
+        res_list =  zip(*[iter(our_list)]*2)
+        if len(our_list) % 2 >0:
+          res_list.append((our_list[-1:][0], None))         
+        
+        context["current_list"] = res_list 
+    else:
+        our_list = get_last_articles(6)
+        res_list =  zip(*[iter(our_list)]*2)
+        if len(our_list) % 2 >0:
+          res_list.append((our_list[-1:][0], None))         
+        
+        context["current_list"] = res_list 
     return render(request, 'blog.html', context)
+  
+def get_last_articles(num):
+  return []
 
+def get_last_products(num):
+  return []
     
 def blog_item(request, item_id):
 
     context = {}
-
+    content = Content.objects.get(id=item_id)
+    context["current"] = content.chanel.id
+    context["article"] = content
+    i = 1
+    cats = []
+    cats_title = {}
     
+    for ch in Category.objects.all().order_by("id"):
+       art_cats = []
+       for item in CatItem.objects.filter(opt1_typ = ch).order_by("order"):
+            art_cats.append({"item": item,
+                             "title": item.opt2_spec,
+                             "count": Content.objects.filter(chanel__ext_id=item.id).count()})
+            
+            cats_title[item.id] = item.opt2_spec
+            
+       cats.append({"sub":art_cats, "title": ch.title})
+
+    context["menu"]= cats   
+    context["cat_title"] = cats_title[context["current"]]
+    context["current_chanel"] = Chanel.objects.get(ext_id=context["current"])
+
     return render(request, 'article.html', context)
 
     
@@ -195,17 +289,15 @@ def content_chanels(request):
     context = {}
     for ch in Chanel.objects.all():
         context[ch.title] = Content.objects.filter(chanel = ch).order_by('ordering')
-
-
+  
     cats = {}
     num2name = {1:"cat_window", 2:"cat_doors"}
     i = 1
     for ch in Category.objects.all():
+        
        cats[num2name[i]] = [ item for item in CatItem.objects.filter(opt1_typ = ch).order_by("order")]
-       
        cats[num2name[i]+"_title"] = ch.title
        i+=1
-        
 
     discont_count = Product.objects.filter(is_discont=True).count()    
     COMPANY_ID = 1
@@ -213,7 +305,10 @@ def content_chanels(request):
     if request.user.is_authenticated() and request.user.is_staff:
         return {"cats":cats, 'chanels': context,
                 "discont_count": discont_count,
-                'is_admin': True }
+                'is_admin': True,
+                }
     else:
         return {"cats":cats, 'chanels': context,
-                 "discont_count": discont_count}
+                "discont_count": discont_count,
+                 
+                 }

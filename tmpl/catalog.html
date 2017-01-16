@@ -27,74 +27,14 @@
 </head>
 <body>
 	
-	<div class="wrapper">
-		<section class="headerMenuSection">
-		
-		<div class="container">
-		<div class="row">
+			
+        {% include "menu.html" %}
 
-			<div class="toggleBox">
-			<a href="#mobile-menu" class="toggle-mnu"><span></span></a>
-			</div>
-
-
-			<div class="header-wrap clearfix">				
-				
-				{% include "menu.html" %}
-
-				<div class="col-lg-2 iconBlock">
-
-						<i class="flaticon-search" data-toggle="modal" data-target="#modalSearch"></i>
-						<i class="flaticon-technology-1" data-toggle="modal" data-target="#myModal"></i>
-						<a href="#">
-							<i class="flaticon-commerce"></i>
-							<span class="cartCount">0</span>
-						</a>
-				</div>
-
-			</div>
-
-		</div>
-		</div>
-		</section>
-
-
-
-
-		<div class="pageTitleImageBack" style="background-image:url(img/sl1.jpg);">
-								<div class="container">
-									<div class="row">			
-										<div class="col-lg-12 pageTitleTextCOl">
-												<div class="pageTitleText">
-													<p>Каталог товаров</p>
-													<h3>ДВЕРНАЯ ФУРНИТУРА</h3>
-												</div>
-										</div>	
-									</div>
-								</div>				
-		</div>
-
-	</div>
-
+			
 
 	<div class="wrapper">
 
-		<section>
-			<div class="container">
-				<div class="row">	
-					<div class="col-lg-12 breadCrumbsCol">
-						<div class="breadCrumbsBox">
-							<ul>
-								<li><a href="#">Главная</a></li>
-								<li><a href="#">Продукция</a></li>
-								<li><a href="#" class="disabled">Дверная фурнитура</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>	
-
+		{% include "crumbs.html" %}
 
 		<section>
 			<div class="container">
@@ -128,14 +68,36 @@
 						<div class="col-lg-9 col-md-12 col-lg-push-3">
 								<div class="homeSalesProducts">
 									<div class="row rowVertAlign">
-
-
-
-
-
-
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
+									{% for item in  current_list %}
+									
+                                                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
+                                                                                            <div class="productBox">
+                                                                                                    <a href="/product_{{item.id}}">
+                                                                                                    {% if item.is_discont %}
+                                                                                                        <span class="salesMarker">акция</span>
+                                                                                                    {%  endif %}
+                                                                                                    <img src="img/productImg.jpg" class="img-responsive">
+                                                                                                    {{item.title}}</a>
+                                                                                                    <span>{{ cat_title }} </span>
+                                                                                                    <div class="row">
+                                                                                                            <div class="rankPriceBox2">
+                                                                                                                    <img src="img/rank.jpg" class="img-responsive">
+                                                                                                                    <div class="priceBoxSPan">
+                                                                                                                            <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
+                                                                                                                    </div>
+                                                                                                            </div>
+                                                                                                            <div class="productButtons2">
+                                                                                                                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
+                                                                                                                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                                                                                                            </div>                                                                  
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>  
+                                                                                
+                                                                         {% endfor %}       
+									
+									
+									<!--	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
 											<div class="productBox">
 												<a href="#">
 													<span class="salesMarker">акция</span>
@@ -331,10 +293,10 @@
 													</div>									
 												</div>
 											</div>
-										</div>	
+										</div>	-->
 
 
-										<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
+									<!--	<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
 											<div class="flexPagination">
 												<ul>
 													<li><a href="#">1</a></li>
@@ -343,7 +305,7 @@
 													<li><a href="#">></a></li>
 												</ul>
 											</div>
-										</div>
+										</div>-->
 										
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="complectCol">
@@ -396,112 +358,9 @@
 						</div>						
 
 
-						<div class="col-lg-3 col-md-12 col-lg-pull-9 leftMenuCol">
-							<div class="inner-addon right-addon catSearchDesktop">
-								<i class="glyphicon glyphicon-search"></i>
-								<input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
-							</div>	
-
-							<div class="leftSectionTitle">
-							<h3 >КАТАЛОГ ТОВАРОВ</h3>	
-							<hr>
-							</div>					
-
-							<div class="leftMenuBox">		
-								<div class="top-mnu">	
-									<ul class="sf-menu2">
-										<div class="sf-mega sfMegaLeft">
-											<li>
-												<div>
-													<div class="menu-new-item leftSubMenuBox">
-														<h3>Оконная фурнитура</h3>
-															<ul class="megaSubMenu">
-																<li><a href="#">Замки-рейки</a>
-																	<ul class="levelMenu">
-																		<li><a href="#">PAVO <span>(8)</span></a></li>
-																		<li><a href="#">ACCADO <span>(8)</span></a></li>
-																	</ul>
-																</li>
-																<li><a href="#">Подменю 2</a></li>
-																<li><a href="#">Подменю 3 <span>(8)</span></a></li>
-															</ul>
-													</div>	
-													<div class="menu-new-item leftSubMenuBox">
-														<h3>Дверная фурнитура</h3>
-															<ul class="megaSubMenu">
-																<li><a href="#">Подменю 1 текст<span>(8)</span></a></li>
-																<li><a href="#">Подменю 2<span>(8)</span></a></li>
-																<li><a href="#">Подменю 3<span>(8)</span></a></li>
-															</ul>
-													</div>	
-													<div class="menu-new-item leftSubMenuBoxSales">
-															<ul class="megaSubMenu">
-																<li><a href="#">АКЦИИ<span>(8)</span></a></li>
-															</ul>
-													</div>																				
-												</div>
-											</li>
-										</div>					
-									</ul>
-								</div>
-							</div>
-
-							<div class="leftSectionSalesTitle">
-								<h3 >ПОПУЛЯРНЫЕ ТОВАРЫ</h3>	
-								<hr>
-							</div>	
-
-							<div class="row popularProducts">
-								<div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-									<div class="row">									
-										<div class="col-sm-8 popProductItem">
-											<a href="#">Петля дверная 1200 мм</a>
-											<img src="img/rank.jpg" class="img-responsive">
-											<span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-										</div>
-										<div class="col-sm-4">
-											<img src="img/productImg.jpg" class="img-responsive">
-										</div>											
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-									<div class="row">									
-										<div class="col-sm-8 popProductItem">
-											<a href="#">Петля дверная 1200 мм</a>
-											<img src="img/rank.jpg" class="img-responsive">
-											<span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-										</div>
-										<div class="col-sm-4">
-											<img src="img/productImg.jpg" class="img-responsive">
-										</div>											
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-									<div class="row">									
-										<div class="col-sm-8 popProductItem">
-											<a href="#">Петля дверная 1200 мм</a>
-											<img src="img/rank.jpg" class="img-responsive">
-											<span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-										</div>
-										<div class="col-sm-4">
-											<img src="img/productImg.jpg" class="img-responsive">
-										</div>											
-									</div>
-								</div>													
-							</div>
-
-							<div class="leftSectionTitle">
-								<h3 >ДЕЙСТВУЮЩИЕ АКЦИИ</h3>	
-								<div class="currentSalesLeft">
-									<img src="img/currentSales.jpg" class="img-responsive">
-									<div class="leftSectionButton">
-										<a href="#" class="btnStandBlueFd">Перейти в раздел</a>
-									</div>
-								</div>
-							</div>	
-
-
-					</div>
+				
+				
+				{% include "left_menu_product.html" %}
 
 
 				</div>
@@ -509,104 +368,11 @@
 		</section>
 
 
-		<section class="newsLetterSection">
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-12 newsletterBox">
-						<div class="newsLetterTitle"><span>Будьте в курсе обновлений нашего ассортимента и проводимых акциях</span></div>
-						<div class="newsletterFormBox col-md-6 col-md-offset-3">
-								<form class="form-inline">
-									<div class="row">
-										  <div class="form-group col-lg-7 col-md-7 newletterInputBox">
-										    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Ваш электронный адрес">
-										  </div>
-										  <div class="col-lg-5 col-md-5 btnNewsLetterBox">
-										  	<button type="submit" class="btnNewsLetter">ПОДПИСАТЬСЯ</button>
-										  </div>
-								  	</div>
-								</form>
-						</div>
-					</div>							
-				</div>
-			</div>
-		</section>			
+		{% include "subscription.html" %}
 
 		
 
-		<footer>
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-3 footerLogoBox">
-						<img src="img/logo.jpg" class="img-responsive">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
-					</div>
-					<div class="col-lg-6 col-md-8 footerMenuCol">
-						<div class="row footerMenuRow">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 firstFooterMenu">
-								<span>Компания</span>
-								<ul>
-									<li><a href="#">О компании</a></li>
-									<li><a href="#">Бренды</a></li>
-									<li><a href="#">Поддержка</a></li>
-									<li><a href="#">Новости и статьи</a></li>
-									<li><a href="#">Контакты</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6">
-								<span>Оконная фурнитура</span>
-								<ul>
-									<li><a href="#">Фурнитура Accado поворотно-откидная</a></li>
-									<li><a href="#">Фурнитура Accado поворотная</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-								<span>Дверная фурнитура</span>
-								<ul>
-									<li><a href="#">Замки-рейки</a></li>
-									<li><a href="#">Короткие замки</a></li>
-									<li><a href="#">Дверные петли</a></li>
-									<li><a href="#">Нажимные гарнитуры</a></li>
-									<li><a href="#">ЦИлиндры</a></li>
-									<li><a href="#">Ответные планки</a></li>
-									<li><a href="#">Дверные доводчики</a></li>
-									<li><a href="#">Офисные ручки</a></li>
-								</ul>
-							</div>														
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
-						<span>Контактная информация</span>
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>
-
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>	
-
-						<p>Понедельник-пятница с 9:00 до 18:00</p>	
-						<hr>
-						<p>E-mail: info@bazistk.com.ua</p>		
-						<div class="socIcons">
-							<a href="#"><i class="flaticon-facebook"></i></a>
-							<a href="#"><i class="flaticon-instagram"></i></a>
-							<a href="#"><i class="flaticon-youtube"></i></a>
-						</div>			
-					</div>										
-				</div>
-			</div>
-		</footer>	
-
-
-
-		<section>
-			<div class="container copyRight">
-				<div class="row">
-					<div class="col-lg-12">© 2016 Компания «Базис ТК». Все права защищены.</div>
-				</div>
-			</div>
-		</section>					
+		{% include "footer.html" %}		
 					
 
 
@@ -638,7 +404,7 @@
 			$('.my-slider').unslider();
 		});
 	</script>
-
+        
 
 </body>
 </html>

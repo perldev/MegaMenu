@@ -1,0 +1,104 @@
+                <div class="col-lg-3 col-md-12 col-lg-pull-9 leftMenuCol">
+                                                        <div class="inner-addon right-addon catSearchDesktop">
+                                                                <i class="glyphicon glyphicon-search"></i>
+                                                                <input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
+                                                        </div>  
+
+                                                        <div class="leftSectionTitle">
+                                                        <h3 >НОВОСТИ И СТАТЬИ</h3>      
+                                                        <hr>
+                                                        </div>                                  
+
+                                                        <div class="leftMenuBox">               
+                                                                <div class="top-mnu">   
+                                                                        <ul class="sf-menu2">
+                                                                                <div class="sf-mega sfMegaLeft">
+                                                                                        <li>
+                                                                                                <div>
+                                                            {% for blog in menu %}
+                                                        
+                                                                <div class="menu-new-item leftSubMenuBox">
+                                                                        <h3>{{blog.title}}</h3>
+                                                                      <ul class="megaSubMenu">
+                                                                              {% for sub_cat in blog.sub %}
+                                                                                    <li><a href="/blog_{{sub_cat.item.id}}">
+                                                                                        {% if sub_cat.item.id == current %}
+                                                                                        <strong>{{sub_cat.title|truncatechars:28}}</strong>
+                                                                                        {% else %}
+                                                                                                {{sub_cat.title|truncatechars:28}}
+                                                                                        {% endif %}
+                                                                                        <span>({{sub_cat.count}})</span></a></li>
+                    
+                                                                              {% endfor %}
+                                                                        </ul>
+                                                                                                        </div>
+                                                                                                        {% endfor %}
+                                                                                                        <div class="menu-new-item leftSubMenuBoxSales">
+                                                                                                                        <ul class="megaSubMenu">
+                                                                                                                                <li><a href="{% url 'catalog' %}?discont=1">АКЦИИ<span>({{ discont_count }})</span></a></li>
+                                                                                                                        </ul>
+                                                                                                        </div>                                                                                                                                                          
+                                                                                                </div>
+                                                                                        </li>
+                                                                                </div>                                  
+                                                                        </ul>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="leftSectionSalesTitle">
+                                                                <h3 >ПОПУЛЯРНЫЕ ТОВАРЫ</h3>     
+                                                                <hr>
+                                                        </div>  
+
+                                                        <div class="row popularProducts">
+                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
+                                                                        <div class="row">                                                                       
+                                                                                <div class="col-sm-8 popProductItem">
+                                                                                        <a href="#">Петля дверная 1200 мм</a>
+                                                                                        <img src="img/rank.jpg" class="img-responsive">
+                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                        <img src="img/productImg.jpg" class="img-responsive">
+                                                                                </div>                                                                                  
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
+                                                                        <div class="row">                                                                       
+                                                                                <div class="col-sm-8 popProductItem">
+                                                                                        <a href="#">Петля дверная 1200 мм</a>
+                                                                                        <img src="img/rank.jpg" class="img-responsive">
+                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                        <img src="img/productImg.jpg" class="img-responsive">
+                                                                                </div>                                                                                  
+                                                                        </div>
+                                                                </div>
+                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
+                                                                        <div class="row">                                                                       
+                                                                                <div class="col-sm-8 popProductItem">
+                                                                                        <a href="#">Петля дверная 1200 мм</a>
+                                                                                        <img src="img/rank.jpg" class="img-responsive">
+                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
+                                                                                </div>
+                                                                                <div class="col-sm-4">
+                                                                                        <img src="img/productImg.jpg" class="img-responsive">
+                                                                                </div>                                                                                  
+                                                                        </div>
+                                                                </div>                                                                                                  
+                                                        </div>
+
+                                                        <div class="leftSectionTitle">
+                                                                <h3 >ДЕЙСТВУЮЩИЕ АКЦИИ</h3>     
+                                                                <div class="currentSalesLeft">
+                                                                        <img src="img/currentSales.jpg" class="img-responsive">
+                                                                        <div class="leftSectionButton">
+                                                                                <a href="{% url 'catalog' %}?discont=1"
+                                                                                class="btnStandBlueFd">Перейти в раздел</a>
+                                                                        </div>
+                                                                </div>
+                                                        </div>  
+
+
+                                        </div>
