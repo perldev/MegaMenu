@@ -24,19 +24,30 @@
                             
                             <li>
                                 <a href="{% url 'catalog' %}">ПРОДУКЦИЯ</a>
+                                
+                                
                                 <ul>
-                                    <li>
-                                        <a href="#">Подменю 1</a>
-                                    </li>
-                                    <li><a href="#">Подменю 2</a>
+                                    <li><a href="/cat_window">{{cats.cat_window_title}}</a>
                                         <ul>
-                                            <li><a href="#">Подменю 1 текст </a></li>
-                                            <li><a href="#">Подменю 2</a></li>
-                                            <li><a href="#">Подменю 3</a></li>
+                                           {% for cat_item in  cats.cat_window %}
+                                                <li><a href="/cat_type_{{ cat_item.id }}">{{ cat_item.opt2_spec }}</a></li>
+                                           {% endfor %}
+                                           
                                         </ul>
                                     </li>
-                                    <li><a href="#">Подменю 3</a></li>
+                                     <li><a href="/cat_doors">{{ cats.cat_doors_title }}</a>
+                                        <ul>
+                                           {% for cat_item in  cats.cat_doors %}
+                                                <li><a href="/cat_type_{{ cat_item.id }}">{{ cat_item.opt2_spec }}</a></li>
+                                           {% endfor %}
+                                        </ul>
+                                    </li>
+                                    
+                           
+                                    
                                 </ul>
+                                
+                                
                             </li>
                             <li>
                                 <a href="{% url 'faq' %}">ПОДДЕРЖКА</a>
