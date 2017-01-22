@@ -187,7 +187,8 @@ def product(request, pk):
     context = {}
     product = get_object_or_404(Product, id=pk)
     cat_id = product.catalog_item.id
-    fill_product_context(cat_id, context)    
+    fill_product_context(cat_id, context)
+    context["product"] = product
     return render(request, 'product.html', context)
     
 def faq(request):

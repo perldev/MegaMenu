@@ -41,6 +41,8 @@ class Chanel(models.Model):
     def __unicode__(self):
         return self.title
 
+
+        
 class Content(models.Model):
 
     image = models.ImageField(upload_to='img', max_length=254, null=True, blank=True)
@@ -116,6 +118,8 @@ class CatItem(models.Model):
             return "%s -> %s" % (self.opt1_typ,
                                  self.opt2_spec)
 
+                                 
+                                 
                                    
 class Product(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
@@ -123,13 +127,17 @@ class Product(models.Model):
     title = models.CharField(max_length=255,
                                verbose_name=u"Название товара",
                                null=True, blank=True, )
+
+    full_desc = models.TextField(max_length=255,
+                               verbose_name=u"полное описание",
+                               null=True, blank=True, )
     
     catalog_item = models.ForeignKey(CatItem, verbose_name = u"Каталог")  
     
     file1 = models.FileField(upload_to='file1', max_length=254,
                              verbose_name = u"Спецификация")
     
-    file2 = models.FileField(upload_to='file1', max_length=254,
+    file2 = models.FileField(upload_to='file2', max_length=254,
                             verbose_name = u"Каталог pdf")
     
     rate = models.DecimalField(default="2.5", max_digits=2, decimal_places=1,
@@ -151,7 +159,16 @@ class Product(models.Model):
     description = models.CharField(max_length=255,
                                    verbose_name=u"Desciption",
                                    null=True, blank=True, )
+                                   
+    pub_date = models.DateTimeField(default=now,
+                                    verbose_name=u"Date of adding")
+    
+    brand = models.ForeignKey(Brand,
+                              verbose_name=u"Бренд",
+                              null=True, blank=True, )
 
+    status = models.BooleanField(verbose_name=u"Активный", default=True)
+    
     class Meta:
         verbose_name = u"Товар"
         verbose_name_plural = u"Товары"

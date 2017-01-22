@@ -70,242 +70,32 @@
 									<div class="row rowVertAlign">
 									{% for item in  current_list %}
 									
-                                                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-                                                                                            <div class="productBox">
-                                                                                                    <a href="/product_{{item.id}}">
-                                                                                                    {% if item.is_discont %}
-                                                                                                        <span class="salesMarker">акция</span>
-                                                                                                    {%  endif %}
-                                                                                                    <img src="img/productImg.jpg" class="img-responsive">
-                                                                                                    {{item.title}}</a>
-                                                                                                    <span>{{ cat_title }} </span>
-                                                                                                    <div class="row">
-                                                                                                            <div class="rankPriceBox2">
-                                                                                                                    <img src="img/rank.jpg" class="img-responsive">
-                                                                                                                    <div class="priceBoxSPan">
-                                                                                                                            <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
-                                                                                                                    </div>
-                                                                                                            </div>
-                                                                                                            <div class="productButtons2">
-                                                                                                                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                                                                                                                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                                                                                                            </div>                                                                  
-                                                                                                    </div>
-                                                                                            </div>
-                                                                                    </div>  
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
+                                                        <div class="productBox">
+                                                                <a href="/product_{{item.id}}">
+                                                                {% if item.is_discont %}
+                                                                    <span class="salesMarker">акция</span>
+                                                                {%  endif %}
+                                                                <img src="img/productImg.jpg" class="img-responsive">
+                                                                {{item.title}}</a>
+                                                                <span>{{ cat_title }} </span>
+                                                                <div class="row">
+                                                                        <div class="rankPriceBox2">
+                                                                                <img src="img/rank.jpg" class="img-responsive">
+                                                                                <div class="priceBoxSPan">
+                                                                                        <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
+                                                                                </div>
+                                                                        </div>
+                                                                        <div class="productButtons2">
+                                                                                <a href="/product_{{item.id}}" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
+                                                                                <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </div>  
                                                                                 
-                                                                         {% endfor %}       
+                                   {% endfor %}       
 									
-									
-									<!--	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>		
-										
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>								
-												</div>
-											</div>
-										</div>	
-
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-											<div class="productBox">
-												<a href="#">
-													<span class="salesMarker">акция</span>
-												<img src="img/productImg.jpg" class="img-responsive">
-												Замок рейка Accado</a>
-												<span>Оконная фурнитура</span>
-												<div class="row">
-													<div class="rankPriceBox2">
-														<img src="img/rank.jpg" class="img-responsive">
-														<div class="priceBoxSPan">
-															<span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-														</div>
-													</div>
-													<div class="productButtons2">
-														<a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-														<a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-													</div>									
-												</div>
-											</div>
-										</div>	-->
-
-
-									<!--	<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
-											<div class="flexPagination">
-												<ul>
-													<li><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">></a></li>
-												</ul>
-											</div>
-										</div>-->
 										
 										<div class="col-lg-12 col-md-12 col-sm-12">
 											<div class="complectCol">
@@ -404,7 +194,9 @@
 			$('.my-slider').unslider();
 		});
 	</script>
-        
+    {% if is_admin %}
+              {% include "chanels.html"%}
+        {% endif %}     
 
 </body>
 </html>

@@ -92,9 +92,13 @@
                                                         <div class="leftSectionTitle">
                                                                 <h3 >ДЕЙСТВУЮЩИЕ АКЦИИ</h3>     
                                                                 <div class="currentSalesLeft">
-                                                                        <img src="img/currentSales.jpg" class="img-responsive">
+                                                                        {% if is_admin %}
+                                                                            {% include "chanel_edit.html" with item=chanels.catalog_current_discont opt_disable_delete="1" %}
+                                                                            <br/>
+                                                                        {% endif %}
+                                                                        <img src="media/{{chanels.catalog_current_discont.image}}" class="img-responsive">
                                                                         <div class="leftSectionButton">
-                                                                                <a href="{% url 'catalog' %}?discont=1"
+                                                                                <a href="{{chanels.catalog_current_discont.title}}"
                                                                                 class="btnStandBlueFd">Перейти в раздел</a>
                                                                         </div>
                                                                 </div>

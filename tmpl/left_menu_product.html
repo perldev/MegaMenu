@@ -22,7 +22,7 @@
                                                                       <ul class="megaSubMenu">
                                                                               {% for sub_cat in blog.sub %}
                                                                                     <li><a href="/cat_type_{{sub_cat.item.id}}">
-                                                                                        {% if sub_cat.item.id == current %}
+                                                                                        {% if sub_cat.item.id == current and not is_discont %}
                                                                                         <strong>{{sub_cat.title|truncatechars:28}}</strong>
                                                                                         {% else %}
                                                                                                 {{sub_cat.title|truncatechars:28}}
@@ -32,13 +32,37 @@
                                                                               {% endfor %}
                                                                         </ul>
                                                                                                         </div>
-                                                                                                        {% endfor %}
-                                                                                                        <div class="menu-new-item leftSubMenuBoxSales">
-                                                                                                                        <ul class="megaSubMenu">
-                                                                                                                                <li><a href="{% url 'catalog' %}?discont=1">АКЦИИ<span>({{ discont_count }})</span></a></li>
-                                                                                                                        </ul>
-                                                                                                        </div>                                                                                                                                                          
-                                                                                                </div>
+                                                           {% endfor %}
+                                                                <div class="menu-new-item leftSubMenuBoxSales">
+                                                                            <a href="{% url 'catalog' %}?discont=1">АКЦИИ<span>({{ discont_count }})</span></a>
+                                                                                <!--<ul>
+                                                                                   <li></li>-->
+
+                                                                                        {% for blog in discont_menu %}
+                                                                                                <div class="menu-new-item leftSubMenuBox">
+                                                                                                     <h3>{{blog.title}}</h3>
+                                                                                                     <ul class="megaSubMenu">
+                                                                                                            {% for sub_cat in blog.sub %}
+                                                                                                                    <li><a href="/cat_type_{{sub_cat.item.id}}?discont=1">
+                                                                                                                        {% if sub_cat.item.id == current and is_discont %}
+                                                                                                                        <strong>{{sub_cat.title|truncatechars:28}}</strong>
+                                                                                                                        {% else %}
+                                                                                                                                {{sub_cat.title|truncatechars:28}}
+                                                                                                                        {% endif %}
+                                                                                                                        <span>({{sub_cat.count}})</span></a></li>
+
+                                                                                                            {% endfor %}
+                                                                                                     </ul>
+                                                                                                 </div>
+                                                                                                 
+                                                                                        {% endfor %}      
+
+                                                                                
+
+<!--                                                                                 </ul> -->
+                                                                </div>
+
+                                                           </div>
                                                                                         </li>
                                                                                 </div>                                  
                                                                         </ul>
@@ -92,9 +116,13 @@
                                                         <div class="leftSectionTitle">
                                                                 <h3 >ДЕЙСТВУЮЩИЕ АКЦИИ</h3>     
                                                                 <div class="currentSalesLeft">
-                                                                        <img src="img/currentSales.jpg" class="img-responsive">
+                                                                        {% if is_admin %}
+                                                                            {% include "chanel_edit.html" with item=chanels.catalog_current_discont opt_disable_delete=1 opt_disable_content=1 opt_disable_ordering=1 %}
+                                                                            <br/>
+                                                                        {% endif %}
+                                                                        <img src="media/{{chanels.catalog_current_discont.image}}" class="img-responsive">
                                                                         <div class="leftSectionButton">
-                                                                                <a href="{% url 'catalog' %}?discont=1"
+                                                                                <a href="{{chanels.catalog_current_discont.title}}"
                                                                                 class="btnStandBlueFd">Перейти в раздел</a>
                                                                         </div>
                                                                 </div>

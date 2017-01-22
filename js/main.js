@@ -4,22 +4,46 @@ $( document ).ready(function() {
 
     var cat;
 
-    var action="add";
+    Chanels.action="add";
     Chanels.add_item = function(id){
             cat = id;
             $("#id_chanel").val(cat);
-            action = "add"
+            Chanels.action = "add";
             $("#myChanelModal").modal("show");
             $("#title_chanel_item").val("");
             $("#myModalLabelChanel").html("Add");
     };
     Chanels.edit_item = function(obj, cat, id){
             $("#id_chanel").val(id);
-            action = "edit";
+            Chanels.action = "edit";
             $("#myChanelModal").modal("show");
+
+            $("#wrapper_title_chanel_item").show();
+            $("#wrapper_ordering_chanel_item").show();
+            $("#wrapper_content_chanel_item").show();
+            $("#wrapper_image_chanel_item").show();
+            
+            if($(obj).data("disable_title")){
+                $("#wrapper_title_chanel_item").hide();
+            }
+            if($(obj).data("disable_content")){
+                $("#wrapper_content_chanel_item").hide();
+            }
+            if($(obj).data("disable_ordering")){
+                $("#wrapper_ordering_chanel_item").hide();
+            }
+            if($(obj).data("disable_image")){
+                $("#wrapper_image_chanel_item").hide();
+            }            
             console.log($(obj).data("title"));
             console.log($(obj).data("ordering"));
             console.log($(obj).data("content"));
+            console.log($(obj).data("img"));
+            console.log($(obj).data("disable_title"));
+            console.log($(obj).data("disable_ordering"));
+            console.log($(obj).data("disable_content"));
+            console.log($(obj).data("disable_image"));
+
             $("#title_chanel_item").val( $(obj).data("title") );
             $("#ordering_chanel_item").val( $(obj).data("ordering") );
             $("#myModalLabelChanel").html("Edit");
@@ -81,20 +105,16 @@ $( document ).ready(function() {
     };
 
     window.MyCommon = MyCommon;
-
-    
-
-
     $("#chanel_btn").on("click", function(event){
         event.preventDefault();
         content = tinyMCE.activeEditor.getContent();
-
+        console.log(Chanels.action);
         $("#content_chanel").html(content);
-        console.log(content);
+        console.log("accction");
         var formData = new FormData($("#form_chanel")[0]);
-
+        
         $.ajax({
-            url: "chanel/"+action,
+            url: "chanel/"+Chanels.action,
             type: 'POST',
             data: formData,
             async: true,
@@ -111,6 +131,7 @@ $( document ).ready(function() {
             contentType: false,
             processData: false
         });
+        
         return false;
     });
 

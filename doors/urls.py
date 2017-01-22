@@ -45,6 +45,7 @@ urlpatterns = [
     url('^$', index, name="index"),
     url('^faq$', faq, name="faq"),
     url('^contacts$', contacts, name="contacts"),
+    url('^product_([\d]+)$', product, name="product_profile"),
     
     url(r'^api/$', api_root),
 
@@ -63,7 +64,7 @@ urlpatterns = [
 
 
      
-    url(r'^api/brands/$', BrandDetail.as_view(), name='brands'),
+    url(r'^api/brands/$', BrandDetail.as_view(), name='api_brands'),
     url(r'^api/cats/$', CategoryDetail.as_view(), name='cats'),
     url(r'^api/cats_item/$', CatItemDetail.as_view(), name='cats_item'),
     url(r'^api/product/$', ProductDetail.as_view(), name='product'),
@@ -74,7 +75,10 @@ urlpatterns = [
     url('^catalog$', catalog, name="catalog"),
     url(r'^cat_type_([\d]+)$', catalog_sub_cat, name='cat-item'),   
     url(r'^cat_([\w]+)$', catalog, name='catalog'),
-    
+
+
+    url(r'^cart$', views.brands, name="cart"),
+
     url(r'^brands$', views.brands, name="brands"),
     url(r'^send_marina$', views.send_marina, name="send_marina"),
     url(r'^page_([\w]+)$', views.custom_page, name="custom_page"),
@@ -92,6 +96,7 @@ urlpatterns = [
 if settings.DEBUG:    
    urlpatterns += static("js", document_root=os.path.join(settings.BASE_DIR,"js"))
    urlpatterns += static("img", document_root=os.path.join(settings.BASE_DIR,"img"))
+   urlpatterns += static("media", document_root=os.path.join(settings.BASE_DIR,"media"))
    urlpatterns += static("css", document_root=os.path.join(settings.BASE_DIR, "css"))
    urlpatterns += static("fonts", document_root=os.path.join(settings.BASE_DIR,"fonts"))
    urlpatterns += static("icon", document_root=os.path.join(settings.BASE_DIR,"icon"))

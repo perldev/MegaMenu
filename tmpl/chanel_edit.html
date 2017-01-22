@@ -3,10 +3,28 @@
         data-title="{{item.title}}"
         data-content="{{item.content}}"
         data-ordering="{{item.ordering}}"
+        
+        {% if opt_disable_content %}
+            data-disable_content="true"
+        {% endif %}
+        {% if opt_disable_title %}
+            data-disable_title="true"
+        {% endif %}
+        {% if opt_disable_img %}
+            data-disable_image="true"
+        {% endif %}
+        {% if opt_disable_ordering %}
+            data-disable_ordering="true"
+        {% endif %}
+        
         class='btn btn-primary'>
         <i class="fa fa-edit" aria-hidden="true"></i></button>
+    {% if  not opt_disable_delete %}
+
     <button type='button'
             onclick="Chanels.delete_item(this, '{{item.chanel.title}}','{{item.id}}')"
             class='btn btn-danger' data-title="{{item.title}}" >
         <i  class="fa fa-trash" aria-hidden="true"
              ></i></button>
+             
+    {% endif %}
