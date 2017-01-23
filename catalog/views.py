@@ -374,7 +374,7 @@ def change_count_item(request, item_id, count):
       cart_item.save()
       
       return render_to_response(request, "confirm_order.html", context) 
-    else:
+   else:
       raise Http404(u"Заказ не найден")
 
   
