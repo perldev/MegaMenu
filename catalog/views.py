@@ -10,12 +10,15 @@ from .serializers import ProductSerializer, BrandSerializer, ImageSerializer
 from .serializers import CategorySerializer, CatItemSerializer
 
 from django.contrib.auth.models import User
-from .models import Content, Chanel
+from .models import Content, Chanel, Cart, CartItem, Package, PackageItem
+
 
 from django.conf import settings
 from django.shortcuts import render_to_response, get_object_or_404, redirect, render
 from helpers import http403json, http200json
 from django.forms import ModelForm
+from django.http import Http404
+
 
 
 
@@ -337,6 +340,82 @@ class ContentForm(ModelForm):
         model = Content
         fields = [ 'title', 'content', 'image','ordering']
 
+## working with cart
+
+
+def cart_add_item(item_id, count):
+  product = get_object_or_404(Product, pk=item_id)
+  add_product2cart(product, product.price, int(count))
+  return http200json(request, {"status": True})
+
+
+def cart_add_package(request, package_id):
+    if request.session.get('cart_id', False):
+      cart = get_object_or_404(Cart, pk=cart_id)
+      pakage = get_object_or_404(Package, pk=package_id)
+      for package_item in PackageItem.objects.filter(pakage=pakage):
+	  add_product2cart(package_item.product, 
+			   package_item.price, 1, package)
+      
+      context = {}
+      context["cart"] = cart
+      context["cart_item_list"] = CartItem.objects.filter(cart=cart)
+      return http200json(request, {"status": True}) 
+    else:
+      return http403json(request)
+
+
+def change_count_item(request, item_id, count):
+   if request.session.get('cart_id', False):
+      cart = get_object_or_404(Cart, pk=cart_id)
+      context = {}
+      cart_item = CartItem.objects.get(id=item_id)
+      cart_item.count = count
+      cart_item.save()
+      
+      return render_to_response(request, "confirm_order.html", context) 
+    else:
+      raise Http404(u"Заказ не найден")
+
+  
+def cart_del_item(request, item_id):
+    if request.session.get('cart_id', False):
+      cart = get_object_or_404(Cart, pk=cart_id)
+      context = {}
+      CartItem.objects.get(id=item_id).delete()
+     
+      return render_to_response(request, "confirm_order.html", context) 
+    else:
+      raise Http404(u"Заказ не найден")
+
+def cart_confirm(request):
+    if request.session.get('cart_id', False):
+      cart = get_object_or_404(Cart, pk=cart_id)
+      
+      context = {}
+      context["cart"] = cart
+      context["cart_item_list"] = CartItem.objects.filter(cart=cart)
+      return render_to_response(request, "confirm_order.html", context) 
+    else:
+      raise Http404(u"Заказ не найден")
+
+
+
+def cart_approve(request):
+    if request.session.get('cart_id', False):
+      cart = Cart.objects.get(id=cart_id)
+      cart_count = cart.count
+      cart.status="processing"
+      cart.save()
+      request.session["cart_id"] = None
+      context = {}
+      context["cart"] = cart
+      return render_to_response(request, "approve_order.html", context) 
+    else:
+      raise Http404(u"Заказ не найден")
+
+
+
 
 def delete_chanel(request, cat):
 
@@ -396,6 +475,18 @@ def content_chanels(request):
        i+=1
 
     discont_count = Product.objects.filter(is_discont=True).count()    
+    cart_count = 0
+    if request.session.get('cart_id', False):
+      cart = Cart.objects.get(id=cart_id)
+      count = 0
+      for i in CartItem.objects.filter(cart=cart):
+	count += i.count
+      cart.count = count
+      cart.save()
+      
+      cart_count = cart.count
+      
+    
     COMPANY_ID = 1
     context["catalog_current_discont"] = context["current_discont"][0]
     context["about_company"] = [Content.objects.get(id=COMPANY_ID)]
@@ -404,11 +495,11 @@ def content_chanels(request):
                 'chanels': context,
                 "discont_count": discont_count,
                 'is_admin': True,
-                "cart_count":0
+                "cart_count": cart_count
                 }
     else:
         return {"cats":cats,
                 'chanels': context,
                 "discont_count": discont_count,
-                "cart_count":0
+                "cart_count": cart_count
                  }

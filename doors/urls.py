@@ -90,6 +90,15 @@ urlpatterns = [
     url(r'^chanel/delete/([\.\d]+)', views.delete_chanel, name="chanel-delete"),
     url(r'^chanel/edit', views.edit_chanel, name="chanel-edit"),
     url(r'^chanel/add', views.add_chanel, name="chanel-add"),   
+
+    
+    url(r'^cart/add/([\d]+)/([\d]+)', views.cart_add_item, name="cart_add_item"),
+    url(r'^cart/add_package/([\d]+)', views.cart_add_package, name="cart_add_package"),
+    url(r'^cart/del/item/([\d]+)', views.cart_del_item, name="cart_del_item"),
+    url(r'^cart/confirm', views.cart_confirm, name="cart_confirm"), 
+    url(r'^cart/approve', views.cart_approve, name="cart_approve"), 
+    
+
     url(r'^admin/', admin.site.urls),
 
 ] 

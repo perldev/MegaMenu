@@ -10,6 +10,16 @@ from django.db import models
 from django.utils.timezone import now
 
 
+
+
+STATUS_ORDER = (
+    ("created", u"формируется"),
+    ("processing", u"запрошен"),
+    ("in_work", u"в работе"),
+    ("sended", u"отправлен"),
+    ("received", u"получен"),
+)
+
 # Create your models here.
 
 def translit(t):
@@ -118,8 +128,41 @@ class CatItem(models.Model):
             return "%s -> %s" % (self.opt1_typ,
                                  self.opt2_spec)
 
-                                 
-                                 
+
+class Cart(models.Model):
+    phone = models.CharField(verbose_name=u"Телефон", max_length=255, null=True, blank=True)
+    fio = models.CharField(verbose_name=u"ФИО", max_length=255, null=True, blank=True)
+    full_desc = models.TextField(verbose_name=u"полное описание",
+                                 null=True, blank=True, )
+    
+    status = models.CharField(verbose_name=u"Статус", 
+			      max_length=40,
+			      choices=STATUS_ORDER, 
+			      default='created' )
+    
+    count = models.IntegerField(verbose_name=u"Кол-во позиций")
+    class Meta:
+      verbose_name = u"Корзин"
+      verbose_name_plural = u"Корзины"
+
+
+class CartItem(models.Model):
+    count = models.IntegerField(verbose_name=u"Кол-во позиций", default=1)
+    product = models.ForeignKey('Product', verbose_name=u"Товар")  
+    price = models.DecimalField(default="0.0", max_digits=6, decimal_places=2,
+                                verbose_name=u"Цена")
+    
+    is_package = models.BooleanField(verbose_name=u"Пакетный")  
+    package = models.IntegerField(verbose_name=u"Пакет", 
+				  null=True, blank=True)  
+    
+    cart = models.ForeignKey(Cart, verbose_name="корзина")
+    class Meta:
+      verbose_name = u"позиция в Корзине"
+      verbose_name_plural = u"позиции в Корзине"
+
+
+                            
                                    
 class Product(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
@@ -168,6 +211,10 @@ class Product(models.Model):
                               null=True, blank=True, )
 
     status = models.BooleanField(verbose_name=u"Активный", default=True)
+    
+    def __unicode__(self):
+      return "%s -> %s " % (self.catalog_item,
+                                 self.title)
     
     class Meta:
         verbose_name = u"Товар"
