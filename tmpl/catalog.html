@@ -52,10 +52,7 @@
 
 
 								<div class="center-block placeholder">
-	<!-- 								<ul>
-										<li><a href="#mobile-menu2" class="toggle-mnu2"><span></span>КАТАЛОГ</a></li>
-										<li class="liTitle"><span>КАТАЛОГ</span></li>
-									</ul> -->
+	
 									<div class="toggleBoxLeftMenu">
 									<a href="#mobile-menu2" class="toggle-mnu2"><span></span><p>КАТАЛОГ</p></a>								
 									</div>								
@@ -88,7 +85,7 @@
                                                                         </div>
                                                                         <div class="productButtons2">
                                                                                 <a href="/product_{{item.id}}" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                                                                                <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                                                                                <a href="javascript:MyCart.add2cart_simple({{item.id}}, 1, '{{item.title}}')" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
                                                                         </div>
                                                                 </div>
                                                         </div>

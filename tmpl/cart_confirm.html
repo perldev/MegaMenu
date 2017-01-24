@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mega Menu</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="format-detection" content="telephone=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Exo+2:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/superfish.css">
+	<link rel="stylesheet" href="css/megafish.css">
+	<link rel="stylesheet" href="css/jquery.mmenu.all.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="css/flaticon.css"> 
+
+	<link rel="stylesheet" href="css/main.css">
+
+	<link rel="stylesheet" href="css/unslider.css">
+	<link rel="stylesheet" href="css/unslider-dots.css">
+
+	
+</head>
+<body>
+	
+       {% include "menu.html" %}
+
+	<div class="wrapper">
+
+		{% include "crumbs.html" %}
+
+
+
+		<section>
+			<div class="container">
+			<form action="{% url 'cart_approve' %}" method="POST" id="cart_form">
+				<div class="row">
+					<div class="table-responsive">
+						  <table class="table cartTable">
+						    <tbody>
+						     {% for item in cart_item_list%}
+							<tr id="cart_position_{{item.id}}">
+							  <td class="cartProductImageTd"><img src="img/productImg.jpg" class="img-responsive cartProductImage"></td>
+							  <td>{{item.product.title}}<br>
+									  <img src="img/rank.jpg">
+									  <div class="cartProductShortInfo">
+									      {{item.product.ext_desc}}
+
+										  <!--<span>Код товара: 26351851231</span>
+										  <span>Количество в упаковке: 20 шт.</span>
+										  <span>Вес упаковки: 10 кг</span>-->
+									  </div>
+							  </td>
+							  <td class="oneProdPriceCart" >{{item.price}} грн</td>
+							  <td>
+							      {{item.count}}
+							  </td>
+							  <td class="totalProdSumCart" >{{item.total_price}} грн</td>
+							  <td></td>				        
+							</tr>
+						      {% endfor %}
+				      				      
+						    </tbody>
+						  </table>
+				    </div>	
+				    <div class="col-lg-12 cartTotalSumCol">
+				    	<span>Общая стоимость заказа:  <span class="totalProdSumCart" id="cart_total">{{cart.total_price}} грн</span></span>
+				    </div>
+				    
+				    
+				    
+				    
+				    <div class="col-lg-12 cartBuyBtnCol">
+				    	<a href="{% url 'cart' %}" class="btnStandBlue">
+				    	<i class="flaticon-checked"></i>Вернуться назад</a>	
+				    </div>
+				    <div class="col-lg-12 cartBuyBtnCol">
+				    	<a href="#" class="formSubmit btnStandBlue" data-submit="cart_form">
+				    	<i class="flaticon-checked"></i>Подтвердить заказ</a>	
+				    </div>			    			
+				</div>
+			</div>
+			
+			</form>
+		</section>
+				
+
+		{% include "subscription.html" %}
+
+		
+
+		{% include "footer.html" %}		
+					
+
+
+
+
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.7/js/superfish.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+
+	<script src="js/unslider.js"></script>
+	<script src="js/quantityCount.js"></script>
+	
+    <script src="js/main.js"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/commonsecmenu.js"></script>
+
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script src="js/icon_customImage.js" type="text/javascript"></script>
+
+	<script type="text/javascript">
+		$('document').ready(function (){
+			$('#myPopOver').popover();
+		});
+	</script>
+
+	
+	<script>
+		jQuery(document).ready(function($) {
+			$('.my-slider').unslider();
+		});
+	</script>
+
+
+</body>
+</html>

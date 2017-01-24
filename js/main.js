@@ -86,6 +86,87 @@ $( document ).ready(function() {
         $("#SubInputEmail").val("");
         return false;
     });
+    var MyCart = {};
+
+    MyCart.add2cart_simple = function(pk, count, title){
+      
+         $.ajax({
+            url: "cart/add/"+pk+"/"+count,
+            type: 'GET',
+            async: true,
+            success: function (data) {
+		MyCommon.modal("Позиция '"+title+"' добавлена вам в корзину в количестве 1 шт.","Корзина");
+		var count = $("#cart_count").html();
+		count = count*1+1;
+		$("#cart_count").html(count);
+	    },
+            cache: false,
+            contentType: false,
+            processData: false
+        });      
+    };
+    MyCart.change_item_count = function(pk, price, obj){
+      console.log(pk);
+      console.log(price);
+      console.log(obj.value);
+      
+      var count = obj.value;
+      $.ajax({
+	  url: "cart/change/item/"+pk+"/"+count,
+	  type: 'GET',
+	  async: true,
+	  success: function (data) {
+		var total_price = price*count;
+		$("#total_item_price_"+pk).html(total_price+" грн");
+		$("#total_price").html(data["price"]);
+	  },
+	  cache: false,
+	  contentType: false,
+	  processData: false
+      });
+      
+      
+      
+    };
+    MyCart.delete_item = function(pk){
+         $.ajax({
+            url: "cart/del/item/"+pk,
+            type: 'GET',
+            async: true,
+            success: function (data) {
+		  $("#cart_position_"+pk).hide();
+		  $("#total_price").html(data["price"]);
+	    },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+      
+    };
+    
+    MyCart.add2cart_count_from = function(pk, count_of_items, title){
+         console.log(count_of_items);
+         var count = $(count_of_items).val()*1;
+         $.ajax({
+            url: "cart/add/"+pk+"/"+count,
+            type: 'GET',
+            async: true,
+            success: function (data) {
+		MyCommon.modal("Позиция '"+title+"' добавлена вам в корзину в количестве "+count+" шт.","Корзина");
+		var count_cart = $("#cart_count").html();
+		count_cart = count_cart*1+count;
+		$("#cart_count").html(count_cart);
+	    },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+      
+      
+    };
+    
+    
+    
     
     var MyCommon = {};
 
@@ -110,9 +191,8 @@ $( document ).ready(function() {
         content = tinyMCE.activeEditor.getContent();
         console.log(Chanels.action);
         $("#content_chanel").html(content);
-        console.log("accction");
         var formData = new FormData($("#form_chanel")[0]);
-        
+	
         $.ajax({
             url: "chanel/"+Chanels.action,
             type: 'POST',
@@ -134,5 +214,11 @@ $( document ).ready(function() {
         
         return false;
     });
+    window.MyCart = MyCart;
+    $(".formSubmit").on("click", function(ev){
+	var id = $(this).data("submit");
+	$(id).submit();
+    });
+    
 
 });

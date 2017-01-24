@@ -33,10 +33,20 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2">
-						<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-						</p>
+					{% for item in chanels.index_header %}
+						{% if is_admin %}
+						    <div class="col-lg-12 text-center">
+							{% include "chanel_edit.html" with item=item opt_disable_delete=1 opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+						    </div>
+						{% endif %}
+					    {% autoescape off %}
+						    <p>
+							{{item.content}}
+					            </p>
+
+					    {% endautoescape %}
+					{% endfor %}						   
+						
 					</div>
 				</div>
 			</div>
@@ -60,7 +70,7 @@
 													<h3>ДВЕРНАЯ ФУРНИТУРА</h3>
 													<p>Задача организации, в особенности же сложившаяся структура организации 
 													влечет за собой процесс внедрения и модернизации новых предложений. </p> <br>
-													<a href="#" class="btnStandBlue">Перейти в раздел</a>
+													<a href="/cat_window" class="btnStandBlue">Перейти в раздел</a>
 												</div>
 										</div>
 									</div>
@@ -79,7 +89,7 @@
 													<h3>ДВЕРНАЯ ФУРНИТУРА</h3>
 													<p>Задача организации, в особенности же сложившаяся структура организации 
 													влечет за собой процесс внедрения и модернизации новых предложений. </p> <br>
-													<a href="#" class="btnStandBlue">Перейти в раздел</a>
+													<a href="/cat_doors" class="btnStandBlue">Перейти в раздел</a>
 												</div>
 										</div>
 									</div>

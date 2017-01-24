@@ -77,7 +77,6 @@ urlpatterns = [
     url(r'^cat_([\w]+)$', catalog, name='catalog'),
 
 
-    url(r'^cart$', views.brands, name="cart"),
 
     url(r'^brands$', views.brands, name="brands"),
     url(r'^send_marina$', views.send_marina, name="send_marina"),
@@ -89,14 +88,14 @@ urlpatterns = [
     
     url(r'^chanel/delete/([\.\d]+)', views.delete_chanel, name="chanel-delete"),
     url(r'^chanel/edit', views.edit_chanel, name="chanel-edit"),
-    url(r'^chanel/add', views.add_chanel, name="chanel-add"),   
-
-    
+    url(r'^chanel/add', views.add_chanel, name="chanel-add"),       
     url(r'^cart/add/([\d]+)/([\d]+)', views.cart_add_item, name="cart_add_item"),
     url(r'^cart/add_package/([\d]+)', views.cart_add_package, name="cart_add_package"),
-    url(r'^cart/del/item/([\d]+)', views.cart_del_item, name="cart_del_item"),
-    url(r'^cart/confirm', views.cart_confirm, name="cart_confirm"), 
-    url(r'^cart/approve', views.cart_approve, name="cart_approve"), 
+    url(r'^cart/del/item/([\d]+)', views.cart_del_item, name="cart_del_item"), 
+    url(r'^cart/change/item/([\d]+)/([\d]+)', views.cart_change_item, name="cart_change_item"), 
+    url(r'^cart/confirm$', views.cart_confirm, name="cart_confirm"), 
+    url(r'^cart/approve$', views.cart_approve, name="cart_approve"), 
+    url(r'^cart$', views.cart, name="cart"),
     
 
     url(r'^admin/', admin.site.urls),

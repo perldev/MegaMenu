@@ -343,11 +343,37 @@ class ContentForm(ModelForm):
         fields = [ 'title', 'content', 'image','ordering']
 
 ## working with cart
-
-
-def cart_add_item(item_id, count):
+def add_product2cart(request, product, price, count, package=None):
+  
+    cart_id = request.session.get('cart_id')
+    cart = None
+    if request.session.get('cart_id', False):
+      try:
+        cart = Cart.objects.get(id=cart_id)
+      except Cart.DoesNotExist:
+	cart = Cart(count=count)
+        cart.save()
+        request.session["cart_id"] = cart.id
+    
+    else:
+      cart = Cart(count=count)
+      cart.save()
+      request.session["cart_id"] = cart.id
+    
+    if package is None:
+	item = CartItem(count=count, product=product, price=price, is_package=False, cart=cart)
+	item.save()	 
+    else:
+	item = CartItem(count=count, product=product, price=price, is_package=True, package=package, cart=cart)
+	item.save()	 
+    
+    return True
+      
+      
+      
+def cart_add_item(request, item_id, count):
   product = get_object_or_404(Product, pk=item_id)
-  add_product2cart(product, product.price, int(count))
+  add_product2cart(request, product, product.price, int(count))
   return http200json(request, {"status": True})
 
 
@@ -356,7 +382,8 @@ def cart_add_package(request, package_id):
       cart = get_object_or_404(Cart, pk=cart_id)
       pakage = get_object_or_404(Package, pk=package_id)
       for package_item in PackageItem.objects.filter(pakage=pakage):
-	  add_product2cart(package_item.product, 
+	  add_product2cart(request,
+			   package_item.product, 
 			   package_item.price, 1, package)
       
       context = {}
@@ -379,25 +406,73 @@ def change_count_item(request, item_id, count):
    else:
       raise Http404(u"Заказ не найден")
 
+
+def cart_change_item(request, item_id, count):
+    cart_id = request.session.get('cart_id', False)
+
+    if cart_id:
+      cart = get_object_or_404(Cart, pk=cart_id)
+      context = {}
+      item = get_object_or_404(CartItem, pk=item_id)
+      item.count = int(count)
+      item.save()
+      count = 0
+      total_price = 0
+      for i in CartItem.objects.filter(cart=cart):
+	count += i.count
+	total_price += i.count*i.price
+      cart.count = count      
+      cart.save() 
+      return http200json(request, {"status": True,
+				   "count": count,
+				   "price": str(total_price)}) 
+    else:
+      raise Http404(u"Заказ не найден")
   
 def cart_del_item(request, item_id):
-    if request.session.get('cart_id', False):
+
+    cart_id = request.session.get('cart_id', False)
+
+    if cart_id:
       cart = get_object_or_404(Cart, pk=cart_id)
       context = {}
       CartItem.objects.get(id=item_id).delete()
+      count = 0
+      total_price = 0
+      for i in CartItem.objects.filter(cart=cart):
+	count += i.count
+	total_price += i.count*i.price
+      cart.count = count
+      
+      cart.save() 
      
-      return render_to_response(request, "confirm_order.html", context) 
+      return http200json(request, {"status": True,
+				   "count": count,
+				   "price": str(total_price)}) 
     else:
       raise Http404(u"Заказ не найден")
 
-def cart_confirm(request):
-    if request.session.get('cart_id', False):
+def cart(request):
+    cart_id = request.session.get('cart_id', False)
+    if cart_id:
       cart = get_object_or_404(Cart, pk=cart_id)
       
       context = {}
       context["cart"] = cart
       context["cart_item_list"] = CartItem.objects.filter(cart=cart)
-      return render_to_response(request, "confirm_order.html", context) 
+      return render(request, "cart.html", context) 
+    else:
+      raise Http404(u"Заказ не найден")
+
+def cart_confirm(request):
+    cart_id = request.session.get('cart_id', False)
+    if cart_id:
+      cart = get_object_or_404(Cart, pk=cart_id)
+      
+      context = {}
+      context["cart"] = cart
+      context["cart_item_list"] = CartItem.objects.filter(cart=cart)
+      return render(request, "cart_confirm.html", context) 
     else:
       raise Http404(u"Заказ не найден")
 
@@ -478,7 +553,8 @@ def content_chanels(request):
 
     discont_count = Product.objects.filter(is_discont=True).count()    
     cart_count = 0
-    if request.session.get('cart_id', False):
+    cart_id = request.session.get('cart_id', False)
+    if cart_id:
       cart = Cart.objects.get(id=cart_id)
       count = 0
       for i in CartItem.objects.filter(cart=cart):
