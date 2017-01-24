@@ -21,14 +21,6 @@ def part(value):
 
 
 
-def multiply( value, arg ):
-    '''
-    multiply the value; argument is the divisor.
-    Returns empty string on any error.
-    '''
-    return value*arg
-
-
 
 register.filter('preview', preview)
 register.filter('part', part)

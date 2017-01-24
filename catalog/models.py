@@ -243,6 +243,9 @@ class Product(models.Model):
 
     status = models.BooleanField(verbose_name=u"Активный", default=True)
     
+    def preview_image(self):
+      return Image.objects.filter(product=self).order_by("order").first()
+    
     def __unicode__(self):
       return "%s -> %s " % (self.catalog_item,
                             self.title)
@@ -256,7 +259,10 @@ class Image(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
     product = models.ForeignKey(Product, verbose_name=u"Продукт" )
     image = models.ImageField(upload_to='photos', max_length=254)
-
+    
+    def url(self):
+      return self.image.url
+  
     class Meta:
         verbose_name = u"Картинка"
         verbose_name_plural = u"Картинки"

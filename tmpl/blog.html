@@ -1,71 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Mega Menu</title>
+  <meta charset="UTF-8">
+  <title>Mega Menu</title>
 
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="format-detection" content="telephone=no">
 
-	<link href='https://fonts.googleapis.com/css?family=Exo+2:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Exo+2:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
-	<link rel="stylesheet" href="css/bootstrap.css"/>
-	<link rel="stylesheet" href="css/superfish.css">
-	<link rel="stylesheet" href="css/megafish.css">
-	<link rel="stylesheet" href="css/jquery.mmenu.all.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/superfish.css">
+  <link rel="stylesheet" href="css/megafish.css">
+  <link rel="stylesheet" href="css/jquery.mmenu.all.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="css/flaticon.css"> 
+  <link rel="stylesheet" type="text/css" href="css/flaticon.css"> 
 
-	<link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/main.css">
 
-	<link rel="stylesheet" href="css/unslider.css">
-	<link rel="stylesheet" href="css/unslider-dots.css">
+  <link rel="stylesheet" href="css/unslider.css">
+  <link rel="stylesheet" href="css/unslider-dots.css">
 
-	
+  
 </head>
 <body>
-	
+  
    {% include "menu.html" %}
 
 
-	<div class="wrapper">
+  <div class="wrapper">
 
         {% include "crumbs.html" %}
-	
+  
         {% load preview %}
 
-		<section>
-			<div class="container">
-				<div class="row">
+    <section>
+      <div class="container">
+        <div class="row">
 
-						<div class="container">
-							<div class="row toggleRow">
+            <div class="container">
+              <div class="row toggleRow">
 
-								<div class="center-block placeholder">
-								<div class="inner-addon right-addon catSearchMobile">
-									<i class="glyphicon glyphicon-search"></i>
-									<input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
-								</div>								
-								</div>								
-
-
-								<div class="center-block placeholder">
-	<!-- 								<ul>
-										<li><a href="#mobile-menu2" class="toggle-mnu2"><span></span>КАТАЛОГ</a></li>
-										<li class="liTitle"><span>КАТАЛОГ</span></li>
-									</ul> -->
-									<div class="toggleBoxLeftMenu">
-									<a href="#mobile-menu2" class="toggle-mnu2"><span></span><p>КАТАЛОГ</p></a>								
-									</div>								
-								</div>	
-					
-							</div>
-						</div>
+                <div class="center-block placeholder">
+                <div class="inner-addon right-addon catSearchMobile">
+                  <i class="glyphicon glyphicon-search"></i>
+                  <input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
+                </div>                
+                </div>                
 
 
-						<div class="col-lg-9 col-md-12 col-lg-push-3">
+                <div class="center-block placeholder">
+  <!--                 <ul>
+                    <li><a href="#mobile-menu2" class="toggle-mnu2"><span></span>КАТАЛОГ</a></li>
+                    <li class="liTitle"><span>КАТАЛОГ</span></li>
+                  </ul> -->
+                  <div class="toggleBoxLeftMenu">
+                  <a href="#mobile-menu2" class="toggle-mnu2"><span></span><p>КАТАЛОГ</p></a>                
+                  </div>                
+                </div>  
+          
+              </div>
+            </div>
+
+
+            <div class="col-lg-9 col-md-12 col-lg-push-3">
                                 {% if is_admin %}
                                     <div class="col-lg-12 text-center">
                                             {% include "chanel_add.html" with item=current_chanel.title %}
@@ -73,8 +73,8 @@
                                         <br/>
                                     </div>
                                 {% endif %}
-						
-						
+            
+            
                                       {% for article, article2 in current_list %}
     
                                     <div class="row">
@@ -110,8 +110,8 @@
 
                                                   {% endautoescape %}
 
-													
-												</div>
+                          
+                        </div>
                                               {% if article2 %}
                                                     <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
                                                       {% if is_admin %}
@@ -145,112 +145,112 @@
                                        {% endfor  %}
             
 
-										
+                    
 <!--
-										<div class="row">
-												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-													<div class="articleHomeBox">
-														<span class="artDate">10.10.2037</span>
-														<a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-														<div class="homeArtTitle">
-														<a href="#">Оконная фурнитура и ее возможности</a>
-														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-														tempor incididunt ut labore et dolore magna aliqua.  ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod	tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam,
-														quis nostrud exercitation ullamco laboris nisi ut aliquip </p>							
-														<div class="row">
-															<div class="col-lg-6 col-xs-6 artCat">
-																<a href="#">Оконная фурнитура</a>
-															</div>
-															<div class="col-lg-6 col-xs-6 artOpen">
-																<img src="img/artSq.jpg" class="img-responsive">
-																<a href="#">Подробнее</a>
-															</div>								
-														</div>
-													</div>
-												</div>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
+                          <div class="articleHomeBox">
+                            <span class="artDate">10.10.2037</span>
+                            <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
+                            <div class="homeArtTitle">
+                            <a href="#">Оконная фурнитура и ее возможности</a>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua.  ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip </p>              
+                            <div class="row">
+                              <div class="col-lg-6 col-xs-6 artCat">
+                                <a href="#">Оконная фурнитура</a>
+                              </div>
+                              <div class="col-lg-6 col-xs-6 artOpen">
+                                <img src="img/artSq.jpg" class="img-responsive">
+                                <a href="#">Подробнее</a>
+                              </div>                
+                            </div>
+                          </div>
+                        </div>
 
-												<div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-													<div class="articleHomeBox">
-														<span class="artDate">10.10.2037</span>
-														<a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-														<div class="homeArtTitle">
-														<a href="#">Оконная фурнитура и ее возможности</a>
-														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-														tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-														quis nostrud exercitation ullamco laboris nisi ut aliquip </p>							
-														<div class="row">
-															<div class="col-lg-6 col-xs-6 artCat">
-																<a href="#">Оконная фурнитура</a>
-															</div>
-															<div class="col-lg-6 col-xs-6 artOpen">
-																<img src="img/artSq.jpg" class="img-responsive">
-																<a href="#">Подробнее</a>
-															</div>								
-														</div>
-													</div>
-												</div>
-										</div>	-->
+                        <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
+                          <div class="articleHomeBox">
+                            <span class="artDate">10.10.2037</span>
+                            <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
+                            <div class="homeArtTitle">
+                            <a href="#">Оконная фурнитура и ее возможности</a>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip </p>              
+                            <div class="row">
+                              <div class="col-lg-6 col-xs-6 artCat">
+                                <a href="#">Оконная фурнитура</a>
+                              </div>
+                              <div class="col-lg-6 col-xs-6 artOpen">
+                                <img src="img/artSq.jpg" class="img-responsive">
+                                <a href="#">Подробнее</a>
+                              </div>                
+                            </div>
+                          </div>
+                        </div>
+                    </div>  -->
 
-								<!--		<div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
-											<div class="flexPagination">
-												<ul>
-													<li><a href="#">1</a></li>
-													<li><a href="#">2</a></li>
-													<li><a href="#">3</a></li>
-													<li><a href="#">4</a></li>
-												</ul>
-											</div>
-										</div>					-->														
-						</div>						
+                <!--    <div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
+                      <div class="flexPagination">
+                        <ul>
+                          <li><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                        </ul>
+                      </div>
+                    </div>          -->                            
+            </div>            
                                                 {% include "left_menu.html" %}
-				
+        
 
 
-				</div>
-			</div>					
-		</section>
+        </div>
+      </div>          
+    </section>
 
 
         {% include "subscription.html" %}
 
-		
+    
         {% include "footer.html" %}
 
 
 
 
-	</div>
+  </div>
 
 
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.7/js/superfish.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.7/js/superfish.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
 
-	<script src="js/unslider.js"></script>
-	<script src="js/quantityCount.js"></script>
-	
+  <script src="js/unslider.js"></script>
+  <script src="js/quantityCount.js"></script>
+  
     <script src="js/main.js"></script>
 
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/commonsecmenu.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/commonsecmenu.js"></script>
 
 
-	<script type="text/javascript">
-		$('document').ready(function (){
-			$('#myPopOver').popover();
-		});
-	</script>
+  <script type="text/javascript">
+    $('document').ready(function (){
+      $('#myPopOver').popover();
+    });
+  </script>
 
-	
-	<script>
-		jQuery(document).ready(function($) {
-			$('.my-slider').unslider();
-		});
-	</script>
+  
+  <script>
+    jQuery(document).ready(function($) {
+      $('.my-slider').unslider();
+    });
+  </script>
 
-	{% if is_admin %}
+  {% if is_admin %}
               {% include "chanels.html"%}
         {% endif %}
 

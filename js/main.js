@@ -106,26 +106,21 @@ $( document ).ready(function() {
         });      
     };
     MyCart.change_item_count = function(pk, price, obj){
-      console.log(pk);
-      console.log(price);
-      console.log(obj.value);
-      
+
       var count = obj.value;
       $.ajax({
 	  url: "cart/change/item/"+pk+"/"+count,
 	  type: 'GET',
-	  async: true,
-	  success: function (data) {
-		var total_price = price*count;
-		$("#total_item_price_"+pk).html(total_price+" грн");
-		$("#total_price").html(data["price"]);
-	  },
-	  cache: false,
-	  contentType: false,
-	  processData: false
+          success: function (data) {
+                var total_price = price*count;
+                $("#total_item_price_"+pk).html(total_price+" грн");
+                $("#cart_total").html(data["price"]+" грн");
+          },
+          cache: false,
+          contentType: false,
+          processData: false
       });
-      
-      
+	
       
     };
     MyCart.delete_item = function(pk){
@@ -135,7 +130,7 @@ $( document ).ready(function() {
             async: true,
             success: function (data) {
 		  $("#cart_position_"+pk).hide();
-		  $("#total_price").html(data["price"]);
+		  $("#cart_total").html(data["price"]);
 	    },
             cache: false,
             contentType: false,
@@ -145,7 +140,6 @@ $( document ).ready(function() {
     };
     
     MyCart.add2cart_count_from = function(pk, count_of_items, title){
-         console.log(count_of_items);
          var count = $(count_of_items).val()*1;
          $.ajax({
             url: "cart/add/"+pk+"/"+count,
@@ -163,9 +157,7 @@ $( document ).ready(function() {
         });
       
       
-    };
-    
-    
+    };  
     
     
     var MyCommon = {};

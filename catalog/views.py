@@ -194,6 +194,8 @@ def product(request, pk):
     cat_id = product.catalog_item.id
     fill_product_context(cat_id, context)
     context["product"] = product
+    context["product_images"] = Image.objects.filter(product=product).order_by("order")
+    
     return render(request, 'product.html', context)
     
 def faq(request):
@@ -443,7 +445,6 @@ def cart_del_item(request, item_id):
 	count += i.count
 	total_price += i.count*i.price
       cart.count = count
-      
       cart.save() 
      
       return http200json(request, {"status": True,
@@ -473,7 +474,6 @@ def cart(request):
     return render(request, "cart.html", context)   
       
   
-
 def cart_confirm(request):
     cart_id = request.session.get('cart_id', False)
     if cart_id:
