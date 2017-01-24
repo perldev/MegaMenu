@@ -129,6 +129,8 @@ class CatItem(models.Model):
                                  self.opt2_spec)
 
 
+
+
 class Cart(models.Model):
     phone = models.CharField(verbose_name=u"Телефон", max_length=255, null=True, blank=True)
     fio = models.CharField(verbose_name=u"ФИО", max_length=255, null=True, blank=True)
@@ -149,8 +151,8 @@ class Cart(models.Model):
       return total_price
     
     class Meta:
-      verbose_name = u"Корзин"
-      verbose_name_plural = u"Корзины"
+      verbose_name = u"Заказ"
+      verbose_name_plural = u"Заказы"
 
 
 class CartItem(models.Model):
@@ -168,13 +170,31 @@ class CartItem(models.Model):
     def total_price(self):
       return self.count*self.price
     
+    def __unicode__(self):
+       product = self.product
+       return u"%s" % (self.product)
+    
     class Meta:
       verbose_name = u"позиция в Корзине"
       verbose_name_plural = u"позиции в Корзине"
 
 
+    
+class CartItemInline(StackedInline):
+    model = CartItem
+    extra = 0
+    class Meta:
+      verbose_name = u"позиция в Корзине"
+      verbose_name_plural = u"позиции в Корзине"
+
+
+class CartAdmin(admin.ModelAdmin):
+    inlines = [ CartItemInline ]
+    list_display = ['phone', "fio", "full_desc", "total_price","count", "status"]
+    list_filter = ('status', 'phone')
+    
                             
-                                   
+                     
 class Product(models.Model):
     order = models.IntegerField(verbose_name = u"порядок", default=0)
 
@@ -225,7 +245,7 @@ class Product(models.Model):
     
     def __unicode__(self):
       return "%s -> %s " % (self.catalog_item,
-                                 self.title)
+                            self.title)
     
     class Meta:
         verbose_name = u"Товар"

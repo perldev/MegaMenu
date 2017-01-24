@@ -217,6 +217,7 @@ $( document ).ready(function() {
     window.MyCart = MyCart;
     $(".formSubmit").on("click", function(ev){
 	var id = $(this).data("submit");
+        console.log(id);
 	$(id).submit();
     });
     

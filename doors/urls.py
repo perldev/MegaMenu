@@ -41,6 +41,7 @@ def api_root(request, format=None):
         'package-item': reverse('package-item', request=request),
     })
 
+
 urlpatterns = [
     url('^$', index, name="index"),
     url('^faq$', faq, name="faq"),
@@ -93,14 +94,16 @@ urlpatterns = [
     url(r'^cart/add_package/([\d]+)', views.cart_add_package, name="cart_add_package"),
     url(r'^cart/del/item/([\d]+)', views.cart_del_item, name="cart_del_item"), 
     url(r'^cart/change/item/([\d]+)/([\d]+)', views.cart_change_item, name="cart_change_item"), 
-    url(r'^cart/confirm$', views.cart_confirm, name="cart_confirm"), 
-    url(r'^cart/approve$', views.cart_approve, name="cart_approve"), 
+    url(r'^cart_confirm$', views.cart_confirm, name="cart_confirm"), 
+    url(r'^cart_approve$', views.cart_approve, name="cart_approve"), 
     url(r'^cart$', views.cart, name="cart"),
     
 
     url(r'^admin/', admin.site.urls),
 
 ] 
+
+
 if settings.DEBUG:    
    urlpatterns += static("js", document_root=os.path.join(settings.BASE_DIR,"js"))
    urlpatterns += static("img", document_root=os.path.join(settings.BASE_DIR,"img"))
@@ -108,5 +111,6 @@ if settings.DEBUG:
    urlpatterns += static("css", document_root=os.path.join(settings.BASE_DIR, "css"))
    urlpatterns += static("fonts", document_root=os.path.join(settings.BASE_DIR,"fonts"))
    urlpatterns += static("icon", document_root=os.path.join(settings.BASE_DIR,"icon"))
+
    
     

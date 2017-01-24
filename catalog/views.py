@@ -460,9 +460,19 @@ def cart(request):
       context = {}
       context["cart"] = cart
       context["cart_item_list"] = CartItem.objects.filter(cart=cart)
-      return render(request, "cart.html", context) 
+      
     else:
-      raise Http404(u"Заказ не найден")
+      cart = Cart(count=0)
+      cart.save()
+      request.session["cart_id"] = cart.id
+      context = {}
+      context["cart"] = cart
+      context["cart_item_list"] = []
+      
+      
+    return render(request, "cart.html", context)   
+      
+  
 
 def cart_confirm(request):
     cart_id = request.session.get('cart_id', False)
@@ -479,15 +489,22 @@ def cart_confirm(request):
 
 
 def cart_approve(request):
-    if request.session.get('cart_id', False):
+    context = {}
+    cart_id = request.session.get('cart_id', False)
+    if cart_id:
       cart = Cart.objects.get(id=cart_id)
-      cart_count = cart.count
+      phone = request.POST.get("phone", None)
+      fio = request.POST.get("fio", None)
+      full_desc = request.POST.get("full_desc", None)
+      cart.phone = phone
+      cart.fio = fio
+      cart.full_desc = full_desc
       cart.status="processing"
       cart.save()
+      context["cart_item_list"] = CartItem.objects.filter(cart=cart)
       request.session["cart_id"] = None
-      context = {}
       context["cart"] = cart
-      return render_to_response(request, "approve_order.html", context) 
+      return render(request, "approve_order.html", context) 
     else:
       raise Http404(u"Заказ не найден")
 
