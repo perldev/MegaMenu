@@ -141,6 +141,13 @@ class Cart(models.Model):
 			      default='created' )
     
     count = models.IntegerField(verbose_name=u"Кол-во позиций")
+    
+    def total_price(self):
+      total_price = 0
+      for i in CartItem.objects.filter(cart=self):
+	total_price += i.count*i.price
+      return total_price
+    
     class Meta:
       verbose_name = u"Корзин"
       verbose_name_plural = u"Корзины"
@@ -157,6 +164,10 @@ class CartItem(models.Model):
 				  null=True, blank=True)  
     
     cart = models.ForeignKey(Cart, verbose_name="корзина")
+    
+    def total_price(self):
+      return self.count*self.price
+    
     class Meta:
       verbose_name = u"позиция в Корзине"
       verbose_name_plural = u"позиции в Корзине"
