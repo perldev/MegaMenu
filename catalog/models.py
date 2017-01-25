@@ -34,7 +34,7 @@ def translit(t):
 
 class Meta(models.Model):
     url = models.CharField(max_length=255,
-                             verbose_name=u"Title", null=True, blank=True)
+                             verbose_name=u"URL", null=True, blank=True)
     keywords = models.CharField(max_length=255,
                            verbose_name=u"key words", null=True, blank=True)
     desc = models.CharField(max_length=255,
@@ -202,7 +202,7 @@ class Product(models.Model):
                                verbose_name=u"Название товара",
                                null=True, blank=True, )
 
-    full_desc = models.TextField(max_length=255,
+    full_desc = models.TextField(
                                verbose_name=u"полное описание",
                                null=True, blank=True, )
     
@@ -222,7 +222,7 @@ class Product(models.Model):
 
     is_discont = models.NullBooleanField(verbose_name=u"Акционный")
 
-    ext_desc = models.CharField(max_length=255,
+    ext_desc = models.TextField(
                                 verbose_name=u"Дополнительное описание",
                                 null=True, blank=True, )
                                       
@@ -336,6 +336,11 @@ class PackageAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ ImagesInline ]
     list_display = ['title', 'rate', 'price', 'catalog_item']
+    class Media:
+        js = (
+            '//cdn.tinymce.com/4/tinymce.min.js',
+            '/js/inline_admin.js',
+        )
 
 
 class CatItemInline(StackedInline):

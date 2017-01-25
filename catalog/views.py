@@ -195,7 +195,9 @@ def product(request, pk):
     fill_product_context(cat_id, context)
     context["product"] = product
     context["product_images"] = Image.objects.filter(product=product).order_by("order")
-    
+    context["meta_description"] = product.description
+    context["meta_keywords"] = product.keywords    
+    context["pagetitle"] = product.title   
     return render(request, 'product.html', context)
     
 def faq(request):
@@ -553,6 +555,18 @@ def add_chanel(request):
     content_item.save()
     return http200json(request, {"status": True})
 
+
+def setup_custom_meta(req, NewContext):
+    Path = req.get_full_path()
+    try:
+        custom_meta = Meta.objects.get(url=Path)
+        NewContext["meta_description"] = custom_meta.desc
+        NewContext["meta_keywords"] = custom_meta.keywords
+        return NewContext
+    except:
+        return NewContext
+      
+
 def content_chanels(request):
     context = {}
     for ch in Chanel.objects.all():
@@ -585,16 +599,22 @@ def content_chanels(request):
     COMPANY_ID = 1
     context["catalog_current_discont"] = context["current_discont"][0]
     context["about_company"] = [Content.objects.get(id=COMPANY_ID)]
+    
+    res_contex = None
     if request.user.is_authenticated() and request.user.is_staff:
-        return {"cats":cats,
-                'chanels': context,
-                "discont_count": discont_count,
-                'is_admin': True,
-                "cart_count": cart_count
-                }
+        res_context = {"cats":cats,
+                      'chanels': context,
+                      "discont_count": discont_count,
+                      'is_admin': True,
+                      "cart_count": cart_count,
+                      
+                      }
     else:
-        return {"cats":cats,
-                'chanels': context,
-                "discont_count": discont_count,
-                "cart_count": cart_count
-                 }
+        res_context = {"cats":cats,
+                      'chanels': context,
+                      "discont_count": discont_count,
+                      "cart_count": cart_count
+                      }
+    res_context = setup_custom_meta(request, res_context)
+    return res_context
+

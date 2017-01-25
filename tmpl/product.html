@@ -1,26 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <title>Mega Menu</title>
+   {% include "meta_header.html" %}
 
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-   <meta name="format-detection" content="telephone=no">
-
-   <link href='https://fonts.googleapis.com/css?family=Exo+2:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-
-   <link rel="stylesheet" href="css/bootstrap.css"/>
-   <link rel="stylesheet" href="css/superfish.css">
-   <link rel="stylesheet" href="css/megafish.css">
-   <link rel="stylesheet" href="css/jquery.mmenu.all.css">
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-   <link rel="stylesheet" type="text/css" href="css/flaticon.css"> 
-
-   <link rel="stylesheet" href="css/main.css">
-
-   <link rel="stylesheet" href="css/unslider.css">
-   <link rel="stylesheet" href="css/unslider-dots.css">
 
    
 </head>
@@ -258,11 +240,11 @@
    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.7/js/superfish.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.5.3/core/js/jquery.mmenu.min.all.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/galleria/1.4.5/galleria.min.js"></script>
 
    <script src="js/unslider.js"></script>
    <script src="js/quantityCount.js"></script>
-   
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script> 
+
       <script src="js/main.js"></script>
 
    <script src="js/bootstrap.min.js"></script>
@@ -276,14 +258,7 @@
    </script>
 
    
-   <script>
-      jQuery(document).ready(function($) {
-         $('.my-slider').unslider();
-         Galleria.loadTheme('https://cdnjs.cloudflare.com/ajax/libs/galleria/1.4.5/themes/classic/galleria.classic.min.js');
-         Galleria.run('.galleria');
-         
-      });
-   </script>
+
         {% if is_admin %}
               {% include "chanels.html"%}
         {% endif %}
