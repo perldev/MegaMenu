@@ -20,7 +20,7 @@
       <form action="{% url 'cart_approve' %}" method="POST" id="cart_form">
         <div class="row">
           <div class="table-responsive">
-              <table class="table cartTable">
+              <table class="table cartTable hidden">
                 <tbody>
                  {% for item in cart_item_list%}
               <tr id="cart_position_{{item.id}}">
