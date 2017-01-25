@@ -599,6 +599,16 @@ def content_chanels(request):
     COMPANY_ID = 1
     context["catalog_current_discont"] = context["current_discont"][0]
     context["about_company"] = [Content.objects.get(id=COMPANY_ID)]
+    discont_products = Product.objects.filter(is_discont=True)[:3]    
+    popular = [] 
+    
+    
+    product = Product.objects.get(id=1)   
+    popular.append(product)
+    product = Product.objects.get(id=1)   
+    popular.append(product)
+    product = Product.objects.get(id=1)   
+    popular.append(product)
     
     res_contex = None
     if request.user.is_authenticated() and request.user.is_staff:
@@ -616,5 +626,9 @@ def content_chanels(request):
                       "cart_count": cart_count
                       }
     res_context = setup_custom_meta(request, res_context)
+    res_context["popular"] = popular
+    res_context["discont_products"] = discont_products
+    res_context["last_articles"] = []
+
     return res_context
 
