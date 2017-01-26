@@ -81,7 +81,7 @@
                             </li>
                             <li>
                                 <a href="{% url 'faq' %}">ПОДДЕРЖКА</a>
-                                <div class="sf-mega">
+                                <!--<div class="sf-mega">
 
                                     <div class="container-fluid containerMmenuBox">
 
@@ -134,7 +134,7 @@
 
                                     </div>
 
-                                </div>
+                                </div>-->
                             </li>
                             <li>
                                 <a href="{% url 'contacts' %}">КОНТАКТЫ</a>
@@ -187,33 +187,34 @@
         {% endif %}
 
     </div>
-
+    
+    
 <div class="modal fade" id="modal_info"
-     tabindex="20" role="dialog"
+     tabindex="-1" role="dialog"
      aria-labelledby="info_modal_label">
 
-  <div class="modal-dialog" role="document" >
-    <div class="modal-content">
-            <div class="col-lg-12">
-                <div class="calcBox">
-                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="info_modal_label"></h4>
-                         </div>
-                         <div class="modal-body">
-                              <div class="form-group" >
-                                  <label class="control-label" id="info_body" ></label>
-                              </div>
-                         </div>
-                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                         </div>
-                </div>
-                </div>
-            </div>
-    </div>
-  </div>
+       <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="info_modal_label"></h4>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="row">
+                          <div class="form-group" >
+                              <label class="control-label" id="info_body" ></label>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                    </div>
+              </div>
+                  
+       </div>
+</div>
 
-</div>      
 {% include "call.html" %}
 {% include "search.html" %}

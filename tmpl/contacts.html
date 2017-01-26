@@ -132,18 +132,27 @@
 			<div class="container contactFormContainer">
 				<div class="row">
 					<h3>написать нам</h3>
-						    <form name="sentMessage" action="/send_marina" id="contactForm" novalidate>
+						    <form name="sentMessage"  id="contactForm" novalidate>
 						        <div class="col-md-12 formContact">
 						          <div class="form-group center-block">
-						            <input type="text" class="form-control" placeholder="Ваше имя *" id="name" required data-validation-required-message="Пожалуйста укажите свое имя">
+						            <input type="text" class="form-control" placeholder="Ваше имя *" 
+						            id="name" name="name" required data-validation-required-message="Пожалуйста укажите свое имя">
 						             <p class="help-block text-danger"></p>
 						          </div>
 						          <div class="form-group center-block">
-						            <input type="text" class="form-control" placeholder="Ваш Email либо телефон*" id="text" required data-validation-required-message="Пожалуйста укажите телефон либо email">
+						            <input type="text" name class="form-control"
+						            placeholder="Ваш Email либо телефон*"
+						            id="contact"
+						            name="contact"
+						            required 
+						            data-validation-required-message="Пожалуйста укажите телефон либо email">
 						            <p class="help-block text-danger"></p>
 						          </div>
 						          <div class="form-group center-block">
-						            <textarea rows="3" class="form-control" placeholder="Ваше сообщение *" id="message" required data-validation-required-message="Вашен сообщение"></textarea>
+						            <textarea rows="3" class="form-control"
+						            placeholder="Ваше сообщение *"
+						            id="question" 
+						            name="question" required data-validation-required-message="Вашен сообщение"></textarea>
 						            <p class="help-block text-danger"></p>
 						          </div>
 						        </div>
@@ -163,83 +172,7 @@
 
 		
 
-		<footer>
-			<div class="container newsletterContainer">
-				<div class="row">
-					<div class="col-lg-3 footerLogoBox">
-						<img src="img/logo.jpg" class="img-responsive">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
-					</div>
-					<div class="col-lg-6 col-md-8 footerMenuCol">
-						<div class="row footerMenuRow">
-							<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 firstFooterMenu">
-								<span>Компания</span>
-								<ul>
-									<li><a href="#">О компании</a></li>
-									<li><a href="#">Бренды</a></li>
-									<li><a href="#">Поддержка</a></li>
-									<li><a href="#">Новости и статьи</a></li>
-									<li><a href="#">Контакты</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-6">
-								<span>Оконная фурнитура</span>
-								<ul>
-									<li><a href="#">Фурнитура Accado поворотно-откидная</a></li>
-									<li><a href="#">Фурнитура Accado поворотная</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-								<span>Дверная фурнитура</span>
-								<ul>
-									<li><a href="#">Замки-рейки</a></li>
-									<li><a href="#">Короткие замки</a></li>
-									<li><a href="#">Дверные петли</a></li>
-									<li><a href="#">Нажимные гарнитуры</a></li>
-									<li><a href="#">ЦИлиндры</a></li>
-									<li><a href="#">Ответные планки</a></li>
-									<li><a href="#">Дверные доводчики</a></li>
-									<li><a href="#">Офисные ручки</a></li>
-								</ul>
-							</div>														
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
-						<span>Контактная информация</span>
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>
-
-						<p>г. Николаев, ул. Электронная 81/24</p>
-						<p class="footerPhone">+38 (0512) 58-23-77</p>	
-
-						<p>Понедельник-пятница с 9:00 до 18:00</p>	
-						<hr>
-						<p>E-mail: info@bazistk.com.ua</p>		
-						<div class="socIcons">
-							<a href="#"><i class="flaticon-facebook"></i></a>
-							<a href="#"><i class="flaticon-instagram"></i></a>
-							<a href="#"><i class="flaticon-youtube"></i></a>
-						</div>			
-					</div>										
-				</div>
-			</div>
-		</footer>	
-
-
-
-
-		<section>
-			<div class="container copyRight">
-				<div class="row">
-					<div class="col-lg-12">© 2016 Компания «Базис ТК». Все права защищены.</div>
-				</div>
-			</div>
-		</section>					
-					
-
+          {% include "footer.html" %}
 
 
 

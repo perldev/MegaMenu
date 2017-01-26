@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Product, Brand, Category, CatItem, Image, Package, PackageItem
 
 from .models import ProductAdmin, PackageAdmin, CatItemAdmin, CategoryAdmin, Cart, CartAdmin
-from .models import Chanel, Content, Meta
+from .models import Chanel, Content, Meta, Subscribing
 
 
 admin.site.register(Product, ProductAdmin)
@@ -16,7 +16,7 @@ admin.site.register(Image)
 admin.site.register(Package, PackageAdmin)
 admin.site.register(PackageItem)
 
-
+admin.site.register(Subscribing)
 admin.site.register(Chanel)
 admin.site.register(Content)
 admin.site.register(Meta)

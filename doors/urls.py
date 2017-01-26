@@ -86,7 +86,7 @@ urlpatterns = [
     url(r'^blog$', views.blog, name="blog"),
     url(r'^blog_item_([\d]+)$', views.blog_item, name="blog-item"),
     url(r'^blog_([\d]+)$', views.blog_cat, name="blog-cat"),
-    
+    url(r"^subscribe/add", views.subscribe_add, name="subscribe-add" ),
     url(r'^chanel/delete/([\.\d]+)', views.delete_chanel, name="chanel-delete"),
     url(r'^chanel/edit', views.edit_chanel, name="chanel-edit"),
     url(r'^chanel/add', views.add_chanel, name="chanel-add"),       

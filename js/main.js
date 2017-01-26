@@ -78,14 +78,56 @@ $( document ).ready(function() {
 
     $("#subscription").on("submit", function(ev){
         var email = $("#SubInputEmail").val();
-            
-        MyCommon.modal("Подписка", "Спасибо за ваш интерес,<p>\
-                        регулярное обновление нашего ассортимента </p><p>\
-                        будет присылаться на почту <strong>"+email+"</strong></p>\
-                        ");
+        var email_decoded = encodeURI(email);
+        $.ajax({
+            url: "subscribe/add?email=" + email_decoded,
+            type: 'GET',
+            async: true,
+            success: function (data) {
+                  MyCommon.modal("Спасибо за ваш интерес,<p>\
+                                  регулярное обновление нашего ассортимента </p><p>\
+                                  будет присылаться на почту <strong>"+email+"</strong></p>\",
+                                 "Спасибо, вы подписаны на наши новости");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });      
         $("#SubInputEmail").val("");
         return false;
     });
+    $("#contactForm").on("submit", function(ev){
+        var formData = new FormData($("#contactForm")[0]);
+        $.ajax({
+            url: "send_marina",
+            type: 'POST',
+            data: formData,
+            async: true,
+            success: function (data) {
+                  MyCommon.modal("Мы ответим на ваш вопрос в кратчайшие сроки","Спасибо за ваш интерес");
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });      
+        
+        $("#question").val("");
+        $("#name").val("");
+        $("#contact").val("");
+        return false;
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     var MyCart = {};
 
     MyCart.add2cart_simple = function(pk, count, title){

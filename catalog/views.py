@@ -12,7 +12,7 @@ from .serializers import ProductSerializer, BrandSerializer, ImageSerializer
 from .serializers import CategorySerializer, CatItemSerializer
 
 from django.contrib.auth.models import User
-from .models import Content, Chanel, Cart, CartItem, Package, PackageItem
+from .models import Content, Chanel, Cart, CartItem, Package, PackageItem, Subscribing, Question
 
 
 from django.conf import settings
@@ -289,12 +289,9 @@ def custom_page(request, name):
 
 # TODO add captcha
 def send_marina(request):
-    resp = requests.post(API_MAIL_URL, auth=HTTPBasicAuth('api', API_MAIL_GUN),
-                        data= {"from": "site@bazis.com",
-                               "to":"savemymind@gmail.com",
-                               "subject": u"mail from site %s %s" % (request.POST.get("name",""),
-                               request.POST.get("email","")),
-                               "html": request.POST.get("text","")})
+    
+    f = AskForm(request.POST, request.FILES)
+    content_item = f.save()
     return http200json(request, {"status": True})
 
     
@@ -340,6 +337,12 @@ class ImageDetail(generics.ListCreateAPIView):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
+
+class AskForm(ModelForm):
+    class Meta:
+        model = Question
+        fields = [ 'contact', 'name', 'question']
+        
 
 class ContentForm(ModelForm):
     class Meta:
@@ -396,6 +399,14 @@ def cart_add_package(request, package_id):
       return http200json(request, {"status": True}) 
     else:
       return http403json(request)
+
+def subscribe_add(request):
+  email =  request.GET.get("email", None)
+  if email:
+    Subscribing(email=email).save()
+    return http200json(request,  {"status": True})
+  else:
+    return http403json(request)
 
 
 def change_count_item(request, item_id, count):

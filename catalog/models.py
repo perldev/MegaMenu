@@ -30,6 +30,26 @@ def translit(t):
     t = t.replace(" ", "_").lower()
     return t
 
+class Question(models.Model):
+  pub_date = models.DateTimeField(default=now,
+                                  verbose_name=u"Date of adding")
+  name = models.EmailField(verbose_name=u"Имя")
+  contact = models.CharField(verbose_name=u"Контакт", max_length=255)
+  question = models.TextField( verbose_name=u"Сообщение",
+                               null=True, blank=True, )
+     
+  def __unicode__(self):
+    return "%s,%s" %  (self.email, str(self.pub_date))
+
+
+class Subscribing(models.Model):
+  pub_date = models.DateTimeField(default=now,
+                                  verbose_name=u"Date of adding")
+  email = models.EmailField(verbose_name=u"Email")
+  
+  def __unicode__(self):
+    return "%s,%s" %  (self.email, str(self.pub_date))
+
 
 
 class Meta(models.Model):
@@ -284,7 +304,7 @@ class Package(models.Model):
         verbose_name_plural = u"Акционный пакеты"
                              
     def __unicode__(self):
-        return self.title
+        return u"%s" % (self.title)
         
         
 class PackageItem(models.Model):
@@ -300,7 +320,7 @@ class PackageItem(models.Model):
 
                                       
     def __unicode__(self):
-        return str(self.product)
+        return u"%s" % (self.product.title)
                                       
 
 class CatItemAdmin(admin.ModelAdmin):
