@@ -89,8 +89,8 @@
                  <span>{{ item.catalog_item.opt2_spec }} </span>
                 <div class="row">
                   <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
+                  {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
+                  <div class="priceBoxSPan">
                       <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
                     </div>
                   </div>
@@ -160,8 +160,8 @@
 
                 <div class="row">
                   <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
+                  {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
+                  <div class="priceBoxSPan">
                       <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
                     </div>
                   </div>

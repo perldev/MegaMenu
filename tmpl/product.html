@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
    {% include "meta_header.html" %}
+        {% load preview %}
 
 
    
@@ -84,7 +85,7 @@
                                     </div>
                                     <div class="col-lg-7 col-sm-7 mainProductCapture">
                                        <h1>{{product.title}}</h1>
-                                       <img src="img/rank.jpg" class="img-responsive">
+                                        {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                                        <div class="productShortCharacters">
                                             {{product.ext_desc}}
                                        

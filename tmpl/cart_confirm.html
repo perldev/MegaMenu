@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
    {% include "meta_header.html" %}
+        {% load preview %}
 
   
 </head>
@@ -26,7 +27,7 @@
               <tr id="cart_position_{{item.id}}">
                 <td class="cartProductImageTd"><img src="{{item.preview_image}}" class="img-responsive cartProductImage"></td>
                 <td>{{item.product.title}}<br>
-                    <img src="img/rank.jpg">
+                  {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                     <div class="cartProductShortInfo">
                                                                           {% autoescape off %}
                         {{item.product.ext_desc}}                      

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   {% include "meta_header.html" %}
+        {% load preview %}
 
   
 </head>
@@ -78,7 +79,9 @@
 					<div class="col-lg-3 dropDownCol">
 
 					    <div class="dropdown">
-					      <button class="btn btnBrandsSort dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					      <button class="btn btnBrandsSort dropdown-toggle" type="button" 
+                                                      id="dropdownMenu1"
+                                                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						Выбрать производителя
 						<span class="brandSortIcon"></span>
 						<!-- <span class="brandSortIcon glyphicon glyphicon-heart pull-right"></span> -->
@@ -109,7 +112,7 @@
                                             <span>{{ cat_title }} </span>
                                             <div class="row">
                                                     <div class="rankPriceBox2">
-                                                            <img src="img/rank.jpg" class="img-responsive">
+                                                           {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                                                             <div class="priceBoxSPan">
                                                                     <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
                                                             </div>

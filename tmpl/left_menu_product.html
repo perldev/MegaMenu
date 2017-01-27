@@ -1,4 +1,6 @@
-                <div class="col-lg-3 col-md-12 col-lg-pull-9 leftMenuCol">
+                      {% load preview %}
+
+              <div class="col-lg-3 col-md-12 col-lg-pull-9 leftMenuCol">
                                                         <div class="inner-addon right-addon catSearchDesktop">
                                                                 <i class="glyphicon glyphicon-search"></i>
                                                                 <input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
@@ -80,7 +82,7 @@
 									  <div class="row">                                                                       
 										  <div class="col-sm-8 popProductItem">
 											  <a href="/product_{{item.id}}">{{item.title}}</a>
-											  <img src="img/rank.jpg" class="img-responsive">
+                                                                                          {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
 											  <span class="priceProductPopural">{{item.price}}<span class="currencyProduct"> грн</span></span>
 										  </div>
 										  <div class="col-sm-4">

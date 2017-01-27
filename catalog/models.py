@@ -229,13 +229,12 @@ class Product(models.Model):
     catalog_item = models.ForeignKey(CatItem, verbose_name = u"Каталог")  
     
     file1 = models.FileField(upload_to='file1', max_length=254,
-                             verbose_name = u"Спецификация")
+                             verbose_name = u"Спецификация", null=True, blank=True )
     
     file2 = models.FileField(upload_to='file2', max_length=254,
-                            verbose_name = u"Каталог pdf")
+                            verbose_name = u"Каталог pdf", null=True, blank=True)
     
-    rate = models.DecimalField(default="2.5", max_digits=2, decimal_places=1,
-                                      verbose_name=u"Рейтинг")
+    rate = models.IntegerField(default=3, verbose_name=u"Рейтинг")
 
     price = models.DecimalField(default="0.0", max_digits=6, decimal_places=2,
                                       verbose_name=u"Цена")
