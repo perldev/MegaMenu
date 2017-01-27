@@ -12,7 +12,7 @@ from .serializers import ProductSerializer, BrandSerializer, ImageSerializer
 from .serializers import CategorySerializer, CatItemSerializer
 
 from django.contrib.auth.models import User
-from .models import Content, Chanel, Cart, CartItem, Package, PackageItem, Subscribing, Question
+from .models import Content, Chanel, Cart, CartItem, Package, PackageItem, Subscribing, Question, Brand
 
 
 from django.conf import settings
@@ -77,7 +77,14 @@ def catalog(request, catalog_id=None):
     context["discont_menu"] = cats_discont
     
     cat_title = None
-
+    sorting = "-pub_date"
+    if request.GET.get("price_desc", None):
+      context["price_sorting"] = "price_desc"
+      sorting = "-price"
+      
+    if request.GET.get("price_asc", None):
+      context["price_sorting"] = "price_asc"  
+      sorting="price"
     
     if catalog_id:
         q_list = Q(status=True)
@@ -90,13 +97,14 @@ def catalog(request, catalog_id=None):
         brand = request.GET.get("brand", None)
         if brand:
             q_list &= Q(brand_id=brand)
-            context["current_brand"] = brand
+            context["current_brand"] = int(brand)
 
 
         context["current"] = catalog_id
         context["cat_title"] = cats_title[context["current"]]
         context["current_chanel"] = CatItem.objects.get(id=context["current"])
-        context["current_list"] = Product.objects.filter(q_list)
+
+        context["current_list"] = Product.objects.filter(q_list).order_by(sorting)
         
     else:
         our_list = get_last_products(6)
@@ -110,11 +118,13 @@ def catalog(request, catalog_id=None):
         brand = request.GET.get("brand", None)
         if brand:
             q_list &= Q(brand_id=brand)
-            context["current_brand"] = brand
+            context["current_brand"] = int(brand)
 
-        context["current_list"] = Product.objects.filter(q_list).order_by("-pub_date")
-        
+
+
+        context["current_list"] = Product.objects.filter(q_list).order_by(sorting)
     return render(request, 'catalog.html', context)
+
 
 def catalog_sub_cat(request, cat_id):
     context = {}
@@ -130,8 +140,18 @@ def catalog_sub_cat(request, cat_id):
     brand = request.GET.get("brand", None)
     if brand:
         q_list &= Q(brand_id=brand)
-        context["current_brand"] = brand
-    context["current_list"] = Product.objects.filter(q_list)
+        context["current_brand"] = int(brand)
+        
+    sorting = "-pub_date"
+    if request.GET.get("price_desc", None):
+      context["price_sorting"] = "price_desc"
+      sorting = "-price"
+      
+    if request.GET.get("price_asc", None):
+      context["price_sorting"] = "price_asc"  
+      sorting="price"
+      
+    context["current_list"] = Product.objects.filter(q_list).order_by(sorting)
 
     
     return render(request, 'catalog.html', context)
@@ -193,8 +213,11 @@ def product(request, pk):
     product = get_object_or_404(Product, id=pk)
     cat_id = product.catalog_item.id
     fill_product_context(cat_id, context)
+    
+    
     context["product"] = product
     context["product_images"] = Image.objects.filter(product=product).order_by("order")
+    context["seemed_prod"] = get_last_products(3, cat_id)
     context["meta_description"] = product.description
     context["meta_keywords"] = product.keywords    
     context["pagetitle"] = product.title   
@@ -247,11 +270,24 @@ def blog(request, cat_id=None):
     return render(request, 'blog.html', context)
   
 def get_last_articles(num):
-  return []
+  art_cats = []
 
-def get_last_products(num):
-  return []
-    
+  for ch in Category.objects.all().order_by("id"):
+      for item in CatItem.objects.filter(opt1_typ = ch).order_by("order"):
+	art_cats.append(item.id)
+      
+  
+  return Content.objects.filter(chanel__ext_id__in=art_cats)[:num]
+      
+            
+      
+
+def get_last_products(num, cat_id=None):
+  if cat_id is None:
+    return Product.objects.filter(status=True)[:num]
+  else:
+    return Product.objects.filter(status=True, catalog_item_id=cat_id)[:num]
+
 def blog_item(request, item_id):
 
     context = {}
@@ -371,7 +407,7 @@ def add_product2cart(request, product, price, count, package=None):
 	item = CartItem(count=count, product=product, price=price, is_package=False, cart=cart)
 	item.save()	 
     else:
-	item = CartItem(count=count, product=product, price=price, is_package=True, package=package, cart=cart)
+	item = CartItem(count=count, product=product, price=price, is_package=True, package=package.id, cart=cart)
 	item.save()	 
     
     return True
@@ -385,10 +421,11 @@ def cart_add_item(request, item_id, count):
 
 
 def cart_add_package(request, package_id):
-    if request.session.get('cart_id', False):
+    cart_id = request.session.get('cart_id', False)
+    if cart_id:
       cart = get_object_or_404(Cart, pk=cart_id)
-      pakage = get_object_or_404(Package, pk=package_id)
-      for package_item in PackageItem.objects.filter(pakage=pakage):
+      package = get_object_or_404(Package, pk=package_id)
+      for package_item in PackageItem.objects.filter(package_id=package_id):
 	  add_product2cart(request,
 			   package_item.product, 
 			   package_item.price, 1, package)
@@ -610,8 +647,17 @@ def content_chanels(request):
     COMPANY_ID = 1
     context["catalog_current_discont"] = context["current_discont"][0]
     context["about_company"] = [Content.objects.get(id=COMPANY_ID)]
-    discont_products = Product.objects.filter(is_discont=True)[:3]    
     popular = [] 
+    discont_products = []
+    
+    product = Product.objects.get(id=1) 
+    discont_products.append(product)
+    product = Product.objects.get(id=1)    
+    discont_products.append(product)
+    product = Product.objects.get(id=1)   
+    discont_products.append(product)
+
+    
     
     
     product = Product.objects.get(id=1)   
@@ -638,8 +684,22 @@ def content_chanels(request):
                       }
     res_context = setup_custom_meta(request, res_context)
     res_context["popular"] = popular
+    
     res_context["discont_products"] = discont_products
-    res_context["last_articles"] = []
+    pack = Package.objects.get(id=1)
+    pack_sum = 0
+    pack_list = []
+    for packitem in PackageItem.objects.filter(package = pack).order_by("order"):
+      pack_sum+= packitem.price
+      pack_list.append(packitem)
+      
+    res_context["random_package"] = {"package_items": pack_list,
+				     "sum": pack_sum,
+				     "id": pack.id}
+    
+    res_context["last_articles"] = get_last_articles(3)
+    res_context["brands"] = Brand.objects.all()
+
 
     return res_context
 

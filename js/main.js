@@ -5,10 +5,28 @@ $( document ).ready(function() {
     var cat;
 
     Chanels.action="add";
-    Chanels.add_item = function(id){
+    Chanels.add_item = function(id, obj){
             cat = id;
             $("#id_chanel").val(cat);
             Chanels.action = "add";
+	    $("#wrapper_title_chanel_item").show();
+            $("#wrapper_ordering_chanel_item").show();
+            $("#wrapper_content_chanel_item").show();
+            $("#wrapper_image_chanel_item").show();
+            
+            if($(obj).data("disable_title")){
+                $("#wrapper_title_chanel_item").hide();
+            }
+            if($(obj).data("disable_content")){
+                $("#wrapper_content_chanel_item").hide();
+            }
+            if($(obj).data("disable_ordering")){
+                $("#wrapper_ordering_chanel_item").hide();
+            }
+            if($(obj).data("disable_image")){
+                $("#wrapper_image_chanel_item").hide();
+            }            
+	    
             $("#myChanelModal").modal("show");
             $("#title_chanel_item").val("");
             $("#myModalLabelChanel").html("Add");
@@ -86,7 +104,7 @@ $( document ).ready(function() {
             success: function (data) {
                   MyCommon.modal("Спасибо за ваш интерес,<p>\
                                   регулярное обновление нашего ассортимента </p><p>\
-                                  будет присылаться на почту <strong>"+email+"</strong></p>\",
+                                  будет присылаться на почту <strong>"+email+"</strong></p>",
                                  "Спасибо, вы подписаны на наши новости");
             },
             cache: false,
@@ -129,7 +147,25 @@ $( document ).ready(function() {
     
     
     var MyCart = {};
-
+    MyCart.add_package = function(pk){
+       $.ajax({
+            url: "cart/add_package/"+pk,
+            type: 'GET',
+            async: true,
+            success: function (data) {
+		MyCommon.modal("Акционный пакет добавлен вам в корзину","Корзина");
+		var count = $("#cart_count").html();
+		count = count*1+2;
+		$("#cart_count").html(count);
+	    },
+            cache: false,
+            contentType: false,
+            processData: false
+        });      
+      
+    };
+    
+    
     MyCart.add2cart_simple = function(pk, count, title){
       
          $.ajax({

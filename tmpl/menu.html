@@ -1,4 +1,38 @@
+
+
+
+    
+    
     <div class="wrapper">
+	<section class="specAnnounceSec">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-md-8 col-md-offset-2">
+	      {% if is_admin %}
+		      <div class="col-lg-12 text-center">
+			  {% include "chanel_add.html" with item="index_header"  opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+			  <br/>
+			  <br/>
+		      </div>
+	      {% endif %}
+	      {% for item in chanels.index_header %}
+		{% if is_admin %}
+		    <div class="col-lg-12 text-center">
+		  {% include "chanel_edit.html" with item=item  opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+		    </div>
+		{% endif %}
+		  {% autoescape off %}
+		    <p>
+		      {{item.content}}
+		  </p>
+		  {% endautoescape %}
+	      {% endfor %}               
+		
+	      </div>
+	    </div>
+	  </div>
+	</section>
+      
         <section class="headerMenuSection">
 
         <div class="container">
@@ -81,60 +115,7 @@
                             </li>
                             <li>
                                 <a href="{% url 'faq' %}">ПОДДЕРЖКА</a>
-                                <!--<div class="sf-mega">
-
-                                    <div class="container-fluid containerMmenuBox">
-
-                                        <div class="row">
-                                            <div class="col-lg-12">
-
-                                                <div class="row">
-                                                    <div class="col-md-4">
-
-                                                        <div class="menu-new-item">
-                                                            <h3>Оконная фурнитура</h3>
-                                                                <ul class="megaSubMenu">
-                                                                    <li><a href="#">Подменю 1 текст </a></li>
-                                                                    <li><a href="#">Подменю 2</a></li>
-                                                                    <li><a href="#">Подменю 3</a></li>
-                                                                </ul>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-4">
-
-                                                        <div class="menu-new-item">
-                                                            <h3>Дверная фурнитура</h3>
-                                                                <ul class="megaSubMenu">
-                                                                    <li><a href="#">Подменю 1 текст </a></li>
-                                                                    <li><a href="#">Подменю 2</a></li>
-                                                                    <li><a href="#">Подменю 3</a></li>
-                                                                    <li><a href="#">Подменю 1 текст </a></li>
-                                                                    <li><a href="#">Подменю 2</a></li>
-                                                                    <li><a href="#">Подменю 3</a></li>
-                                                                    <li><a href="#">Подменю 1 текст </a></li>
-                                                                    <li><a href="#">Подменю 2</a></li>
-                                                                </ul>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-4">
-
-                                                        <div class="menu-new-item specMegaItem">
-                                                            <h3>Акции и другие спецпредложения</h3>
-                                                            <img class="responsive-img" src="img/coffee.jpg" alt="Alt">
-                                                            <a href="#" class="btn megaMenuButton">Все акции</a>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>-->
+                             
                             </li>
                             <li>
                                 <a href="{% url 'contacts' %}">КОНТАКТЫ</a>

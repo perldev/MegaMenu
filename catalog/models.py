@@ -87,7 +87,7 @@ class Content(models.Model):
     pub_date = models.DateTimeField(default=now,
                                     verbose_name=u"Date of adding")
 
-    ordering = models.IntegerField(verbose_name=u"ordering", default=0)
+    ordering = models.IntegerField(verbose_name=u"ordering", default=0,blank=True, null=True)
 
     def __unicode__(self):
         return "%s -> %s -> %s " % (self.chanel.title, self.title, str(self.pub_date) )

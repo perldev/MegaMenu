@@ -71,7 +71,7 @@
                                                         <div class="articleHomeBox">
                                                             <span class="artDate">{{article.pub_date}}</span>
                                                             <a href="/blog_item_{{article.id}}">
-                                                            <img src="img/artImg.jpg" class="img-responsive"></a>
+                                                            <img src="{{article.image}}" class="img-responsive"></a>
                                                             <div class="homeArtTitle">
                                                             <a href="/blog_item_{{article.id}}">{{article.title}}</a>
                                                             </div>
@@ -103,7 +103,8 @@
                                                       {% autoescape off %}
                                                             <div class="articleHomeBox">
                                                                 <span class="artDate">{{article2.pub_date}}</span>
-                                                                <a href="/blog_item_{{article2.id}}"><img src="img/artImg.jpg" class="img-responsive"></a>
+                                                                <a href="/blog_item_{{article2.id}}">
+                                                                <img src="{{article2.image}}" class="img-responsive"></a>
                                                                 <div class="homeArtTitle">
                                                                 <a href="/blog_item_{{article2.id}}">{{article2.title}}</a>
                                                                 </div>
@@ -125,65 +126,7 @@
                                        </div>
                                        {% endfor  %}
             
-
-                    
-<!--
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-                          <div class="articleHomeBox">
-                            <span class="artDate">10.10.2037</span>
-                            <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-                            <div class="homeArtTitle">
-                            <a href="#">Оконная фурнитура и ее возможности</a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua.  ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip </p>              
-                            <div class="row">
-                              <div class="col-lg-6 col-xs-6 artCat">
-                                <a href="#">Оконная фурнитура</a>
-                              </div>
-                              <div class="col-lg-6 col-xs-6 artOpen">
-                                <img src="img/artSq.jpg" class="img-responsive">
-                                <a href="#">Подробнее</a>
-                              </div>                
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-lg-6 col-sm-6 col-xs-6 col-xs-B-12">
-                          <div class="articleHomeBox">
-                            <span class="artDate">10.10.2037</span>
-                            <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
-                            <div class="homeArtTitle">
-                            <a href="#">Оконная фурнитура и ее возможности</a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip </p>              
-                            <div class="row">
-                              <div class="col-lg-6 col-xs-6 artCat">
-                                <a href="#">Оконная фурнитура</a>
-                              </div>
-                              <div class="col-lg-6 col-xs-6 artOpen">
-                                <img src="img/artSq.jpg" class="img-responsive">
-                                <a href="#">Подробнее</a>
-                              </div>                
-                            </div>
-                          </div>
-                        </div>
-                    </div>  -->
-
-                <!--    <div class="col-lg-12 col-md-12 col-sm-12 paginationCol">
-                      <div class="flexPagination">
-                        <ul>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                        </ul>
-                      </div>
-                    </div>          -->                            
+      
             </div>            
                                                 {% include "left_menu.html" %}
         

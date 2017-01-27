@@ -1,0 +1,39 @@
+    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="complectCol">
+                      <div class="row">
+                        <div class="col-lg-9 col-md-9"> 
+                          <div class="row">
+                           {% for item in  random_package.package_items %}
+                            
+			      <div class="col-lg-5 col-md-5">
+				<div class="row">
+				  <div class="col-lg-4 col-md-4">
+				    <img src="{{item.product.preview_image.url}}" class="img-responsive">
+				  </div>
+				  <div class="col-lg-8 col-md-8 productTitleComplect">
+				    <a href="/product_{{item.id}}">{{item.product.title}}</a><br/>
+				    <span class="priceProductComplect">{{item.price}}<span class="currencyProduct"> грн</span></span>
+				  </div>  
+				</div>
+			      </div> 
+			      {% if not forloop.last %}
+				<div class="col-lg-1 col-md-1 complectIconBox">
+				  <img src="img/plusIcon.jpg" class="img-responsive">
+				</div>
+			      {% endif %}
+                            {% endfor %}
+                            
+                            <div class="col-lg-1 col-md-1 complectIconBoxCenter">
+                              <img src="img/sumIcon.jpg" class="img-responsive">
+                            </div>                                                  
+                          </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 complectSumBox">
+                          <span class="priceProductComplectSum">{{random_package.sum}}<span class="currencyProduct"> грн</span></span>
+                          <br><br>
+                          <a href="javascript:MyCart.add_package({{random_package.id}})" class="btnStandBlue">Купить комплект</a>
+                        </div>
+                      </div>
+                      </div>
+                    </div>  

@@ -1,11 +1,5 @@
-@charset "UTF-8";
-body {
-  font-family: "Exo 2", sans-serif;
-  font-size: 16px;
-}
 
-/*confirm cart*/
-
+*confirm cart*/
 input.confirm_cart{
     border: 1px solid #b72822;
     font-size: 18px;
@@ -18,10 +12,16 @@ textarea.confirm_cart{
     font-size: 18px;
 }
 
+
+@charset "UTF-8";
+body {
+  font-family: "Exo 2", sans-serif;
+  font-size: 16px;
+}
+
 a {
   color: #FB0106;
 }
-
 
 input:not([type=checkbox]):not([type=radio]),
 textarea, 
@@ -1246,26 +1246,20 @@ vertical-align: top;
   margin-bottom: 7px;
   margin-top: 0px;
 }
-.leftSubMenuBoxSales  a {
+.leftSubMenuBoxSales ul li > a {
   color: #b72822 !important;
   font-size: 16px;
   text-decoration: none;
 }
 .leftSubMenuBoxSales ul > li span {
   float: right;
-}/*
+}
 .leftSubMenuBoxSales ul li {
   list-style: none;
-}*/
+}
 .leftSubMenuBoxSales ul {
   padding-left: 0px;
-  
 }
-.leftSubMenuBoxSales ul.megaSubMenu {
-  padding-left: 12px;
-
-}
-
 .sf-mega li {
   list-style: none;
 }
@@ -1726,7 +1720,10 @@ vertical-align: top;
     margin-top: 20px;
 }
 /*---------------------CONTACT FORM---------------*/
+
+
 .contacform-group {
+ 
   max-width: 350px;
 }
 .formContact input, .formContact textarea {
@@ -1737,14 +1734,12 @@ vertical-align: top;
 }
 .contactFormContainer {
   text-align: center;
-  max-width: 350px;
-
   padding-top: 25px;
+  max-width:350px;
   padding-bottom: 25px;
 }
 .contactFormContainer h3 {
-    font-size: 26px;
-
+      font-size: 26px;
     text-transform: uppercase;
     color: #303460;
     padding-top: 0px;
@@ -1911,4 +1906,86 @@ td i {
 #contactModal {
   z-index: 50;
   background-color: #fff;
+}
+
+
+
+/*----------------------------CATALOG DROPDOWN LISTS-----------------------*/
+.sortRow {
+  margin-bottom: 23px;
+}
+.sortName {
+  color: #000;
+}
+
+.btnBrandsSort {
+  height: 34px;
+  float: right;
+  border-bottom: 1px solid #e7e7e7;
+  display: block;
+  border-radius: 0px;
+  background-color: #fff;
+  padding: 0px 0px; 
+  color: #868894;
+}
+.btnPriceSort {
+    height: 34px;
+  float: left;
+  border-bottom: 1px solid #e7e7e7;
+  display: block;
+  border-radius: 0px;
+  background-color: #fff;
+  padding: 0px 0px; 
+  color: #868894;
+}
+@media only screen and (max-width: 400px) {
+  .btnBrandsSort {
+    margin: 0 auto;
+    float: none;
+    margin-top: 10px;
+  }
+  .btnPriceSort {
+    margin: 0 auto;
+    float: none;
+  }
+  .dropDownCol {
+    text-align: center;
+  }
+  .brandsDropDown {
+    border-radius: 0px;
+    border: 1px solid #e7e7e7;
+    top: 30px;
+    width: 100%;
+    text-align: center !important;
+  }
+  .PriceDropDown {
+    border-radius: 0px;
+    border: 1px solid #e7e7e7;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+  }   
+}
+.brandsDropDown {
+  border-radius: 0px;
+  border: 1px solid #e7e7e7;
+  top: 30px;
+  min-width: 175px; 
+  text-align: right;
+}
+.PriceDropDown {
+  border-radius: 0px;
+  border: 1px solid #e7e7e7;
+  top: 30px;
+}
+.brandSortIcon {
+  display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-top: 4px solid \9;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent; 
 }

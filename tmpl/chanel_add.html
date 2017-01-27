@@ -1,4 +1,20 @@
 <button type='button'
-        onclick="Chanels.add_item('{{item}}')"
-        class='btn btn-success'>
+        onclick="Chanels.add_item('{{item}}', this)"
+        class='btn btn-success'
+        
+        {% if opt_disable_content %}
+            data-disable_content="true"
+        {% endif %}
+        {% if opt_disable_title %}
+            data-disable_title="true"
+        {% endif %}
+        {% if opt_disable_img %}
+            data-disable_image="true"
+        {% endif %}
+        {% if opt_disable_ordering %}
+            data-disable_ordering="true"
+        {% endif %}
+        
+        
+        >
         <i class="fa fa-plus" aria-hidden="true"></i></button>

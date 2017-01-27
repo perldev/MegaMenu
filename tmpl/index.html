@@ -3,34 +3,12 @@
 <head>
  {% include "meta_header.html" %}
 
-  
+ {% load preview %}
+
 </head>
 <body>
   
-  <div class="wrapper">
-
-    <section class="specAnnounceSec">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-          {% for item in chanels.index_header %}
-            {% if is_admin %}
-                <div class="col-lg-12 text-center">
-              {% include "chanel_edit.html" with item=item opt_disable_delete=1 opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
-                </div>
-            {% endif %}
-              {% autoescape off %}
-                <p>
-                  {{item.content}}
-               </p>
-              {% endautoescape %}
-          {% endfor %}               
-            
-          </div>
-        </div>
-      </div>
-    </section>
-
+  
        {% include "menu.html"  with index=True  %}
 
 
@@ -46,7 +24,7 @@
                   <div class="row">
                     <div class="col-lg-12 col-lg-offset-2 slCaptureCol">
                         <div class="slCapture">
-                          <h3>ДВЕРНАЯ ФУРНИТУРА</h3>
+                          <h3>ОКОННАЯ ФУРНИТУРА</h3>
                           <p>Задача организации, в особенности же сложившаяся структура организации 
                           влечет за собой процесс внедрения и модернизации новых предложений. </p> <br>
                           <a href="/cat_window" class="btnStandBlue">Перейти в раздел</a>
@@ -99,82 +77,42 @@
               <h3>Акционные товары</h3>
               <span>У вас есть возможность сэкономить, приобретая у нас товары в рамках акционных предложений</span>
             </div>
+            
+            {% for item in discont_products%}
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
               <div class="productBox">
-                <a href="#">
+                <a href="/product_{{item.id}}">
                   <span class="salesMarker">акция</span>
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
+                  
+                <img src="{{item.preview_image.url}}" class="img-responsive">
+                {{item.title}}</a>
+                 <span>{{ item.catalog_item.opt2_spec }} </span>
                 <div class="row">
                   <div class="rankPriceBox2">
                     <img src="img/rank.jpg" class="img-responsive">
                     <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
+                      <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
                     </div>
                   </div>
                   <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                    <a href="/product_{{item.id}}" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
+                    <a href="javascript:MyCart.add2cart_simple({{item.id}}, 1, '{{item.title}}')" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                                                    
                   </div>                                    
                 </div>
               </div>
             </div>  
+            
+	  {% endfor %}
 
 
-
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-              <div class="productBox">
-                <a href="#">
-                  <span class="salesMarker">акция</span>
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
-                <div class="row">
-                  <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-                    </div>
-                  </div>
-                  <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                  </div>                  
-                </div>
-              </div>
-            </div>  
-
-
-
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
-              <div class="productBox productBoxHeightExample">
-                <a href="#">
-                  <span class="salesMarker">акция</span>
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
-                <div class="row">
-                  <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-                    </div>
-                  </div>
-                  <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                  </div>                  
-                </div>
-              </div>
-            </div>
                                               
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12">
-              <div class="salesBannerBox">
+              <div class="salesBannerBox" style="height: 377px;">
                 <div class="salesBannerCaptureBox">
                   <span class="slBanTitle">АКЦИИ и СКИДКИ</span><br />
                   <span class="slBanCap">Выгодные предложения на популярные товары</span><br><br><br>
-                  <div><a href="#" class="slBanBtn">Смотреть все</a></div>
+                  <div><a href="{% url  'catalog' %}?is_discont=1" class="slBanBtn">Смотреть все</a></div>
                 </div>
                 <img src="img/salesBanner.jpg" class="img-responsive">
               </div>
@@ -208,73 +146,41 @@
               <h3>Популярные товары</h3>
               <span>Мы всегда предлагаем наиболее актуальную продукцию по выгодным ценам</span>
             </div>
-          
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12">
+          {% for item in popular %}
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
               <div class="productBox">
-                <a href="#">                  
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
+                <a href="/product_{{item.id}}">
+                {% if item.is_discont %}
+		      <span class="salesMarker">акция</span>
+                {% endif %}
+                  
+                <img src="{{item.preview_image.url}}" class="img-responsive">
+                {{item.title}}</a>
+                 <span>{{ item.catalog_item.opt2_spec }} </span>
+
                 <div class="row">
                   <div class="rankPriceBox2">
                     <img src="img/rank.jpg" class="img-responsive">
                     <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
+                      <span class="priceProduct">{{item.price}}<span class="currencyProduct"> грн</span></span>
                     </div>
                   </div>
                   <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                  </div>                  
+                    <a href="/product_{{item.id}}" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
+                    <a href="javascript:MyCart.add2cart_simple({{item.id}}, 1, '{{item.title}}')" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
+                                                    
+                  </div>                                    
                 </div>
               </div>
             </div>  
+            
+	  {% endfor %}
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12">
-              <div class="productBox">
-                <a href="#">
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
-                <div class="row">
-                  <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-                    </div>
-                  </div>
-                  <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                  </div>                  
-                </div>
-              </div>
-            </div>  
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12">
-              <div class="productBox">
-                <a href="#">
-                <img src="img/productImg.jpg" class="img-responsive">
-                Замок рейка Accado</a>
-                <span>Оконная фурнитура</span>
-                <div class="row">
-                  <div class="rankPriceBox2">
-                    <img src="img/rank.jpg" class="img-responsive">
-                    <div class="priceBoxSPan">
-                      <span class="priceProduct">1022,65<span class="currencyProduct"> грн</span></span>
-                    </div>
-                  </div>
-                  <div class="productButtons2">
-                    <a href="#" class="btn btnViewProduct"><i class="flaticon-search"></i></a>
-                    <a href="#" class="btn btnCartProduct"><i class="flaticon-commerce"></i></a>
-                  </div>                  
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 col-xs-B-12">
-              <div class="salesBannerBox">
+              <div class="salesBannerBox" style="height: 377px;">
                 <div class="salesBannerCaptureBox">
                   <span class="slBanTitle">КАТАЛОГ ТОВАРОВ</span><br />
                   <span class="slBanCap">Оконная и дверная фуринтура известных брендов</span><br /><br /><br />
-                  <a href="#" class="slBanBtn">Смотреть все</a>
+                  <a href="{% url 'catalog' %}" class="slBanBtn">Смотреть все</a>
                 </div>
                 <img src="img/catBanner.jpg" class="img-responsive">
               </div>
@@ -310,31 +216,39 @@
               <h3>Новости и статьи</h3>
               <span>Новости компани и прочие публикации на тему оконной и дверной фурнитуры</span>
             </div>    
+	{% autoescape off %}
 
-            <div class="col-lg-4 col-sm-6 col-xs-6 col-xs-B-12">
+	  {% for item in last_articles %}
+            
+            
+            <div class="col-lg-4 col-sm-6 col-xs-6 {% if forloop.counter0 == 2 %} homeThirdArt  {% else %} col-xs-B-12 {% endif %}">
               <div class="articleHomeBox">
-                <span class="artDate">10.10.2037</span>
-                <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
+                <span class="artDate">{{item.pub_date}}</span>
+                <a href="/blog_item_{{item.id}}"><img src="{{item.image}}" class="img-responsive"></a>
                 <div class="homeArtTitle">
-                <a href="#">Оконная фурнитура и ее возможности</a>
+                <a href="/blog_item_{{item.id}}">{{item.title}}</a>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip </p>              
+                <p>{{item.content|preview}} </p>              
                 <div class="row">
                   <div class="col-lg-6 col-xs-6 artCat">
                     <a href="#">Оконная фурнитура</a>
                   </div>
                   <div class="col-lg-6 col-xs-6 artOpen">
                     <img src="img/artSq.jpg" class="img-responsive">
-                    <a href="#">Подробнее</a>
+                    <a href="/blog_item_{{item.id}}">Подробнее</a>
                   </div>                
                 </div>
               </div>
             </div>  
+            
+            
+            
+	  {% endfor %}
+	  
+       {% endautoescape %}
+	 
 
-
-            <div class="col-lg-4 col-sm-6 col-xs-6 col-xs-B-12">
+        <!--    <div class="col-lg-4 col-sm-6 col-xs-6 col-xs-B-12">
               <div class="articleHomeBox">
                 <span class="artDate">10.10.2037</span>
                 <a href="#"><img src="img/artImg.jpg" class="img-responsive"></a>
@@ -377,7 +291,7 @@
                   </div>                
                 </div>
               </div>
-            </div>                                                                                                
+            </div>                                                                                                -->
 
           </div>
         </div>
@@ -423,8 +337,8 @@
 
     <script type="text/javascript">
         $('document').ready(function (){
-            var elemHeight = parseInt($('.productBoxHeightExample').height()+20);
-            $('.salesBannerBox').height(elemHeight);    
+            //var elemHeight = parseInt($('.productBoxHeightExample').height()+20);
+            //$('.salesBannerBox').height(elemHeight);    
         });     
     </script>
     {% if is_admin %}

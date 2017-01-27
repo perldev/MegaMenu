@@ -51,42 +51,20 @@
                                                         </div>  
 
                                                         <div class="row popularProducts">
-                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-                                                                        <div class="row">                                                                       
-                                                                                <div class="col-sm-8 popProductItem">
-                                                                                        <a href="#">Петля дверная 1200 мм</a>
-                                                                                        <img src="img/rank.jpg" class="img-responsive">
-                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-                                                                                </div>
-                                                                                <div class="col-sm-4">
-                                                                                        <img src="img/productImg.jpg" class="img-responsive">
-                                                                                </div>                                                                                  
-                                                                        </div>
-                                                                </div>
-                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-                                                                        <div class="row">                                                                       
-                                                                                <div class="col-sm-8 popProductItem">
-                                                                                        <a href="#">Петля дверная 1200 мм</a>
-                                                                                        <img src="img/rank.jpg" class="img-responsive">
-                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-                                                                                </div>
-                                                                                <div class="col-sm-4">
-                                                                                        <img src="img/productImg.jpg" class="img-responsive">
-                                                                                </div>                                                                                  
-                                                                        </div>
-                                                                </div>
-                                                                <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
-                                                                        <div class="row">                                                                       
-                                                                                <div class="col-sm-8 popProductItem">
-                                                                                        <a href="#">Петля дверная 1200 мм</a>
-                                                                                        <img src="img/rank.jpg" class="img-responsive">
-                                                                                        <span class="priceProductPopural">1022,65<span class="currencyProduct"> грн</span></span>
-                                                                                </div>
-                                                                                <div class="col-sm-4">
-                                                                                        <img src="img/productImg.jpg" class="img-responsive">
-                                                                                </div>                                                                                  
-                                                                        </div>
-                                                                </div>                                                                                                  
+                                                               {% for item in popular %}
+								  <div class="col-lg-12 col-md-4 col-sm-4 popProductItemMain">
+									  <div class="row">                                                                       
+										  <div class="col-sm-8 popProductItem">
+											  <a href="/product_{{item.id}}">{{item.title}}</a>
+											  <img src="img/rank.jpg" class="img-responsive">
+											  <span class="priceProductPopural">{{item.price}}<span class="currencyProduct"> грн</span></span>
+										  </div>
+										  <div class="col-sm-4">
+											  <img src="{{item.preview_image.url}}" class="img-responsive">
+										  </div>                                                                                  
+									  </div>
+								  </div>
+                                                                {% endfor %}                                                                               
                                                         </div>
 
                                                         <div class="leftSectionTitle">

@@ -7,11 +7,17 @@
                 <div class="row">
                     <div class="col-lg-3 footerLogoBox">
                         <img src="img/logo.jpg" class="img-responsive">
-                        
+			    {% if is_admin %}
+				    <div class="col-lg-12 text-center">
+					{% include "chanel_add.html" with item="index_footer"  opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+					<br/>
+					<br/>
+				    </div>
+			    {% endif %}
                             {% for item in chanels.index_footer %}
                                     {% if is_admin %}
                                         <div class="col-lg-12 text-center">
-                                            {% include "chanel_edit.html" with item=item opt_disable_delete=1 opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+                                            {% include "chanel_edit.html" with item=item  opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
                                         </div>
                                     {% endif %}
                                 {% autoescape off %}

@@ -45,6 +45,56 @@
             <div class="col-lg-9 col-md-12 col-lg-push-3">
                 <div class="homeSalesProducts">
                   <div class="row rowVertAlign">
+                  
+                  
+				  <div class="row sortRow">
+					<div class="col-lg-7"></div>
+					<div class="col-lg-2 dropDownCol">
+						<div class="dropdown">
+						  <button class="btn btnPriceSort dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Сортировать по цене
+						    <span class="brandSortIcon"></span>
+						    <!-- <span class="brandSortIcon glyphicon glyphicon-heart pull-right"></span> -->
+						  </button>
+						  <ul class="dropdown-menu PriceDropDown" aria-labelledby="dropdownMenu1">
+						    <li><a href="?price_asc=1&amp;brand={{current_brand}}">{% if price_sorting == "price_asc" %}
+											    <strong>По возрастанию</strong> 
+											    {% else %}
+											    По возрастанию
+											    {% endif %}</a></li>
+						    <li><a href="?price_desc=1&amp;brand={{current_brand}}">
+						    {% if price_sorting == "price_desc" %}
+						      <strong>По убыванию</strong> 
+						    {% else %}
+						      По убыванию
+						    {% endif %}
+						    
+						    </a></li>
+						  </ul>
+						</div>
+
+
+					</div>
+					<div class="col-lg-3 dropDownCol">
+
+					    <div class="dropdown">
+					      <button class="btn btnBrandsSort dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						Выбрать производителя
+						<span class="brandSortIcon"></span>
+						<!-- <span class="brandSortIcon glyphicon glyphicon-heart pull-right"></span> -->
+					      </button>
+					      <ul class="dropdown-menu dropdown-menu-right brandsDropDown" aria-labelledby="dropdownMenu1">
+						{%for brand in  brands %}
+						  <li><a href="?brand={{brand.id}}&amp;{{price_sorting}}=1">{% if current_brand == brand.id %}<strong>{{brand.title}}</strong>{% else %} {{brand.title}} {% endif %}</a></li>
+					      
+					        {% endfor %}
+					      </ul>
+					    </div>
+
+					</div>
+				  </div>
+                  
+                  
                   {% for item in  current_list %}
 
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
@@ -75,50 +125,7 @@
                 {% endfor %}       
                   
                     
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="complectCol">
-                      <div class="row">
-                        <div class="col-lg-9 col-md-9"> 
-                          <div class="row">
-                            <div class="col-lg-5 col-md-5">
-                              <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                  <img src="img/productImg.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-lg-8 col-md-8 productTitleComplect">
-                                  <a href="#">Замок рейка Accado Оконная фурнитура</a>
-                                  <span class="priceProductComplect">1022,65<span class="currencyProduct"> грн</span></span>
-                                </div>  
-                              </div>
-                            </div>  
-                            <div class="col-lg-1 col-md-1 complectIconBox">
-                              <img src="img/plusIcon.jpg" class="img-responsive">
-                            </div>  
-                            <div class="col-lg-5 col-md-5">
-                              <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                  <img src="img/productImg.jpg" class="img-responsive">
-                                </div>
-                                <div class="col-lg-8 col-md-8 productTitleComplect">
-                                  <a href="#">Замок рейка Accado Оконная фурнитура</a>
-                                  <span class="priceProductComplect">1022,65<span class="currencyProduct"> грн</span></span>
-                                </div>  
-                              </div>
-                            </div>  
-                            <div class="col-lg-1 col-md-1 complectIconBoxCenter">
-                              <img src="img/sumIcon.jpg" class="img-responsive">
-                            </div>                                                  
-                          </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-3 complectSumBox">
-                          <span class="priceProductComplectSum">1022,65<span class="currencyProduct"> грн</span></span>
-                          <br><br>
-                          <a href="#" class="btnStandBlue">Купить комплект</a>
-                        </div>
-                      </div>
-                      </div>
-                    </div>  
+                {% include "package.html" %}
 
 
                   </div>
