@@ -27,7 +27,7 @@
               <tr id="cart_position_{{item.id}}">
                 <td class="cartProductImageTd"><img src="{{item.preview_image}}" class="img-responsive cartProductImage"></td>
                 <td>{{item.product.title}}<br>
-                  {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
+                  {% for i in item.product.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                     <div class="cartProductShortInfo">
                                                                           {% autoescape off %}
                         {{item.product.ext_desc}}                      
