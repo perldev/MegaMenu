@@ -277,7 +277,7 @@ def get_last_articles(num):
 	art_cats.append(item.id)
       
   
-  return Content.objects.filter(chanel__ext_id__in=art_cats)[:num]
+  return list(Content.objects.filter(chanel__ext_id__in=art_cats)[:num])
       
             
       
