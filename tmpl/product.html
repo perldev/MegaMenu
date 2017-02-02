@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-lg-7 col-sm-7 mainProductCapture">
                                        <h1>{{product.title}}</h1>
-                                        {% for i in item.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
+                                        {% for i in product.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                                        <div class="productShortCharacters">
                                             {{product.ext_desc}}
                                        
