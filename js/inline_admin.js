@@ -1,1 +1,13 @@
-tinymce.init({ selector:'textarea'});
+tinymce.init({
+  
+  
+  selector:'textarea',
+ plugins: [
+'advlist autolink lists link image charmap print preview anchor',
+'searchreplace visualblocks code fullscreen',
+'insertdatetime media table contextmenu paste code pagebreak'
+],
+toolbar: ' undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+  
+  
+});

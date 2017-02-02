@@ -8,7 +8,15 @@
 ],
 toolbar: 'pagebreak | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 pagebreak_separator: "<!-- my page break -->"
-});</script>
+});
+
+$(document).on('focusin', function(e) {
+    if ($(event.target).closest(".mce-window").length) {
+        e.stopImmediatePropagation();
+    }
+});
+
+</script>
 
 <div class="modal fade" id="myChanelModal"
      tabindex="20" role="dialog"
