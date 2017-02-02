@@ -13,21 +13,7 @@
 
 	<div class="wrapper">
 
-		<section>
-			<div class="container">
-				<div class="row">	
-					<div class="col-lg-12 breadCrumbsCol">
-						<div class="breadCrumbsBox">
-							<ul>
-								<li><a href="#">Главная</a></li>
-								<li><a href="#">Продукция</a></li>
-								<li><a href="#" class="disabled">Дверная фурнитура</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>	
+		{% include "crumbs.html" %}
 
 
 		<section>
@@ -36,11 +22,14 @@
 					<div class="col-lg-12">
 						<h1>Контактная информация</h1>
 					</div>
+					
 					<div class="col-lg-12 fiflialContactsCol">
 						<span>Украина, г. Николаев, ул. Электронная 81/24</span><br>
 						<span class="phoneContactBold">+38 (0512) 58-23-77</span><br>
 						<span>Понедельник-пятница с 9:00 до 18:00</span><br>
 					</div>
+					
+					
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xs-B-12">
 						<div class="personalBox">
 							<span class="personName">Дмитрий Bеселовский</span><br>
@@ -121,6 +110,7 @@
 						</div>
 					</div>																				
 				</div>
+				
 			</div>
 		</section>
 
@@ -172,7 +162,7 @@
 
 		
 
-          {% include "footer.html" %}
+     {% include "footer.html" %}
 
 
 

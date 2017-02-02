@@ -34,13 +34,14 @@ $('.input-number').focusin(function(){
    $(this).data('oldValue', $(this).val());
 });
 $('.input-number').change(function() {
-    
+    console.log("changing")
     minValue =  parseInt($(this).attr('min'));
     maxValue =  parseInt($(this).attr('max'));
     valueCurrent = parseInt($(this).val());
     
     name = $(this).attr('name');
     if(valueCurrent >= minValue) {
+        console.log("change minimum");
         $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
     } else {
         alert('Sorry, the minimum value was reached');

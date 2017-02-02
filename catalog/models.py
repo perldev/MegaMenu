@@ -158,16 +158,16 @@ class Cart(models.Model):
                                  null=True, blank=True, )
     
     status = models.CharField(verbose_name=u"Статус", 
-			      max_length=40,
-			      choices=STATUS_ORDER, 
-			      default='created' )
-    
+                              max_length=40,
+                              choices=STATUS_ORDER, 
+                              default='created' )
+      
     count = models.IntegerField(verbose_name=u"Кол-во позиций")
     
     def total_price(self):
       total_price = 0
       for i in CartItem.objects.filter(cart=self):
-	total_price += i.count*i.price
+        total_price += i.count*i.price
       return total_price
     
     class Meta:
@@ -183,7 +183,12 @@ class CartItem(models.Model):
     
     is_package = models.BooleanField(verbose_name=u"Пакетный")  
     package = models.IntegerField(verbose_name=u"Пакет", 
-				  null=True, blank=True)  
+                                  null=True, blank=True) 
+    
+    group = models.CharField(verbose_name=u"Группа пакета", 
+                             null=True, blank=True,
+                             max_length=255,
+                             )     
     
     cart = models.ForeignKey(Cart, verbose_name="корзина")
     

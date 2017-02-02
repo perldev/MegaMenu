@@ -24,46 +24,68 @@
               <table class="table cartTable">
                 <tbody>
                  {% for item in cart_item_list%}
-              <tr id="cart_position_{{item.id}}">
-                <td class="cartProductImageTd"><img src="img/productImg.jpg" class="img-responsive cartProductImage"></td>
-                <td>{{item.product.title}}<br>
-                  {% for i in item.product.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
-                    <div class="cartProductShortInfo">
-                    {% autoescape off %}
+                    
+                    <tr id="cart_position_{{item.id}}" 
+                      {% if item.is_package %}
+                          class="group_{{item.group}}"
+                          data-group="{{item.group}}"
+                          style="background-color:{{item.group}}"            
+                      {% endif %}
+                      >
+                          <td class="cartProductImageTd"><img src="img/productImg.jpg" class="img-responsive cartProductImage"></td>
+                          <td>
+                          {% if item.is_package %}
+                            <strong>Пакет!</strong><br/> 
+                          {% endif %}
+                          
+                          
+                          {{item.product.title}}<br/>
+                            {% for i in item.product.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
+                              <div class="cartProductShortInfo">
+                              {% autoescape off %}
+                                  {{item.product.ext_desc}}                                 
+                              {% endautoescape %}
+                                <!--<span>Код товара: 26351851231</span>
+                                <span>Количество в упаковке: 20 шт.</span>
+                                <span>Вес упаковки: 10 кг</span>-->
+                              </div>
+                          </td>
+                          <td class="oneProdPriceCart" >{{item.price}} грн</td>
+                          <td>
 
-                        {{item.product.ext_desc}}
-                        
-                    {% endautoescape %}
-                      <!--<span>Код товара: 26351851231</span>
-                      <span>Количество в упаковке: 20 шт.</span>
-                      <span>Вес упаковки: 10 кг</span>-->
-                    </div>
-                </td>
-                <td class="oneProdPriceCart" >{{item.price}} грн</td>
-                <td>
+                            <div class="cartQuantity">
+                                <div class="input-group">
+                                  <span class="input-group-btn">
+                                  {% if not item.is_package %}
 
-                  <div class="cartQuantity">
-                      <div class="input-group">
-                        <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
-                          <span class="glyphicon glyphicon-minus"></span>
-                      </button>
-                        </span>
-                        <input type="text" onchange="MyCart.change_item_count({{item.id}}, '{{item.price}}', this)" 
-                        name="quant[{{item.id}}]" class="form-control input-number" 
-                        value="{{item.count}}" min="1" max="10">
-                        <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[{{item.id}}]">
-                          <span class="glyphicon glyphicon-plus"></span>
-                      </button>
-                        </span>
-                      </div>
-                    </div>
-                </td>
-                <td class="totalProdSumCart" id="total_item_price_{{item.id}}">{{item.total_price}} грн</td>
-                <td><i class="flaticon-cancel" onclick="MyCart.delete_item({{item.id}})"></i></td>                
-              </tr>
-                  {% endfor %}
+                                      <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" 
+                                              data-field="quant[{{item.id}}]">
+                                          <span class="glyphicon glyphicon-minus"></span>
+                                      </button>
+                                  {% endif %}
+                                  </span>
+                                  <input type="text" onchange="MyCart.change_item_count({{item.id}}, '{{item.price}}', this)" 
+                                  name="quant[{{item.id}}]" class="form-control input-number" 
+                                  value="{{item.count}}" min="1" max="10"
+                                  {% if  item.is_package %} disabled {% endif %}
+                                  >
+                                  <span class="input-group-btn">
+                                 {% if not item.is_package %}
+                                    <button type="button" class="btn btn-default btn-number" 
+                                            data-type="plus" 
+                                            data-field="quant[{{item.id}}]">
+                                      <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                 {% endif %}
+
+                                  </span>
+                                </div>
+                              </div>
+                          </td>
+                      <td class="totalProdSumCart" id="total_item_price_{{item.id}}">{{item.total_price}} грн</td>
+                      <td><i class="flaticon-cancel" onclick="MyCart.delete_item({{item.id}})"></i></td>                
+                    </tr>
+                 {% endfor %}
                             
                 </tbody>
               </table>

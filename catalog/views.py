@@ -20,7 +20,7 @@ from django.shortcuts import render_to_response, get_object_or_404, redirect, re
 from helpers import http403json, http200json
 from django.forms import ModelForm
 from django.http import Http404
-
+import random
 
 
 
@@ -386,7 +386,7 @@ class ContentForm(ModelForm):
         fields = [ 'title', 'content', 'image','ordering']
 
 ## working with cart
-def add_product2cart(request, product, price, count, package=None):
+def add_product2cart(request, product, price, count, package=None, group=None):
   
     cart_id = request.session.get('cart_id')
     cart = None
@@ -394,7 +394,7 @@ def add_product2cart(request, product, price, count, package=None):
       try:
         cart = Cart.objects.get(id=cart_id)
       except Cart.DoesNotExist:
-	cart = Cart(count=count)
+        cart = Cart(count=count)
         cart.save()
         request.session["cart_id"] = cart.id
     
@@ -404,13 +404,34 @@ def add_product2cart(request, product, price, count, package=None):
       request.session["cart_id"] = cart.id
     
     if package is None:
-	item = CartItem(count=count, product=product, price=price, is_package=False, cart=cart)
-	item.save()	 
+      item = CartItem(count=count, product=product, price=price, is_package=False, cart=cart)
+      item.save()	 
     else:
-	item = CartItem(count=count, product=product, price=price, is_package=True, package=package.id, cart=cart)
-	item.save()	 
+      item = CartItem(count=count, product=product, price=price, is_package=True, 
+                      package=package.id, cart=cart, group=group)
+      item.save()	 
     
     return True
+
+
+def get_group4cart(cart):
+   for i in range(1, 5):
+      group = random.choice(
+                (
+                    "azure",
+                    "AliceBlue",
+                    "Bisque",
+                    "FloralWhite",
+                    "HoneyDew"
+                )
+            )
+      try:
+          CartItem.objects.get(group=group, cart=cart)
+      except CartItem.DoesNotExist:
+          return group
+
+  
+  
       
       
       
@@ -425,11 +446,12 @@ def cart_add_package(request, package_id):
     if cart_id:
       cart = get_object_or_404(Cart, pk=cart_id)
       package = get_object_or_404(Package, pk=package_id)
+      group = get_group4cart(cart)
       for package_item in PackageItem.objects.filter(package_id=package_id):
-	  add_product2cart(request,
-			   package_item.product, 
-			   package_item.price, 1, package)
-      
+          add_product2cart(request,
+                           package_item.product, 
+                           package_item.price, 1, package, group)
+    
       context = {}
       context["cart"] = cart
       context["cart_item_list"] = CartItem.objects.filter(cart=cart)
@@ -471,13 +493,13 @@ def cart_change_item(request, item_id, count):
       count = 0
       total_price = 0
       for i in CartItem.objects.filter(cart=cart):
-	count += i.count
-	total_price += i.count*i.price
+          count += i.count
+          total_price += i.count*i.price
       cart.count = count      
       cart.save() 
       return http200json(request, {"status": True,
-				   "count": count,
-				   "price": str(total_price)}) 
+                                  "count": count,
+                                  "price": str(total_price)}) 
     else:
       raise Http404(u"Заказ не найден")
   
@@ -488,18 +510,23 @@ def cart_del_item(request, item_id):
     if cart_id:
       cart = get_object_or_404(Cart, pk=cart_id)
       context = {}
-      CartItem.objects.get(id=item_id).delete()
+      item = CartItem.objects.get(id=item_id)
+      if item.is_package:
+         CartItem.objects.filter(group=item.group).delete()
+      else:
+         item.delete()
+
       count = 0
       total_price = 0
       for i in CartItem.objects.filter(cart=cart):
-	count += i.count
-	total_price += i.count*i.price
+        count += i.count
+        total_price += i.count*i.price
       cart.count = count
       cart.save() 
      
       return http200json(request, {"status": True,
-				   "count": count,
-				   "price": str(total_price)}) 
+                                   "count": count,
+                                   "price": str(total_price)}) 
     else:
       raise Http404(u"Заказ не найден")
 
@@ -510,7 +537,7 @@ def cart(request):
       
       context = {}
       context["cart"] = cart
-      context["cart_item_list"] = CartItem.objects.filter(cart=cart)
+      context["cart_item_list"] = CartItem.objects.filter(cart=cart).order_by("package")
       
     else:
       cart = Cart(count=0)

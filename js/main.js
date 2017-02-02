@@ -7,9 +7,10 @@ $( document ).ready(function() {
     Chanels.action="add";
     Chanels.add_item = function(id, obj){
             cat = id;
+            console.log("add changel");
             $("#id_chanel").val(cat);
             Chanels.action = "add";
-	    $("#wrapper_title_chanel_item").show();
+            $("#wrapper_title_chanel_item").show();
             $("#wrapper_ordering_chanel_item").show();
             $("#wrapper_content_chanel_item").show();
             $("#wrapper_image_chanel_item").show();
@@ -187,32 +188,39 @@ $( document ).ready(function() {
 
       var count = obj.value;
       $.ajax({
-	  url: "cart/change/item/"+pk+"/"+count,
-	  type: 'GET',
-          success: function (data) {
-                var total_price = price*count;
-                $("#total_item_price_"+pk).html(total_price+" грн");
-                $("#cart_total").html(data["price"]+" грн");
-          },
-          cache: false,
-          contentType: false,
-          processData: false
-      });
+            url: "cart/change/item/"+pk+"/"+count,
+            type: 'GET',
+                  success: function (data) {
+                        var total_price = price*count;
+                        $("#total_item_price_"+pk).html(total_price+" грн");
+                        $("#cart_total").html(data["price"]+" грн");
+                  },
+                  cache: false,
+                  contentType: false,
+                  processData: false
+              });
 	
       
     };
     MyCart.delete_item = function(pk){
+           
          $.ajax({
             url: "cart/del/item/"+pk,
             type: 'GET',
             async: true,
             success: function (data) {
-		  $("#cart_position_"+pk).hide();
-		  $("#cart_total").html(data["price"]);
-	    },
-            cache: false,
-            contentType: false,
-            processData: false
+               var group = $("#cart_position_"+pk).data("group")
+               if(group){
+                  $(".group_"+group).hide();
+               }else{
+                  $("#cart_position_"+pk).hide();
+               }
+               $("#cart_total").html(data["price"]);
+               
+              },
+              cache: false,
+              contentType: false,
+              processData: false
         });
       
     };

@@ -62,17 +62,21 @@
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-12 contactFooter">
-                        <span>Контактная информация</span>
-                        <p>г. Николаев, ул. Электронная 81/24</p>
-                        <p class="footerPhone">+38 (0512) 58-23-77</p>
+                        {% for item in chanels.footer_contacts %}
+                                  {% if is_admin %}
+                                      <div class="col-lg-12 text-center">
+                                          {% include "chanel_edit.html" with item=item opt_disable_delete=1  opt_disable_img=1 opt_disable_title=1 opt_disable_ordering=1 %}
+                                      </div>
+                                  {% endif %}
+                              {% autoescape off %}
+                                      <p>
+                                          {{item.content}}
+                                      </p>
 
-                        <p>г. Николаев, ул. Электронная 81/24</p>
-                        <p class="footerPhone">+38 (0512) 58-23-77</p>
-
-                        <p>Понедельник-пятница с 9:00 до 18:00</p>
-                        <hr>
-                        <p>E-mail: info@bazistk.com.ua</p>
-                        <div class="socIcons">
+                              {% endautoescape %}
+                        {% endfor %}    
+                        
+                         <div class="socIcons">
                             <a href="#"><i class="flaticon-facebook"></i></a>
                             <a href="#"><i class="flaticon-instagram"></i></a>
                             <a href="#"><i class="flaticon-youtube"></i></a>

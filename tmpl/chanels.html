@@ -1,13 +1,14 @@
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea.chanel_edit_add',
-                       plugins: "pagebreak",
-                       toolbar: "pagebreak",
-                       pagebreak_separator: "<!-- my page break -->"
-  });</script>
-
-
-
-
+<script>tinymce.init(
+{selector:'textarea.chanel_edit_add',
+ plugins: [
+'advlist autolink lists link image charmap print preview anchor',
+'searchreplace visualblocks code fullscreen',
+'insertdatetime media table contextmenu paste code pagebreak'
+],
+toolbar: 'pagebreak | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+pagebreak_separator: "<!-- my page break -->"
+});</script>
 
 <div class="modal fade" id="myChanelModal"
      tabindex="20" role="dialog"
@@ -62,7 +63,6 @@
     </div>
   </div>
 </div>
-
 
 
 <div id="myChanelDeleteModal" class="modal fade"
