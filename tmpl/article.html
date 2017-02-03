@@ -10,7 +10,7 @@
 
 	<div class="wrapper">
 
-		{% include "crumbs.html" %}
+		{% include "crumbs.html" with item="article" cat_id=current cat_title=cat_title title=article.title %}
 		<section>
 			<div class="container">
 				<div class="row">

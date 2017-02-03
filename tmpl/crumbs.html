@@ -1,3 +1,5 @@
+{% if item == "cart" %}
+
 <section>
     <div class="container">
         <div class="row">
@@ -5,11 +7,260 @@
                 <div class="breadCrumbsBox">
                     <ul>
                         <li><a href="/">Главная</a></li>
-                        <li><a href="/catalog">Продукция</a></li>
-                        <li><a href="#" class="disabled">Дверная фурнитура</a></li>
+                        <li><a href="{% url 'cart' %}" class="disabled">Корзина</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</section>  
+</section> 
+
+{% endif %}
+
+
+{% if item == "cart_confirm" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'cart' %}" >Корзина</a></li>
+                        <li><a href="{% url 'cart_confirm' %}" class="disabled">Подтверждение заказа</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "cart_approve" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'cart' %}" >Корзина</a></li>
+                        <li><a href="{% url 'cart_confirm' %}" >Подтверждение заказа</a></li>
+                        <li><a href="{% url 'cart_approve' %}" class="disabled">Заказ подтвержден</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "blog" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'blog' %}" class="disabled">Новости и статьи</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "brands" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'brands' %}" class="disabled">Бренды</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "company" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/page_company" class="disabled">О Компании</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "faq" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'faq' %}" class="disabled">Поддержка</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "contacts" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/contacts" class="disabled">Контакты</a></li>
+
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+
+{% if item == "product" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="{% url 'catalog'%}" >Каталог</a></li>
+                        <li><a href="/cat_type_{{cat_id}}" >{{cat_title}}</a></li>
+                        <li><a href="#" class="disabled">{{title}}</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+
+
+
+
+{% if item == "blog" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        {% if cat_id %}
+			    <li><a href="{% url 'blog'%}" >Новости и статьи</a></li>
+
+			    <li><a href="/blog_{{cat_id}}" class="disabled">{{cat_title}}</a></li>
+                        {% else %}
+			    <li><a href="{% url 'blog'%}" class="disabled" >Новости и статьи</a></li>
+
+                        
+                        {% endif %}
+                        
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "article" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+			    <li><a href="{% url 'blog'%}" >Новости и статьи</a></li>
+			    <li><a href="/blog_{{cat_id}}" >{{cat_title}}</a></li>
+			    <li><a href="#" class="disabled" >{{title}}</a></li>                        
+                        
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+{% if item == "catalog" %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        {% if cat_id %}
+			    <li><a href="{% url 'catalog'%}" >Каталог</a></li>			
+			    <li><a href="/cat_type_{{cat_id}}" class='disabled'>{{cat_title}}</a></li>
+                        {% else %}
+			    <li><a href="{% url 'catalog'%}" class='disabled'>Каталог</a></li>
+                        {% endif %}
+                        
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
+
+
+
+

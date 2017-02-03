@@ -192,7 +192,7 @@ $( document ).ready(function() {
             type: 'GET',
                   success: function (data) {
                         var total_price = price*count;
-                        $("#total_item_price_"+pk).html(total_price+" грн");
+                        $("#total_item_price_"+pk).html(total_price.toFixed(2)+" грн");
                         $("#cart_total").html(data["price"]+" грн");
                   },
                   cache: false,

@@ -9,7 +9,8 @@ from django.contrib.admin  import TabularInline, StackedInline
 from django.db import models
 from django.utils.timezone import now
 
-
+import os
+from doors.settings import MEDIA_ROOT
 
 
 STATUS_ORDER = (
@@ -268,7 +269,14 @@ class Product(models.Model):
     status = models.BooleanField(verbose_name=u"Активный", default=True)
     
     def preview_image(self):
-      return Image.objects.filter(product=self).order_by("order").first()
+      img = Image.objects.filter(product=self).order_by("order").first()
+      path = os.path.join(MEDIA_ROOT, str(img.image)) 
+      print path
+      if img and os.path.isfile(path):
+	return img.url()
+      else:
+	return "/img/productImg.jpg"
+      
     
     def __unicode__(self):
       return "%s -> %s " % (self.catalog_item,
