@@ -29,9 +29,9 @@
                 <td>{{item.product.title}}<br>
                   {% for i in item.product.rate|get_range  %}<img src="img/star.png" >&nbsp;{% endfor %}
                     <div class="cartProductShortInfo">
-                                                                          {% autoescape off %}
+                      {% autoescape off %}
                         {{item.product.ext_desc}}                      
-                                                                          {% endautoescape %}
+                      {% endautoescape %}
                     
                     </div>
                 </td>

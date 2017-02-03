@@ -11,6 +11,9 @@ from django.utils.timezone import now
 
 import os
 from doors.settings import MEDIA_ROOT
+from django.db.models.aggregates import Count
+from random import randint
+
 
 
 STATUS_ORDER = (
@@ -21,6 +24,19 @@ STATUS_ORDER = (
     ("received", u"получен"),
 )
 
+class MyManager(models.Manager):
+  
+    def random_discont(self):
+        count = self.filter(is_discont=True).aggregate(count=Count('id'))['count']
+        random_index = randint(0, count - 1)
+        return self.all()[random_index]
+      
+  
+    def random(self):
+        count = self.aggregate(count=Count('id'))['count']
+        random_index = randint(0, count - 1)
+        return self.all()[random_index]
+      
 # Create your models here.
 
 def translit(t):
@@ -75,6 +91,8 @@ class Chanel(models.Model):
 
         
 class Content(models.Model):
+    objects = MyManager()
+
 
     image = models.ImageField(upload_to='img', max_length=254, null=True, blank=True)
 
@@ -219,9 +237,10 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ['phone', "fio", "full_desc", "total_price","count", "status"]
     list_filter = ('status', 'phone')
     
-                            
-                     
+
 class Product(models.Model):
+    objects = MyManager()
+    
     order = models.IntegerField(verbose_name = u"порядок", default=0)
 
     title = models.CharField(max_length=255,
@@ -273,9 +292,9 @@ class Product(models.Model):
       path = os.path.join(MEDIA_ROOT, str(img.image)) 
       print path
       if img and os.path.isfile(path):
-	return img.url()
+        return img.url()
       else:
-	return "/img/productImg.jpg"
+        return "/img/productImg.jpg"
       
     
     def __unicode__(self):
@@ -306,6 +325,8 @@ class ImagesInline(StackedInline):
 
 
 class Package(models.Model):
+    objects = MyManager()
+
     order = models.IntegerField(verbose_name = u"порядок", default=0)
     title = models.CharField(max_length=255,
                              verbose_name=u"Название",

@@ -193,9 +193,6 @@ def fill_product_context(cat_id, context):
 
     context["menu"] = cats
     context["discont_menu"] = cats_discont
-
-
-        
     context["cat_title"] = cats_title[context["current"]]
     context["current_chanel"] = CatItem.objects.get(id=context["current"])
 
@@ -664,7 +661,7 @@ def content_chanels(request):
       cart = Cart.objects.get(id=cart_id)
       count = 0
       for i in CartItem.objects.filter(cart=cart):
-	count += i.count
+          count += i.count
       cart.count = count
       cart.save()
       
@@ -675,24 +672,33 @@ def content_chanels(request):
     context["catalog_current_discont"] = context["current_discont"][0]
     context["about_company"] = [Content.objects.get(id=COMPANY_ID)]
     popular = [] 
+    
+    
     discont_products = []
     
-    product = Product.objects.get(id=1) 
+    
+    
+    
+    product = Product.objects.random_discont()
     discont_products.append(product)
-    product = Product.objects.get(id=1)    
+    product = Product.objects.random_discont()   
     discont_products.append(product)
-    product = Product.objects.get(id=1)   
+    product = Product.objects.random_discont()   
     discont_products.append(product)
 
     
     
     
-    product = Product.objects.get(id=1)   
+    product = Product.objects.random()
     popular.append(product)
-    product = Product.objects.get(id=1)   
+    product = Product.objects.random()
     popular.append(product)
-    product = Product.objects.get(id=1)   
+    product = Product.objects.random()   
     popular.append(product)
+    
+    product = Product.objects.random()   
+    popular.append(product)
+    
     
     res_contex = None
     if request.user.is_authenticated() and request.user.is_staff:
@@ -710,10 +716,11 @@ def content_chanels(request):
                       "cart_count": cart_count
                       }
     res_context = setup_custom_meta(request, res_context)
-    res_context["popular"] = popular
-    
+    res_context["popular"] = popular[:3]
+    res_context["popular1"] = popular
+
     res_context["discont_products"] = discont_products
-    pack = Package.objects.get(id=1)
+    pack = Package.objects.random()
     pack_sum = 0
     pack_list = []
     for packitem in PackageItem.objects.filter(package = pack).order_by("order"):
@@ -721,8 +728,8 @@ def content_chanels(request):
       pack_list.append(packitem)
       
     res_context["random_package"] = {"package_items": pack_list,
-				     "sum": pack_sum,
-				     "id": pack.id}
+                                     "sum": pack_sum,
+                                     "id": pack.id}
     
     res_context["last_articles"] = get_last_articles(3)
     res_context["brands"] = Brand.objects.all()

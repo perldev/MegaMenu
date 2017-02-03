@@ -233,7 +233,7 @@
             
             <div class="col-lg-4 col-sm-6 col-xs-6 {% if forloop.counter0 == 2 %} homeThirdArt  {% else %} col-xs-B-12 {% endif %}">
               <div class="articleHomeBox">
-                <span class="artDate">{{item.pub_date}}</span>
+                <span class="artDate">{{item.pub_date|date:'d.m.Y'}}</span>
                 <a href="/blog_item_{{item.id}}"><img src="{{item.image}}" class="img-responsive"></a>
                 <div class="homeArtTitle">
                 <a href="/blog_item_{{item.id}}">{{item.title}}</a>

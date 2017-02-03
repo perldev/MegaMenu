@@ -69,7 +69,7 @@
 
 
                                                         <div class="articleHomeBox">
-                                                            <span class="artDate">{{article.pub_date}}</span>
+                                                            <span class="artDate">{{article.pub_date|date:'d.m.Y'}}</span>
                                                             <a href="/blog_item_{{article.id}}">
                                                             <img src="{{article.image}}" class="img-responsive"></a>
                                                             <div class="homeArtTitle">
@@ -102,7 +102,7 @@
 
                                                       {% autoescape off %}
                                                             <div class="articleHomeBox">
-                                                                <span class="artDate">{{article2.pub_date}}</span>
+                                                                <span class="artDate">{{article2.pub_date|date:'d.m.Y'}}</span>
                                                                 <a href="/blog_item_{{article2.id}}">
                                                                 <img src="{{article2.image}}" class="img-responsive"></a>
                                                                 <div class="homeArtTitle">
