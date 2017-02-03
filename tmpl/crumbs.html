@@ -182,7 +182,24 @@
 
 {% endif %}
 
+{% if item == "search" %}
 
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 breadCrumbsCol">
+                <div class="breadCrumbsBox">
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="#" class="disabled">Поиск</a></li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+{% endif %}
 
 
 
@@ -223,9 +240,9 @@
                 <div class="breadCrumbsBox">
                     <ul>
                         <li><a href="/">Главная</a></li>
-			    <li><a href="{% url 'blog'%}" >Новости и статьи</a></li>
-			    <li><a href="/blog_{{cat_id}}" >{{cat_title}}</a></li>
-			    <li><a href="#" class="disabled" >{{title}}</a></li>                        
+                        <li><a href="{% url 'blog'%}" >Новости и статьи</a></li>
+                        <li><a href="/blog_{{cat_id}}" >{{cat_title}}</a></li>
+                        <li><a href="#" class="disabled" >{{title}}</a></li>                        
                         
                         </ul>
                 </div>

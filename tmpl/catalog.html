@@ -27,7 +27,8 @@
                 <div class="center-block placeholder">
                 <div class="inner-addon right-addon catSearchMobile">
                   <i class="glyphicon glyphicon-search"></i>
-                  <input type="text" class="form-control catalogSearchForm" placeholder="Поиск"/>
+                  <input type="text" 
+                        class="form-control catalogSearchForm" placeholder="Поиск"/>
                 </div>                
                 </div>                
 
@@ -100,7 +101,7 @@
                   
                   {% for item in  current_list %}
 
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
+                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 col-xs-B-12 prodCol">
                                     <div class="productBox">
                                             <a href="/product_{{item.id}}">
                                             {% if item.is_discont %}

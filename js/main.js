@@ -137,8 +137,21 @@ $( document ).ready(function() {
     });
     
     
-    
-    
+    //searching
+    $("#SearchForm").on("keyup", function(e){
+          var search = $(this).val();
+          if(e.keyCode == 13 && search.length>3){ 
+              window.location.href = "/search?str="+search;
+          }
+      
+    });
+
+    $(".catalogSearchForm").on("keyup", function(e){
+          var search = $(this).val();
+          if(e.keyCode == 13 && search.length>3){ 
+              window.location.href = "/search_product?str="+search;
+          }
+    });
     
     
     
@@ -232,11 +245,11 @@ $( document ).ready(function() {
             type: 'GET',
             async: true,
             success: function (data) {
-		MyCommon.modal("Позиция '"+title+"' добавлена вам в корзину в количестве "+count+" шт.","Корзина");
-		var count_cart = $("#cart_count").html();
-		count_cart = count_cart*1+count;
-		$("#cart_count").html(count_cart);
-	    },
+                MyCommon.modal("Позиция '"+title+"' добавлена вам в корзину в количестве "+count+" шт.","Корзина");
+                var count_cart = $("#cart_count").html();
+                count_cart = count_cart*1+count;
+                $("#cart_count").html(count_cart);
+            },
             cache: false,
             contentType: false,
             processData: false

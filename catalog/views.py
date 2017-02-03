@@ -639,6 +639,79 @@ def setup_custom_meta(req, NewContext):
         return NewContext
       
 
+def search(request):
+  search_str = request.GET.get("str", None)
+  context = {}
+  found  = Content.objects.filter(Q(title__contains=search_str)|
+                                  Q(content__contains=search_str)).order_by("-pub_date")
+  found_product  = Product.objects.filter(Q(title__contains=search_str)|
+                                          Q(full_desc__contains=search_str)|
+                                          Q(description__contains=search_str)
+                                          ).order_by("rate")
+  result = []
+  for item in found_product:
+    result.append({"url": "/product_%i" % item.id,
+                   "title":item.title, "content":item.full_desc, "product": True })
+   
+  for item in found:
+    result.append({"url": "/blog_item_%i" % item.id,
+                   "title":item.title, "product": False,  })
+    
+  context["search_list"] = result
+  return render(request, 'search_list.html', context)
+
+
+def search_product(request):
+    search_str = request.GET.get("str", None)
+
+    found_product  = Product.objects.filter(Q(title__contains=search_str)|
+                                            Q(full_desc__contains=search_str)|
+                                            Q(description__contains=search_str)
+                                            ).order_by("rate")
+
+    context = {}
+    i = 1
+    cats_title = {}
+    cats = []
+    cats_discont = []
+    for ch in Category.objects.all().order_by("id"):
+        art_cats = []
+        arts_discont = []
+        count_discont = 0
+        count = 0
+        for item in CatItem.objects.filter(opt1_typ = ch).order_by("order"):
+            count_tmp = Product.objects.filter(catalog_item=item.id).count()
+            count_tmp_discont = Product.objects.filter(catalog_item=item.id,
+                                                      is_discont=True).count()
+
+            if count_tmp_discont>0:
+                arts_discont.append({"item": item,
+                                     "title": item.opt2_spec,
+                                     "count": count_tmp_discont})
+                count_discont+=count_tmp_discont
+
+            art_cats.append({"item": item,
+                             "title": item.opt2_spec,
+                             "count": count_tmp})
+                             
+            count += count_tmp
+            cats_title[item.id] = item.opt2_spec
+            
+        
+        cats.append({"sub":art_cats, "title": ch.title, "count": count})
+        if count_discont>0:
+            cats_discont.append({"sub":arts_discont,
+                                 "title": ch.title,
+                                 "count": count_discont
+                                 })
+
+
+    context["menu"]=cats
+    context["discont_menu"] = cats_discont
+    context["current_list"] = found_product
+    return render(request, 'catalog.html', context)
+
+
 def content_chanels(request):
     context = {}
     for ch in Chanel.objects.all():

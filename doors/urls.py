@@ -98,7 +98,9 @@ urlpatterns = [
     url(r'^cart_approve$', views.cart_approve, name="cart_approve"), 
     url(r'^cart$', views.cart, name="cart"),
     
-
+    url(r'^search_product$', views.search_product, name="search"),
+    url(r'^search$', views.search, name="search"),
+    
     url(r'^admin/', admin.site.urls),
 
 ] 

@@ -84,6 +84,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'doors.wsgi.application'
 
+DATE_FORMAT="%d.%m.%Y"
+DATETIME_FORMAT="%d.%m.%Y"
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
