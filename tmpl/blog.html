@@ -86,11 +86,8 @@
                                                                     <a href="#">{{cat_title}}</a>
                                                                 </div>
                                                                 <div class="col-lg-6 col-xs-6 artOpen">
-                                                              {% if article.image %}		
-                                                                            <img src="{{article.image.url}}" class="img-responsive">
-                                                             {% else %}
-                                                                              <img src="img/artImg.jpg" class="img-responsive">
-                                                             {% endif %}	                                                                    <a href="/blog_item_{{article.id}}">Подробнее</a>
+                                                              <img src="img/artSq.jpg" class="img-responsive">
+ -                                                                    <a href="/blog_item_{{article.id}}">Подробнее</a>                                                                   <a href="/blog_item_{{article.id}}">Подробнее</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -110,7 +107,12 @@
                                                             <div class="articleHomeBox">
                                                                 <span class="artDate">{{article2.pub_date|date:'d.m.Y'}}</span>
                                                                 <a href="/blog_item_{{article2.id}}">
-                                                                <img src="{{article2.image}}" class="img-responsive"></a>
+                                                                {% if article2.image %}		
+                                                                            <img src="{{article2.image.url}}" class="img-responsive">
+                                                                  {% else %}
+                                                                              <img src="img/artImg.jpg" class="img-responsive">
+                                                                 {% endif %}
+                                                               </a>
                                                                 <div class="homeArtTitle">
                                                                 <a href="/blog_item_{{article2.id}}">{{article2.title}}</a>
                                                                 </div>
