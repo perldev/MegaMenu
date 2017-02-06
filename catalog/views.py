@@ -12,7 +12,7 @@ from .serializers import ProductSerializer, BrandSerializer, ImageSerializer
 from .serializers import CategorySerializer, CatItemSerializer
 
 from django.contrib.auth.models import User
-from .models import Content, Chanel, Cart, CartItem, Package, PackageItem, Subscribing, Question, Brand
+from .models import Content, Chanel, Cart, Meta, CartItem, Package, PackageItem, Subscribing, Question, Brand
 
 
 from django.conf import settings
