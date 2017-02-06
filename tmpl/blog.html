@@ -86,8 +86,11 @@
                                                                     <a href="#">{{cat_title}}</a>
                                                                 </div>
                                                                 <div class="col-lg-6 col-xs-6 artOpen">
-                                                                    <img src="img/artSq.jpg" class="img-responsive">
-                                                                    <a href="/blog_item_{{article.id}}">Подробнее</a>
+                                                              {% if article.image %}		
+                                                                            <img src="{{article.image.url}}" class="img-responsive">
+                                                             {% else %}
+                                                                              <img src="img/artImg.jpg" class="img-responsive">
+                                                             {% endif %}	                                                                    <a href="/blog_item_{{article.id}}">Подробнее</a>
                                                                 </div>
                                                             </div>
                                                         </div>
