@@ -71,8 +71,11 @@
                                                         <div class="articleHomeBox">
                                                             <span class="artDate">{{article.pub_date|date:'d.m.Y'}}</span>
                                                             <a href="/blog_item_{{article.id}}">
-                                                            <img src="{{article.image}}" class="img-responsive"></a>
-                                                            <div class="homeArtTitle">
+                                                              {% if article.image %}		
+                                                                            <img src="{{article.image.url}}" class="img-responsive">
+                                                             {% else %}
+                                                                              <img src="img/artImg.jpg" class="img-responsive">
+                                                             {% endif %}	                                                            <div class="homeArtTitle">
                                                             <a href="/blog_item_{{article.id}}">{{article.title}}</a>
                                                             </div>
                                                             <p>
